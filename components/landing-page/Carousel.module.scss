@@ -1,0 +1,24 @@
+.caption {
+  width: 50%;
+  margin: 0 auto;
+}
+
+@media (max-width: 40rem) {
+  .caption {
+    width: 75%;
+    margin: 0 auto;
+    padding: 0.25rem 0.25rem 0.5rem 0.25rem;
+
+    p {
+      font-size: 1rem;
+      margin: 0;
+    }
+    h1 {
+      font-size: 1.3rem;
+      margin: 0;
+    }
+    button {
+        margin: 0;
+    }
+  }
+}

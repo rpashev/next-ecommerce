@@ -1,11 +1,11 @@
-import { Carousel } from "react-bootstrap";
-// import styles from "./Carousel.module.scss";
+import { Button, Carousel } from "react-bootstrap";
+import styles from "./carousel.module.scss";
 import Image from "next/image";
 
 const HomeCarousel = (props) => {
   return (
-    <Carousel>
-      <Carousel.Item interval={1500}>
+    <Carousel indicators={false}>
+      <Carousel.Item interval={150000}>
         <Image
           className="d-block w-100"
           src="/images/landing-page/slide1.jpg"
@@ -14,9 +14,18 @@ const HomeCarousel = (props) => {
           height={676}
           layout="responsive"
         />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        <Carousel.Caption
+          className={`bg-dark opacity-75 rounded ${styles.caption}`}
+        >
+          <h1 className="fw-bold">
+            Welcome to <span className="text-success">My Shop</span>
+          </h1>
+          <p className="muted lead mt-1 ">
+            Shop for accessoriess today, we offer the best prices!
+          </p>
+          <Button variant="success" className="opacity-100 mt-2">
+            SHOP
+          </Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={1500}>

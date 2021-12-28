@@ -1,5 +1,5 @@
 const BestSellers = (props) => {
-  return <div>WT</div>;
+  return <div></div>;
 };
 
 export default BestSellers;
