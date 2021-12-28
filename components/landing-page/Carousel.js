@@ -1,11 +1,11 @@
 import { Carousel } from "react-bootstrap";
-import styles from "./Carousel.module.scss";
+// import styles from "./Carousel.module.scss";
 import Image from "next/image";
 
 const HomeCarousel = (props) => {
   return (
-    <Carousel className={styles.carousel}>
-      <Carousel.Item interval={1000000} className={styles.item}>
+    <Carousel>
+      <Carousel.Item interval={1500}>
         <Image
           className="d-block w-100"
           src="/images/landing-page/slide1.jpg"
@@ -22,7 +22,7 @@ const HomeCarousel = (props) => {
       <Carousel.Item interval={1500}>
         <Image
           className="d-block w-100"
-          src="/images/landing-page/slide2.jpg"
+          src="/images/landing-page/slide3.jpg"
           alt="Second slide"
           width={1600}
           height={676}
@@ -33,10 +33,10 @@ const HomeCarousel = (props) => {
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </Carousel.Caption>
       </Carousel.Item>
-      <Carousel.Item>
+      <Carousel.Item interval={1500}>
         <Image
           className="d-block w-100"
-          src="/images/landing-page/slide3.jpg"
+          src="/images/landing-page/slide2.jpg"
           alt="Third slide"
           width={1600}
           height={676}

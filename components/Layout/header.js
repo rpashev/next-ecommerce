@@ -21,7 +21,7 @@ const Header = (props) => {
               Shop
             </Nav.Link>
             <Nav.Link className="mx-3" href="/about">
-              About
+              Aboutttt
             </Nav.Link>
           </Nav>
           <Nav>
