@@ -13,13 +13,13 @@ const Header = (props) => {
           >
             <ul className={`${styles["general-nav"]} col-6`}>
               <li>
-                <Link href="/">Home</Link>
+                <Link href="/">HOME</Link>
               </li>
               <li>
-                <Link href="/shop">Shop</Link>
+                <Link href="/shop">SHOP</Link>
               </li>
               <li>
-                <Link href="/">About</Link>
+                <Link href="/">ABOUT</Link>
               </li>
             </ul>
             <ul className={`${styles["user-nav"]} col-6`}>
@@ -31,10 +31,10 @@ const Header = (props) => {
                 </Link>
               </li>
               <li>
-                <Link href="/login">Login</Link>
+                <Link href="/login">LOGIN</Link>
               </li>
               <li>
-                <Link href="/sign-up">Sign Up</Link>
+                <Link href="/sign-up">SIGN UP</Link>
               </li>
             </ul>
           </nav>

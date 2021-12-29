@@ -1,0 +1,30 @@
+@import "../../styles/colors.scss";
+.intro {
+  position: relative;
+  color: $gray-light;
+
+  .prompt {
+    position: absolute;
+    width: 30rem;
+    top: 30%;
+    left: 5%;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 40rem) {
+  .img {
+    display: none;
+  }
+  .intro .prompt {
+    position: static;
+    width: 100%;
+    background: $gray-darkest;
+    text-align: center;
+    padding: 2rem;
+    p {
+        // width: 90% !important;
+        margin: 1rem auto;
+    }
+  }
+}
