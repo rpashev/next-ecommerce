@@ -1,5 +1,5 @@
 const BestSellers = (props) => {
-  return <div></div>;
+  return <button className="btn btn-primary">BUTTOn</button>;
 };
 
 export default BestSellers;

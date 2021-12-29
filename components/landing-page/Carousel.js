@@ -23,7 +23,7 @@ const HomeCarousel = (props) => {
           <p className="muted lead mt-1 ">
             Shop for accessoriess today, we offer the best prices!
           </p>
-          <Button variant="success" className="opacity-100 mt-2">
+          <Button variant="primary" className="opacity-100 mt-2">
             SHOP
           </Button>
         </Carousel.Caption>

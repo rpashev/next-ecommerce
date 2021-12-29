@@ -1,0 +1,13 @@
+@import "../node_modules/bootstrap/scss/functions";
+
+$theme-colors: (
+  "primary": #22d3ee,
+  "success": #198754,
+  "danger": #c21423,
+  "warning": #ffc107,
+  "light": #fff,
+  "secondary": #303030,
+  "dark": #101010,
+);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
