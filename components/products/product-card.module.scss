@@ -1,0 +1,15 @@
+@import "../../styles//colors.scss";
+.card {
+  width: 300px;
+  height: 530px;
+  padding: 0;
+  position: relative;
+
+  .info {
+    padding: 0.5rem;
+  }
+}
+
+.card:hover {
+  border: 1px solid $gray-darkest;
+}
