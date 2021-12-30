@@ -1,10 +1,17 @@
 import Image from "next/image";
+import { useState } from "react";
 import ProductBadge from "./product-badge";
 import styles from "./product-card.module.scss";
 
 const ProductCard = (props) => {
+  const [showButton, setShowButton] = useState(false);
+
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      onMouseEnter={() => setShowButton(true)}
+      onMouseLeave={() => setShowButton(false)}
+    >
       <Image
         src="/images/products/hat1-pic1.jpg"
         alt="product"
@@ -12,18 +19,20 @@ const ProductCard = (props) => {
         height={400}
       />
       <div className={`${styles.info}`}>
-        <h4>Adidas</h4>
-        <p className={`lead`}>SUPERLITE HAT</p>
-        <p>19.99</p>
-        <div className={`${styles.badges}`}>
-          <ProductBadge badgeContent="BEST SELLER" />
+        <div>
+          <h3>Adidas</h3>
+          <p className={`lead`}>SUPERLITE HAT</p>
         </div>
+        <h2 className={`${styles.price} opacity-75`}>$19.99</h2>
       </div>
-      <button
-        className={`btn btn-info w-100 position-absolute bottom-0 text-light `}
-      >
-        ADD TO CART
-      </button>
+      <ProductBadge onSale={props.onSale || false} />
+      {showButton && (
+        <button
+          className={`btn btn-info w-100 position-absolute bottom-0 text-light `}
+        >
+          ADD TO CART
+        </button>
+      )}
     </div>
   );
 };

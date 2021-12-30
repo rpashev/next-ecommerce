@@ -6,7 +6,7 @@ const Newsletter = (props) => {
           <h3 className="mb-3 mb-md-0">Sign Up For Our Newsletter</h3>
           <div className="input-group news-input">
             <input type="text" className="form-control" placeholder="Enter Email" />
-            <button className="btn btn-primary btn-lg" type="button">
+            <button className="btn btn-info btn-lg text-light" type="button">
               Subscribe
             </button>
           </div>

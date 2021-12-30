@@ -5,7 +5,7 @@ const BestSellers = (props) => {
     <div className={`container`}>
       <div className={`row justify-content-around py-3`}>
         <ProductCard />
-        <ProductCard />
+        <ProductCard onSale />
         <ProductCard />
         <ProductCard />
       </div>
