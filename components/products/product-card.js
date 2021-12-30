@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ProductBadge from "./product-badge";
 import styles from "./product-card.module.scss";
 
 const ProductCard = (props) => {
@@ -13,10 +14,14 @@ const ProductCard = (props) => {
       <div className={`${styles.info}`}>
         <h4>Adidas</h4>
         <p className={`lead`}>SUPERLITE HAT</p>
-        <span>19.99</span>
-        <div>ON SALE</div>
+        <p>19.99</p>
+        <div className={`${styles.badges}`}>
+          <ProductBadge badgeContent="BEST SELLER" />
+        </div>
       </div>
-      <button className={`btn btn-primary w-100 position-absolute bottom-0 `}>
+      <button
+        className={`btn btn-info w-100 position-absolute bottom-0 text-light `}
+      >
         ADD TO CART
       </button>
     </div>

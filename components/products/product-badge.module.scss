@@ -1,0 +1,13 @@
+@import "../../styles//colors.scss";
+
+.badge {
+  width: 50%;
+  padding: 0.2rem;
+  color: $gray-light;
+  text-align: center;
+  font-size: 0.8rem;
+  transform: rotate(40deg);
+  position: absolute;
+  top: 5%;
+  right: -10%;
+}
