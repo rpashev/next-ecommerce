@@ -3,11 +3,11 @@ import ProductCard from "../products/product-card";
 const BestSellers = (props) => {
   return (
     <div className={`container`}>
-      <div className={`row justify-content-around py-3`}>
+      <div className={`row justify-content-center py-3`}>
+        <ProductCard />
+        <ProductCard />
         <ProductCard />
         <ProductCard onSale />
-        <ProductCard />
-        <ProductCard />
       </div>
     </div>
   );

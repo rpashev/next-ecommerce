@@ -8,7 +8,7 @@ const ProductCard = (props) => {
 
   return (
     <div
-      className={styles.card}
+      className={`${styles.card}`}
       onMouseEnter={() => setShowButton(true)}
       onMouseLeave={() => setShowButton(false)}
     >
@@ -26,13 +26,14 @@ const ProductCard = (props) => {
         <h2 className={`${styles.price} opacity-75`}>$19.99</h2>
       </div>
       <ProductBadge onSale={props.onSale || false} />
-      {showButton && (
-        <button
-          className={`btn btn-info w-100 position-absolute bottom-0 text-light `}
-        >
-          ADD TO CART
-        </button>
-      )}
+
+      <button
+        className={`${
+          showButton ? styles.visible : ""
+        } btn btn-info w-100 position-absolute bottom-0 text-light d-none`}
+      >
+        ADD TO CART
+      </button>
     </div>
   );
 };

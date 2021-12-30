@@ -1,6 +1,7 @@
 @import "../../styles//colors.scss";
 .card {
   width: 300px;
+  margin: 0.75rem;
   height: 450px;
   padding: 0;
   position: relative;
@@ -14,14 +15,21 @@
     align-items: flex-start;
     padding: 0.5rem;
   }
-
-  .badges {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  .visible {
+    display: block !important;
   }
 }
 
 .card:hover {
   border: 1px solid $gray-darkest;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    border: 1px solid $gray-darkest;
+
+    button {
+      display: block !important;
+    }
+  }
 }
