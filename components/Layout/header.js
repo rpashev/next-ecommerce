@@ -1,21 +1,30 @@
 import Link from "next/link";
+import { useState } from "react";
 import CartIcon from "../UI/cart-icon";
 import styles from "./header.module.scss";
+import MobileNav from "./mobile-nav";
+import Backdrop from "../UI/backdrop";
 
 const Header = (props) => {
+  const [showMobileNav, setShowMobileNav] = useState(false);
+
+  const toggleMobileNav = () => {
+    setShowMobileNav((prevState) => !prevState);
+  };
+
   return (
     <header className={styles.header}>
       <div className="container h-100">
         <div className={`${styles.navbar} row h-100`}>
-          <button
-            className={styles["toggle-button"]}
-            // onClick={toggleShowMobileNav}
-          >
+          <button className={styles["toggle-button"]} onClick={toggleMobileNav}>
             <span className={styles["toggle-button__bar"]}></span>
             <span className={styles["toggle-button__bar"]}></span>
             <span className={styles["toggle-button__bar"]}></span>
           </button>
           <div className={`${styles.logo} col-6 col-md-4 h3`}>My Shop</div>
+
+          <MobileNav close={toggleMobileNav} opened={showMobileNav} />
+          {showMobileNav && <Backdrop close={toggleMobileNav} />}
 
           <nav
             className={`${styles["main-nav"]} col-8 row justify-content-between align-items-center`}
