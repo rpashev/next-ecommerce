@@ -4,36 +4,80 @@
   height: 5rem;
   background-color: $gray-darker;
   color: #fff;
-  .logo {
+  position: relative;
+
+  .navbar {
+    align-items: center;
+    justify-content: center;
+    .logo {
       color: $color-primary;
+    }
+
+    .main-nav {
+      ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li a {
+          text-decoration: none;
+          margin: 0 1rem;
+          color: $gray-light;
+          padding: 0.4rem 0.5rem;
+          border-radius: 8px;
+          vertical-align: middle;
+          transition: all 0.2s ease-out;
+        }
+
+        li a:hover {
+          background-color: $gray-darkest;
+        }
+        .cart-icon {
+          padding: 0.75rem;
+          border-radius: 50%;
+        }
+      }
+    }
+
+    .toggle-button {
+      display: none;
+      width: 3rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding-top: 0;
+      padding-bottom: 0;
+      vertical-align: middle;
+      position: absolute;
+      left: 0;
+
+      .toggle-button__bar {
+        width: 100%;
+        height: 0.2rem;
+        background: $gray-light;
+        display: block;
+        margin: 0.6rem 0;
+      }
+    }
   }
+}
 
-  .nav {
-    ul {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      li a {
-        text-decoration: none;
-        margin: 0 1rem;
-        color: $gray-light;
-        padding: 0.4rem 0.5rem;
-        border-radius: 8px;
-        vertical-align: middle;
-        transition: all 0.2s ease-out;
-      }
-
-      li a:hover {
-        background-color: $gray-darkest;
-      }
-      .cart-icon {
-        padding: 0.75rem;
-        border-radius: 50%;
-      }
+@media (max-width: 1024px) {
+  .navbar {
+    // justify-content: space-between;
+    // display: inline-block;
+    .logo {
+      margin: 0 auto;
+      text-align: center;
+    }
+    .main-nav {
+      display: none !important;
+    }
+    .toggle-button {
+      display: block !important;
     }
   }
 }

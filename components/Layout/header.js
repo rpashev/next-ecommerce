@@ -6,10 +6,19 @@ const Header = (props) => {
   return (
     <header className={styles.header}>
       <div className="container h-100">
-        <div className="row align-items-center justify-content-center h-100">
-          <div className={`${styles.logo} col-4 h3`}>My Shop</div>
+        <div className={`${styles.navbar} row h-100`}>
+          <button
+            className={styles["toggle-button"]}
+            // onClick={toggleShowMobileNav}
+          >
+            <span className={styles["toggle-button__bar"]}></span>
+            <span className={styles["toggle-button__bar"]}></span>
+            <span className={styles["toggle-button__bar"]}></span>
+          </button>
+          <div className={`${styles.logo} col-6 col-md-4 h3`}>My Shop</div>
+
           <nav
-            className={`${styles.nav} col-8 row justify-content-between align-items-center`}
+            className={`${styles["main-nav"]} col-8 row justify-content-between align-items-center`}
           >
             <ul className={`${styles["general-nav"]} col-6`}>
               <li>

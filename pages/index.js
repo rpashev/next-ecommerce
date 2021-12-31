@@ -7,7 +7,7 @@ import MobileNav from "../components/layout/mobile-nav";
 export default function Home() {
   return (
     <Fragment>
-      <MobileNav />
+      {/* <MobileNav /> */}
       <HomeIntro />
       <Newsletter />
       <BestSellers />

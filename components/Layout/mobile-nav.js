@@ -24,7 +24,7 @@ const MobileNav = () => {
           <Link href="/">SIGN UP</Link>
         </li>
       </ul>
-      <button type="button" className="btn-close position-absolute top-0 left-0 btn-lg text-light h2" aria-label="Close">X</button>
+      <button type="button" className="btn-dark position-absolute top-0 left-0 btn-lg text-light h2" aria-label="Close">X</button>
     </nav>
   );
 };
