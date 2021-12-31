@@ -30,7 +30,7 @@ const ProductCard = (props) => {
       <button
         className={`${
           showButton ? styles.visible : ""
-        } btn btn-info w-100 position-absolute bottom-0 text-light d-none`}
+        } btn btn-info w-100 position-absolute bottom-0 text-light d-none rounded-0`}
       >
         ADD TO CART
       </button>
