@@ -1,0 +1,21 @@
+@import "../../styles//colors.scss";
+
+.features {
+  list-style: none;
+  .features-item {
+    // background: $gray-darkest;
+    opacity: 0.9;
+    padding: 1rem;
+    min-width: 280px;
+    max-width: 400px;
+    border-radius: 30px;
+    height: 10rem;
+    width: 25%;
+    margin: 1rem 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    i {
+      font-size: 4rem;
+    }
+  }
+}
