@@ -4,7 +4,7 @@ const Features = () => {
   return (
     <section>
       <div className="container">
-        <h2 className="text-center mt-5 text-dark display-5">
+        <h2 className="text-center mt-5 text-dark">
           Why are we the best?
         </h2>
         <ul className={`${styles.features} row justify-content-center mb-5`}>

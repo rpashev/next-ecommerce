@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./home-intro.module.scss";
 
 const HomeIntro = () => {
@@ -21,7 +22,9 @@ const HomeIntro = () => {
         <p className="lead muted w-75">
           Your best choice for hats, gloves, socks and much more accessories
         </p>
-        <button className={`btn btn-outline-primary btn-lg`}>SHOP</button>
+        <Link href="/shop">
+          <a className={`btn btn-outline-primary btn-lg`}>SHOP</a>
+        </Link>
       </div>
     </section>
   );
