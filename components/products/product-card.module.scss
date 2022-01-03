@@ -1,8 +1,9 @@
 @import "../../styles//colors.scss";
 .card {
-  width: 300px;
+  width: 250px;
+  min-width: 250px;
   margin: 0.75rem;
-  height: 450px;
+  height: 400px;
   padding: 0;
   position: relative;
   margin-bottom: 1.5rem;
