@@ -13,19 +13,21 @@ const ProductCard = (props) => {
       onMouseLeave={() => setShowButton(false)}
     >
       <Image
-        src="/images/products/hat1-pic1.jpg"
+        src={`/images/products/${props.images[0]}.jpg`}
         alt="product"
         width={400}
         height={400}
       />
       <div className={`${styles.info}`}>
         <div>
-          <h3>Adidas</h3>
-          <p className={`lead`}>SUPERLITE HAT</p>
+          <h3>{props.brand}</h3>
+          <p className={`lead`}>{props.name}</p>
         </div>
-        <h2 className={`${styles.price} opacity-75`}>$19.99</h2>
+        <h2 className={`${styles.price} opacity-75`}>${props.price}</h2>
       </div>
-      <ProductBadge onSale={props.onSale || false} />
+      {(props.onSale || props.bestSeller) && (
+        <ProductBadge onSale={props.onSale} bestSeller={props.bestSeller} />
+      )}
 
       <button
         className={`${

@@ -12,7 +12,7 @@ export const products = [
     images: ["gloves2-pic1", "gloves2-pic2"],
   },
   {
-    name: "COMFORT FLEECE 3.0 GLOVES",
+    name: "Comfort Fleece 3.0 Gloves",
     category: "Gloves",
     price: 30,
     description:
@@ -20,11 +20,11 @@ export const products = [
     brand: "Adidas",
     sizes: ["S", "M", "L"],
     onSale: false,
-    bestSeller: false,
+    bestSeller: true,
     images: ["gloves1-pic1", "gloves1-pic2"],
   },
   {
-    name: "SUPERLITE HAT",
+    name: "Superlite hat",
     category: "Hats & Beanies",
     price: 24,
     description:
@@ -47,4 +47,5 @@ export const products = [
     bestSeller: false,
     images: ["hat2-pic1", "hat2-pic2"],
   },
+  
 ];

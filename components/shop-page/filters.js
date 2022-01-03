@@ -1,8 +1,14 @@
 import { useState } from "react";
 import styles from "./filters.module.scss";
 
-const Filters = () => {
+const Filters = (props) => {
   const [priceRange, setPriceRange] = useState(200);
+
+  const filterHandler = (event) => {
+    if (event.target instanceof HTMLButtonElement) {
+      props.filter(event.target.textContent);
+    }
+  };
 
   return (
     <div className={`${styles.filters} col-12 col-md-4 col-lg-3`}>
@@ -14,7 +20,7 @@ const Filters = () => {
       />
       <div className="my-3">
         <h3>Categories</h3>
-        <div className={styles.categories}>
+        <div className={styles.categories} onClick={filterHandler}>
           <button className={styles.btn}>ALL</button>
           <button className={styles.btn}>Hats & Beanies</button>
           <button className={styles.btn}>Gloves</button>
@@ -28,14 +34,14 @@ const Filters = () => {
       <div className="my-3">
         <h3>Brand</h3>
         <select className="form-select shadow-none">
-          <option selected>All brands</option>
+          <option defaultValue>All brands</option>
           <option>Adidas</option>
           <option>Reebok</option>
         </select>
       </div>
       <div className="my-3">
         <h3>Price</h3>
-        <label for="customRange1" className="form-label">
+        <label htmlFor="customRange1" className="form-label">
           Select price range
         </label>
         <input

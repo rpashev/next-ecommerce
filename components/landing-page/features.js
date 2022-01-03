@@ -13,23 +13,23 @@ const Features = () => {
             <h4>Top prices on the market</h4>
           </li>
           <li className={`${styles["features-item"]} col-12 col-md-4`}>
-            <i class="bi bi-truck"></i>
+            <i className="bi bi-truck"></i>
             <h4>Free Shipping</h4>
           </li>
           <li className={`${styles["features-item"]} col-12 col-md-4`}>
-            <i class="bi bi-arrow-counterclockwise"></i>
+            <i className="bi bi-arrow-counterclockwise"></i>
             <h4>30 day refund policy</h4>
           </li>
           <li className={`${styles["features-item"]} col-12 col-md-4`}>
-            <i class="bi bi-geo-alt"></i>
+            <i className="bi bi-geo-alt"></i>
             <h4>Physical stores across 50 countries</h4>
           </li>
           <li className={`${styles["features-item"]} col-12 col-md-4`}>
-            <i class="bi bi-currency-bitcoin"></i>
+            <i className="bi bi-currency-bitcoin"></i>
             <h4>We support payments in cryptocurrency</h4>
           </li>
           <li className={`${styles["features-item"]} col-12 col-md-4`}>
-            <i class="bi bi-people"></i>
+            <i className="bi bi-people"></i>
             <h4>Loyalty program for our best customers</h4>
           </li>
         </ul>
