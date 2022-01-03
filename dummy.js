@@ -24,7 +24,7 @@ export const products = [
     images: ["gloves1-pic1", "gloves1-pic2"],
   },
   {
-    name: "Superlite hat",
+    name: "Superlite Hat",
     category: "Hats & Beanies",
     price: 24,
     description:

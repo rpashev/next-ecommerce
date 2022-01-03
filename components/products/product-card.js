@@ -5,15 +5,26 @@ import styles from "./product-card.module.scss";
 
 const ProductCard = (props) => {
   const [showButton, setShowButton] = useState(false);
+  const [imgLink, setImgLink] = useState(props.images[0]);
+
+  const onHoverHandler = () => {
+    setShowButton(true);
+    setImgLink(props.images[1]);
+  };
+
+  const onMouseLeaveHandler = () => {
+    setShowButton(false);
+    setImgLink(props.images[0]);
+  };
 
   return (
     <div
       className={`${styles.card}`}
-      onMouseEnter={() => setShowButton(true)}
-      onMouseLeave={() => setShowButton(false)}
+      onMouseEnter={onHoverHandler}
+      onMouseLeave={onMouseLeaveHandler}
     >
       <Image
-        src={`/images/products/${props.images[0]}.jpg`}
+        src={`/images/products/${imgLink}.jpg`}
         alt="product"
         width={400}
         height={400}
