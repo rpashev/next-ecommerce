@@ -3,11 +3,21 @@ import styles from "./index.module.scss";
 import { products } from "../../../dummy";
 import Image from "next/image";
 import SizeButton from "../../../components/product-details/size-button";
+import Slideshow from "../../../components/product-details/slideshow";
+import { useState } from "react";
 
 const Details = (props) => {
   const p = products[0];
+  const [imgLink, setImgLink] = useState(p.images[0]);
 
   const links = ["Home", "Shop"];
+
+  const changePhoto = (link) => {
+    if (imgLink !== link) {
+      setImgLink(link);
+    }
+  };
+
   return (
     <section className="container py-4">
       <div className={styles["product-page"]}>
@@ -17,11 +27,12 @@ const Details = (props) => {
       <div className={`${styles.product} row`}>
         <div className={`col-12 col-md-7 mt-2`}>
           <Image
-            src={`/images/products/${p.images[0]}.jpg`}
+            src={`/images/products/${imgLink}.jpg`}
             alt="product"
             width={650}
             height={650}
           />
+          <Slideshow images={p.images} changePhoto={changePhoto} />
           <div className={`mt-3`}>
             <h3>Product information</h3>
             <p className="lead pe-md-5">{p.description}</p>
@@ -34,7 +45,7 @@ const Details = (props) => {
           <div className={styles.sizes}>
             <h6>Choose a size: </h6>
             {p.sizes.map((s) => {
-              return <SizeButton size={s} />;
+              return <SizeButton size={s} key={s} />;
             })}
           </div>
         </div>
