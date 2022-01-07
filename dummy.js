@@ -10,6 +10,7 @@ export const products = [
     onSale: true,
     bestSeller: false,
     images: ["gloves2-pic1", "gloves2-pic2"],
+    available: true,
   },
   {
     name: "Comfort Fleece 3.0 Gloves",
@@ -22,6 +23,7 @@ export const products = [
     onSale: false,
     bestSeller: true,
     images: ["gloves1-pic1", "gloves1-pic2"],
+    available: true,
   },
   {
     name: "Superlite Hat",
@@ -34,6 +36,7 @@ export const products = [
     onSale: false,
     bestSeller: true,
     images: ["hat1-pic1", "hat1-pic2"],
+    available: false,
   },
   {
     name: "Classics Foundation Bucket Hat",
@@ -46,6 +49,6 @@ export const products = [
     onSale: true,
     bestSeller: false,
     images: ["hat2-pic1", "hat2-pic2"],
+    available: true,
   },
-  
 ];

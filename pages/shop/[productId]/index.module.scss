@@ -19,5 +19,31 @@
   }
 }
 
+.btn-cta {
+  background-color: $gray-darker;
+  color: $gray-light;
+  min-width: 20rem;
+  border: none;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease-out;
+  margin-top: 2rem;
+  border-radius: 4px;
+  box-shadow: 0 0 2px $gray-darker;
+}
+.btn-cta:hover {
+  background-color: $gray-darkest;
+  box-shadow: none;
+}
+.disabled {
+  cursor: not-allowed;
+}
+.disabled:hover {
+  background-color: $gray-darker;
+  box-shadow: 0 0 2px $gray-darker;
+}
+
 @media (max-width: 40rem) {
+  .btn-cta {
+    width: 100%;
+  }
 }

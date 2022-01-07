@@ -18,3 +18,10 @@
   background-color: $gray-darker;
   color: $gray-light;
 }
+.disabled {
+  cursor: not-allowed;
+}
+.disabled:hover {
+  background-color: $gray-light;
+  color: $gray-darkest;
+}

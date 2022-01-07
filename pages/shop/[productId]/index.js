@@ -8,7 +8,7 @@ import { useState } from "react";
 import ProductBadge from "../../../components/products/product-badge";
 
 const Details = (props) => {
-  const p = products[1];
+  const p = products[3];
   const [imgLink, setImgLink] = useState(p.images[0]);
 
   const links = ["Home", "Shop"];
@@ -51,12 +51,26 @@ const Details = (props) => {
             {p.bestSeller && <ProductBadge bestSeller={p.bestSeller} details />}
           </div>
 
+          <h6>
+            Availability:{" "}
+            <span
+              className={`${
+                p.available ? "text-success" : "text-danger"
+              } fw-bold mt-2`}
+            >
+              {p.available ? "In Stock" : "Out Of Stock"}
+            </span>
+          </h6>
+
           <div className={styles.sizes}>
             <h6>Choose a size: </h6>
             {p.sizes.map((s) => {
-              return <SizeButton size={s} key={s} />;
+              return <SizeButton size={s} key={s} available={p.available}/>;
             })}
           </div>
+          <button className={`${styles["btn-cta"]} ${p.available ? "" : styles.disabled}`} disabled={!p.available} >
+            ADD TO CART
+          </button>
         </div>
       </div>
     </section>
