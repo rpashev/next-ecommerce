@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ProductBadge from "../products/product-badge";
 import styles from "./slideshow.module.scss";
 
 const Slideshow = (props) => {

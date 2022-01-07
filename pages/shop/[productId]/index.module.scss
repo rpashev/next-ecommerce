@@ -6,3 +6,18 @@
     border-right: 1px solid $gray-darker;
   }
 }
+
+.price-info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .price {
+    font-size: 3rem;
+    margin: 1rem 0;
+    margin-right: 4rem;
+  }
+}
+
+@media (max-width: 40rem) {
+}

@@ -7,7 +7,7 @@ const ProductBadge = (props) => {
     <div
       className={`${props.onSale ? "bg-success" : ""} ${styles.badge} ${
         props.bestSeller ? "bg-danger" : ""
-      }`}
+      } ${props.details ? styles.details : ""}`}
     >
       {content}
     </div>

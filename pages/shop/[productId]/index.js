@@ -5,9 +5,10 @@ import Image from "next/image";
 import SizeButton from "../../../components/product-details/size-button";
 import Slideshow from "../../../components/product-details/slideshow";
 import { useState } from "react";
+import ProductBadge from "../../../components/products/product-badge";
 
 const Details = (props) => {
-  const p = products[0];
+  const p = products[1];
   const [imgLink, setImgLink] = useState(p.images[0]);
 
   const links = ["Home", "Shop"];
@@ -19,29 +20,37 @@ const Details = (props) => {
   };
 
   return (
-    <section className="container py-4">
-      <div className={styles["product-page"]}>
+    <section className="container py-4 ">
+      <div className={`${styles["product-page"]}`}>
         <Breadcrumbs links={links} current={p.name} />
       </div>
       <hr></hr>
-      <div className={`${styles.product} row`}>
-        <div className={`col-12 col-md-7 mt-2`}>
+      <div className={`${styles.product} row mx-auto mx-md-0`}>
+        <div className={`col-12 col-md-6 mt-2`}>
           <Image
             src={`/images/products/${imgLink}.jpg`}
             alt="product"
             width={650}
             height={650}
           />
+
           <Slideshow images={p.images} changePhoto={changePhoto} />
           <div className={`mt-3`}>
             <h3>Product information</h3>
             <p className="lead pe-md-5">{p.description}</p>
           </div>
         </div>
-        <div className={`col-12 col-md-5 mt-5 mt-md-2`}>
+        <div
+          className={`col-12 col-md-6 mt-5 mt-md-2 position-relative ps-md-5`}
+        >
           <h3>{p.brand}</h3>
-          <h1 className={`display-5`}>{p.name}</h1>
-          <h1 className={`mt-3`}>${p.price}</h1>
+          <h1 className={`display-5 mb-3`}>{p.name}</h1>
+          <div className={styles["price-info"]}>
+            <h1 className={`${styles.price}`}>${p.price}</h1>
+            {p.onSale && <ProductBadge onSale={p.onSale} details />}
+            {p.bestSeller && <ProductBadge bestSeller={p.bestSeller} details />}
+          </div>
+
           <div className={styles.sizes}>
             <h6>Choose a size: </h6>
             {p.sizes.map((s) => {

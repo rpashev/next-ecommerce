@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Breadcrumbs = (props) => {
   return (
-    <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb" className="mx-3">
       <ol className="breadcrumb">
         {props.links.map((link) => {
           const href = link === "Home" ? "/" : `/${link.toLowerCase()}`;
