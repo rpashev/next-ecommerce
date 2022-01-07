@@ -5,9 +5,9 @@ const Breadcrumbs = (props) => {
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">
         {props.links.map((link) => {
-          const href = link === "Home" ? "/" : link.toLowerCase();
+          const href = link === "Home" ? "/" : `/${link.toLowerCase()}`;
           return (
-            <li className="breadcrumb-item">
+            <li key={link} className="breadcrumb-item">
               <Link href={href}>{link}</Link>
             </li>
           );

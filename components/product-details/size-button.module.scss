@@ -1,0 +1,20 @@
+@import "../../styles/colors.scss";
+
+.btn {
+  display: inline-block;
+  background-color: $gray-light;
+  color: $gray-darkest;
+  padding: 1rem;
+  border: 1px solid $gray-darker;
+  border-right: none;
+  width: 4rem;
+  height: 4rem;
+  transition: all 0.2s ease-out;
+  margin-top: 0.5rem;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: $gray-darker;
+  color: $gray-light;
+}

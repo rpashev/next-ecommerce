@@ -1,0 +1,8 @@
+@import "../../../styles/colors.scss";
+.sizes {
+  margin-top: 2rem;
+
+  button:last-child {
+    border-right: 1px solid $gray-darker;
+  }
+}
