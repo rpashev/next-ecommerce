@@ -19,8 +19,25 @@
   }
 }
 
+.operations {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  margin-top: 2rem;
+
+  .amount {
+    font-size: 1.3rem;
+    line-height: 2.5rem;
+    margin: 0;
+    padding: 0;
+    width: 3rem;
+    text-align: center;
+  }
+}
+
 .btn-cta {
   background-color: $gray-darker;
+  display: block;
   color: $gray-light;
   min-width: 20rem;
   border: none;
