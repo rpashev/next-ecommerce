@@ -23,7 +23,7 @@ const HomeIntro = () => {
           Your best choice for hats, gloves, socks and much more accessories
         </p>
         <Link href="/shop">
-          <a className={`btn btn-outline-primary btn-lg`}>SHOP</a>
+          <a className={`btn btn-outline-primary btn-lg shadow-none`}>SHOP</a>
         </Link>
       </div>
     </section>

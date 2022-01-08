@@ -1,6 +1,7 @@
 export const products = [
   {
     name: "Sports Essentials Logo Gloves",
+    slug: "sports-essentials-logo-gloves",
     category: "Gloves",
     price: 25,
     description:
@@ -15,6 +16,7 @@ export const products = [
   {
     name: "Comfort Fleece 3.0 Gloves",
     category: "Gloves",
+    slug: "comfort-fleece-gloves",
     price: 30,
     description:
       "These gloves keep you warm through cold-weather commutes and afternoons on the slope. They have breathable insulation and smart moisture-wicking features so you stay warm and dry. The palm is designed to give you good grip, and there are touchscreen-friendly points on the thumb and forefinger.",
@@ -26,7 +28,37 @@ export const products = [
     available: true,
   },
   {
+    name: "Freak 5.0 Polynesian Bowl Gloves",
+    slug: "freak-polynesian-bowl-gloves",
+    category: "Gloves",
+    price: 60,
+    description:
+      "The perfect blend of impact protection and dexterity. These adidas football receiver gloves are padded across the backhand and wrist, giving you a controlled, steady feel. They're ergonomically built to mimic the hand's natural movement. This pair celebrates the Polynesian Bowl with graphics on the backhand and palm.",
+    brand: "Adidas",
+    sizes: ["M", "L"],
+    onSale: false,
+    bestSeller: false,
+    images: ["gloves3-pic1", "gloves3-pic2", "gloves3-pic3"],
+    available: true,
+  },
+  {
+    name: "OS Run Gloves",
+    slug: "os-run-gloves",
+    category: "Gloves",
+    price: 25,
+    description:
+      "Chilled fingers don't have to be a part of your winter running routine. These running gloves are made of lightweight and breathable fabric to keep your hands covered on those frosty mornings. Reflective details help you stand out.",
+    brand: "Reebok",
+    sizes: ["S", "M", "L"],
+    onSale: false,
+    bestSeller: false,
+    images: ["gloves4-pic1", "gloves4-pic2"],
+    available: false,
+  },
+
+  {
     name: "Superlite Hat",
+    slug: "superlite-hat",
     category: "Hats & Beanies",
     price: 24,
     description:
@@ -40,6 +72,7 @@ export const products = [
   },
   {
     name: "Classics Foundation Bucket Hat",
+    slug: "classics-foundation-bucket-hat",
     category: "Hats & Beanies",
     price: 28,
     description:
@@ -50,5 +83,61 @@ export const products = [
     bestSeller: false,
     images: ["hat2-pic1", "hat2-pic2"],
     available: true,
+  },
+  {
+    name: "Rib Cuff Beanie",
+    slug: "rib-cuff-beanie",
+    category: "Hats & Beanies",
+    price: 24,
+    description:
+      "Low temperatures, questionable hair day, pulling a look together — with this adidas beanie, all reasons are good reasons for tossing it on. It's low-key enough to not distract, and more than comfortable enough to get you from morning to night feeling good all the way through.",
+    brand: "Adidas",
+    sizes: ["S", "M", "L"],
+    onSale: false,
+    bestSeller: false,
+    images: ["hat3-pic1", "hat3-pic2", "hat3-pic3"],
+    available: true,
+  },
+  {
+    name: "Baseball Cap",
+    slug: "baseball-cap",
+    category: "Hats & Beanies",
+    price: 40,
+    description:
+      "Pull together any casual outfit. This adidas baseball cap lets you do just that. The Trefoil and 3-Stripes are decked out in colorful rhinestones, giving your look the perfect pop of sparkle. While you shine in the light, the pre-curved brim helps keep the sun out of your eyes.",
+    brand: "Adidas",
+    sizes: ["S", "M", "L"],
+    onSale: false,
+    bestSeller: true,
+    images: ["hat4-pic1", "hat4-pic2", "hat4-pic3"],
+    available: false,
+  },
+  {
+    name: "Classics Foundation Beanie",
+    slug: "classics-foundation-beanie",
+    category: "Hats & Beanies",
+    price: 20,
+    description:
+      "Keep your look chill in crisp weather in this beanie. A subtle logo patch on the cuff stays true to heritage style. The clean, minimalist design pairs well with everything.",
+    brand: "Reebok",
+    sizes: ["S", "M", "L"],
+    onSale: true,
+    bestSeller: false,
+    images: ["hat5-pic1", "hat5-pic2"],
+    available: false,
+  },
+  {
+    name: "United By Fitness Baseball Hat",
+    slug: "united-by-fitness-baseball-hat",
+    category: "Hats & Beanies",
+    price: 28,
+    description:
+      "You don't just do one sport on the weekend. Sometimes you fit in a round of golf, a workout and a run. The Speedwick sweatband in this Reebok hat wicks moisture away, so you stay cool and dry no matter what you're doing. Eyelets on the hat add an extra hit of breathability.",
+    brand: "Reebok",
+    sizes: ["S", "M", "L"],
+    onSale: false,
+    bestSeller: false,
+    images: ["hat6-pic1", "hat6-pic2"],
+    available: false,
   },
 ];

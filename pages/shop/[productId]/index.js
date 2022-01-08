@@ -8,6 +8,7 @@ import ProductCard from "../../../components/products/product-card";
 import { useState } from "react";
 import ProductBadge from "../../../components/products/product-badge";
 import ButtonOperation from "../../../components/UI/btn-operation";
+import OnSaleProducts from "../../../components/product-details/onsale-products";
 
 const Details = (props) => {
   const p = products[3];
@@ -105,26 +106,7 @@ const Details = (props) => {
             <p className="lead">Total: ${p.price * amount}</p>
           </div>
         </div>
-        <div className={`py-5 mt-3`}>
-          <h2 className={`text-center`}>Check out what's on sale </h2>
-          <div className={`row justify-content-center py-3`}>
-            {products.map((p) => {
-              if (p.onSale) {
-                return (
-                  <ProductCard
-                    key={p.name}
-                    price={p.price}
-                    onSale={p.onSale}
-                    bestSeller={p.bestSeller}
-                    name={p.name}
-                    brand={p.brand}
-                    images={p.images}
-                  />
-                );
-              }
-            })}
-          </div>
-        </div>
+        <OnSaleProducts />
       </div>
     </section>
   );
