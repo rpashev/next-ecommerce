@@ -1,11 +1,12 @@
 import styles from "./index.module.scss";
 import ProductCard from "../../components/products/product-card";
 import Filters from "../../components/shop-page/filters";
-import { products } from "../../dummy";
 import { useState } from "react";
 import Breadcrumbs from "../../components/UI/breadcrumbs";
+import { getByField } from "../lib/mongo";
 
-const ShopPage = () => {
+const ShopPage = (props) => {
+  const { products } = props;
   const [filteredProducts, setFilteredProducts] = useState(products);
 
   const filterProducts = (category) => {
@@ -41,6 +42,17 @@ const ShopPage = () => {
       </div>
     </div>
   );
+};
+
+export const getStaticProps = async () => {
+  const products = await getByField({});
+  return {
+    props: {
+      products: products,
+    },
+
+    revalidate: 3600,
+  };
 };
 
 export default ShopPage;
