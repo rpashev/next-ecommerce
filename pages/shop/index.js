@@ -4,43 +4,21 @@ import Filters from "../../components/shop-page/filters";
 import { useState } from "react";
 import Breadcrumbs from "../../components/UI/breadcrumbs";
 import { getByField } from "../../lib/mongo";
+import { filterProducts } from "../../utils/filter";
 
 const ShopPage = (props) => {
   const { products } = props;
   const [filteredProducts, setFilteredProducts] = useState(products);
 
-  const filterProducts = (
-    category = "ALL",
-    searchQuery = "",
-    brand = "All brands",
-    priceRange = 200
-  ) => {
-    console.log(category, searchQuery, brand, priceRange);
-
-    if (
-      category === "ALL" &&
-      brand === "All brands" &&
-      searchQuery === "" &&
-      priceRange === 200
-    ) {
-      setFilteredProducts(products);
-      return;
-    }
-    const updatedProducts = products.filter((p) => {
-      console.log(p.brand);
-      if (
-        (p.category === category || category === "ALL") &&
-        (p.brand === brand || brand === "All brands") &&
-        p.price <= priceRange &&
-        (searchQuery === "" ||
-          p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.brand.toLowerCase().includes(searchQuery.toLowerCase()))
-      ) {
-        return p;
-      }
-    });
-    setFilteredProducts(updatedProducts);
+  const loadFilteredProducts = (category, searchQuery, brand, priceRange) => {
+    const resultProducts = filterProducts(
+      category,
+      searchQuery,
+      brand,
+      priceRange,
+      products
+    );
+    setFilteredProducts(resultProducts);
   };
 
   let content = <h2 className="text-center w-75">No products found!</h2>;
@@ -66,7 +44,7 @@ const ShopPage = (props) => {
       <Breadcrumbs links={["Home"]} current="Shop" />
       <hr></hr>
       <div className="row py-3">
-        <Filters filter={filterProducts} />
+        <Filters filter={loadFilteredProducts} />
         <div className={`${styles["product-list"]} col`}>{content}</div>
       </div>
     </div>
