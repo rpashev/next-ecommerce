@@ -28,13 +28,14 @@ const ShopPage = (props) => {
           {filteredProducts.map((p) => {
             return (
               <ProductCard
-                key={p.name}
+                key={p.slug}
                 price={p.price}
                 onSale={p.onSale}
                 bestSeller={p.bestSeller}
                 name={p.name}
                 brand={p.brand}
                 images={p.images}
+                slug={p.slug}
               />
             );
           })}

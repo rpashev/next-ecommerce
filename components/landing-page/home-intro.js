@@ -12,6 +12,7 @@ const HomeIntro = () => {
           width={1600}
           height={676}
           layout="responsive"
+          priority
         />
       </div>
 

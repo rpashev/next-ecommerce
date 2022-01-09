@@ -27,6 +27,7 @@ export const getByField = async (filter) => {
       .collection("products")
       .find(filter, { projection: { _id: 0 } })
       .toArray();
+      // console.log("--------------------------------------" + result)
   } catch (error) {
     client.close();
     console.log(error);

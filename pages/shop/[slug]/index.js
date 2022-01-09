@@ -4,15 +4,16 @@ import { products } from "../../../dummy";
 import Image from "next/image";
 import SizeButton from "../../../components/product-details/size-button";
 import Slideshow from "../../../components/product-details/slideshow";
-import ProductCard from "../../../components/products/product-card";
 import { useState } from "react";
 import ProductBadge from "../../../components/products/product-badge";
 import ButtonOperation from "../../../components/UI/btn-operation";
 import OnSaleProducts from "../../../components/product-details/onsale-products";
+import { getByField } from "../../lib/mongo";
 
 const Details = (props) => {
-  const p = products[3];
-  const [imgLink, setImgLink] = useState(p.images[0]);
+  const product = props.product;
+  console.log(product);
+  const [imgLink, setImgLink] = useState(product.images[0]);
 
   const [amount, setAmount] = useState(1);
 
@@ -36,7 +37,7 @@ const Details = (props) => {
   return (
     <section className="container py-4 ">
       <div className={`${styles["product-page"]}`}>
-        <Breadcrumbs links={links} current={p.name} />
+        <Breadcrumbs links={links} current={product.name} />
 
         <hr></hr>
         <div className={`${styles.product} row mx-auto mx-md-0 `}>
@@ -48,22 +49,24 @@ const Details = (props) => {
               height={650}
             />
 
-            <Slideshow images={p.images} changePhoto={changePhoto} />
+            <Slideshow images={product.images} changePhoto={changePhoto} />
             <div className={`my-4`}>
               <h3>Product information</h3>
-              <p className="lead pe-md-5">{p.description}</p>
+              <p className="lead pe-md-5">{product.description}</p>
             </div>
           </div>
           <div
             className={`col-12 col-md-6 mt-5 mt-md-2 ps-md-5 position-relative`}
           >
-            <h3>{p.brand}</h3>
-            <h1 className={`display-5 mb-3`}>{p.name}</h1>
+            <h3>{product.brand}</h3>
+            <h1 className={`display-5 mb-3`}>{product.name}</h1>
             <div className={styles["price-info"]}>
-              <h1 className={`${styles.price}`}>${p.price}</h1>
-              {p.onSale && <ProductBadge onSale={p.onSale} details />}
-              {p.bestSeller && (
-                <ProductBadge bestSeller={p.bestSeller} details />
+              <h1 className={`${styles.price}`}>${product.price}</h1>
+              {product.onSale && (
+                <ProductBadge onSale={product.onSale} details />
+              )}
+              {product.bestSeller && (
+                <ProductBadge bestSeller={product.bestSeller} details />
               )}
             </div>
 
@@ -71,17 +74,19 @@ const Details = (props) => {
               Availability:{" "}
               <span
                 className={`${
-                  p.available ? "text-success" : "text-danger"
+                  product.available ? "text-success" : "text-danger"
                 } fw-bold mt-2`}
               >
-                {p.available ? "In Stock" : "Out Of Stock"}
+                {product.available ? "In Stock" : "Out Of Stock"}
               </span>
             </h6>
 
             <div className={styles.sizes}>
               <h6>Choose a size: </h6>
-              {p.sizes.map((s) => {
-                return <SizeButton size={s} key={s} available={p.available} />;
+              {product.sizes.map((s) => {
+                return (
+                  <SizeButton size={s} key={s} available={product.available} />
+                );
               })}
             </div>
             <div className={styles.operations}>
@@ -97,19 +102,43 @@ const Details = (props) => {
 
             <button
               className={`${styles["btn-cta"]} ${
-                p.available ? "" : styles.disabled
+                product.available ? "" : styles.disabled
               }`}
-              disabled={!p.available}
+              disabled={!product.available}
             >
               ADD TO CART
             </button>
-            <p className="lead">Total: ${p.price * amount}</p>
+            <p className="lead">Total: ${product.price * amount}</p>
           </div>
         </div>
         <OnSaleProducts />
       </div>
     </section>
   );
+};
+
+export const getStaticProps = async (context) => {
+  const { params } = context;
+  const { slug } = params;
+
+  const products = await getByField({ slug: slug });
+  const product = products[0];
+
+  return {
+    props: {
+      product: product,
+    },
+  };
+};
+
+export const getStaticPaths = async () => {
+  const products = await getByField({});
+  const slugs = products.map((el) => el.slug);
+
+  return {
+    paths: slugs.map((slug) => ({ params: { slug: slug } })),
+    fallback: false,
+  };
 };
 
 export default Details;
