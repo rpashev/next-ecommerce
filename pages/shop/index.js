@@ -3,7 +3,7 @@ import ProductCard from "../../components/products/product-card";
 import Filters from "../../components/shop-page/filters";
 import { useState } from "react";
 import Breadcrumbs from "../../components/UI/breadcrumbs";
-import { getByField } from "../lib/mongo";
+import { getByField } from "../../lib/mongo";
 
 const ShopPage = (props) => {
   const { products } = props;

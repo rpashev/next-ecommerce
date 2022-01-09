@@ -1,11 +1,11 @@
 import { Fragment, useEffect } from "react";
-import BestSellers from "../components/landing-page/best-sellers";
 import Features from "../components/landing-page/features";
 import FinalPrompt from "../components/landing-page/final-prompt";
 import HomeIntro from "../components/landing-page/home-intro";
 import Newsletter from "../components/landing-page/newsletter";
+import ProductList from "../components/products/product-list";
 // import axios from "axios";
-import { getByField } from "./lib/mongo";
+import { getByField } from "../lib/mongo";
 
 export default function Home(props) {
   // useEffect(() => {  //pushing all products to mongo
@@ -18,7 +18,7 @@ export default function Home(props) {
   return (
     <Fragment>
       <HomeIntro />
-      <BestSellers products={props.products}/>
+      <ProductList products={props.products} title="Popular right now"/>
       <Newsletter />
       <Features />
       <FinalPrompt />

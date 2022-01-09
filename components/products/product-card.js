@@ -19,7 +19,7 @@ const ProductCard = (props) => {
   };
 
   return (
-    <Link href={`/shop/${props.slug}`} title="View Details">
+    <Link href={`/shop/${props.slug}`} passHref>
       <div
         className={`${styles.card}`}
         onMouseEnter={onHoverHandler}

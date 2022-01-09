@@ -1,18 +1,17 @@
 import Breadcrumbs from "../../../components/UI/breadcrumbs";
 import styles from "./index.module.scss";
-import { products } from "../../../dummy";
 import Image from "next/image";
 import SizeButton from "../../../components/product-details/size-button";
 import Slideshow from "../../../components/product-details/slideshow";
 import { useState } from "react";
 import ProductBadge from "../../../components/products/product-badge";
 import ButtonOperation from "../../../components/UI/btn-operation";
-import OnSaleProducts from "../../../components/product-details/onsale-products";
-import { getByField } from "../../lib/mongo";
+import { getByField } from "../../../lib/mongo";
+import ProductList from "../../../components/products/product-list";
 
 const Details = (props) => {
   const product = props.product;
-  console.log(product);
+
   const [imgLink, setImgLink] = useState(product.images[0]);
 
   const [amount, setAmount] = useState(1);
@@ -47,6 +46,7 @@ const Details = (props) => {
               alt="product"
               width={650}
               height={650}
+              key={product.slug}
             />
 
             <Slideshow images={product.images} changePhoto={changePhoto} />
@@ -111,7 +111,10 @@ const Details = (props) => {
             <p className="lead">Total: ${product.price * amount}</p>
           </div>
         </div>
-        <OnSaleProducts />
+        <ProductList
+          title="Currently on sale"
+          products={props.onSaleProducts}
+        />
       </div>
     </section>
   );
@@ -124,9 +127,14 @@ export const getStaticProps = async (context) => {
   const products = await getByField({ slug: slug });
   const product = products[0];
 
+  const onSaleProducts = await getByField({ onSale: true });
+
+  
   return {
     props: {
       product: product,
+      onSaleProducts: onSaleProducts,
+      key: product.slug
     },
   };
 };

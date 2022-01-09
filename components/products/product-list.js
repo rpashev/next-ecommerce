@@ -1,13 +1,12 @@
-import { products } from "../../dummy";
 import ProductCard from "../products/product-card";
 
-const OnSaleProducts = () => {
+const ProductList = (props) => {
   return (
-    <div className={`py-5 mt-3`}>
-      <h2 className={`text-center`}>Check out what's on sale </h2>
-      <div className={`row justify-content-center py-3`}>
-        {products.map((p) => {
-          if (p.onSale) {
+    <section>
+      <div className={`container`}>
+        <h2 className="text-center mt-5 text-dark ">{props.title}</h2>
+        <div className={`row justify-content-center py-3`}>
+          {props.products.map((p) => {
             return (
               <ProductCard
                 key={p.slug}
@@ -20,11 +19,11 @@ const OnSaleProducts = () => {
                 slug={p.slug}
               />
             );
-          }
-        })}
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default OnSaleProducts;
+export default ProductList;
