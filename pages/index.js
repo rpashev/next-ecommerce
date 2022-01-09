@@ -4,9 +4,10 @@ import Features from "../components/landing-page/features";
 import FinalPrompt from "../components/landing-page/final-prompt";
 import HomeIntro from "../components/landing-page/home-intro";
 import Newsletter from "../components/landing-page/newsletter";
-import axios from "axios";
+// import axios from "axios";
+import { getByField } from "./lib/mongo";
 
-export default function Home() {
+export default function Home(props) {
   // useEffect(() => {  //pushing all products to mongo
   //   axios
   //     .post("/api/products")
@@ -17,10 +18,21 @@ export default function Home() {
   return (
     <Fragment>
       <HomeIntro />
-      <BestSellers />
+      <BestSellers products={props.products}/>
       <Newsletter />
       <Features />
       <FinalPrompt />
     </Fragment>
   );
 }
+
+export const getStaticProps = async () => {
+  const products = await getByField({ bestSeller: true });
+
+  return {
+    props: {
+      products: products,
+    },
+    revalidate: 3600
+  };
+};
