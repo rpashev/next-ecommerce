@@ -1,12 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./filters.module.scss";
 
 const Filters = (props) => {
   const [priceRange, setPriceRange] = useState(200);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [category, setCategory] = useState("ALL");
+  const [brand, setBrand] = useState("All brands");
 
-  const filterHandler = (event) => {
+  useEffect(() => {
+    props.filter(category, searchQuery, brand, priceRange);
+  }, [category, searchQuery, brand, priceRange]);
+
+  const categoryHandler = (event) => {
     if (event.target instanceof HTMLButtonElement) {
-      props.filter(event.target.textContent);
+      if (event.target.textContent !== category) {
+        setCategory(event.target.textContent);
+      }
+    }
+  };
+
+  const brandHandler = (event) => {
+    if (event.target.value !== brand) {
+      setBrand(event.target.value);
+    }
+  };
+
+  const searchQueryHandler = (event) => {
+    if (event.target.value !== searchQuery) {
+      setSearchQuery(event.target.value);
+    }
+  };
+
+  const priceRangeHandler = (event) => {
+    if (event.target.value !== priceRange) {
+      setPriceRange(+event.target.value);
     }
   };
 
@@ -17,10 +44,11 @@ const Filters = (props) => {
         type="text"
         className="form-control shadow-none"
         aria-label="Search"
+        onChange={searchQueryHandler}
       />
       <div className="my-3">
         <h3>Categories</h3>
-        <div className={styles.categories} onClick={filterHandler}>
+        <div className={styles.categories} onClick={categoryHandler}>
           <button className={styles.btn}>ALL</button>
           <button className={styles.btn}>Hats & Beanies</button>
           <button className={styles.btn}>Gloves</button>
@@ -33,7 +61,7 @@ const Filters = (props) => {
       </div>
       <div className="my-3">
         <h3>Brand</h3>
-        <select className="form-select shadow-none">
+        <select className="form-select shadow-none" onChange={brandHandler}>
           <option defaultValue>All brands</option>
           <option>Adidas</option>
           <option>Reebok</option>
@@ -50,7 +78,8 @@ const Filters = (props) => {
           id="customRange1"
           min="1"
           max="200"
-          onChange={(event) => setPriceRange(event.target.value)}
+          onChange={priceRangeHandler}
+          defaultValue={200}
         ></input>
         <p>Max price of ${priceRange}</p>
       </div>
