@@ -52,7 +52,7 @@ const Header = (props) => {
                 <Link href="/login">LOGIN</Link>
               </li>
               <li>
-                <Link href="/sign-up">SIGN UP</Link>
+                <Link href="/register">SIGN UP</Link>
               </li>
             </ul>
           </nav>

@@ -1,0 +1,15 @@
+.register-page {
+  width: 30%;
+}
+
+@media (max-width: 1024px) {
+    .register-page {
+      width: 60%;
+    }
+  }
+
+@media (max-width: 40rem) {
+  .register-page {
+    width: 80%;
+  }
+}
