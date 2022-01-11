@@ -1,5 +1,11 @@
 const Input = (props) => {
-  const { label, type, placeholder, errorText, error, id } = props;
+
+  const { label, type, placeholder, errorText, error, id, updateInputState } =
+    props;
+
+  const changeHandler = (event) => {
+    updateInputState(event.target.value.trim(), id);
+  };
 
   return (
     <div className="form-floating mb-3">
@@ -8,6 +14,7 @@ const Input = (props) => {
         className={`form-control shadow-none ${error ? "is-invalid" : ""}`}
         id={id}
         placeholder={placeholder}
+        onChange={changeHandler}
       />
       <label htmlFor={id} className="px-4">
         {label}
