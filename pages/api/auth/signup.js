@@ -2,6 +2,9 @@ import { hashPassword } from "../../../lib/auth";
 import { connectToDatabase } from "../../../lib/mongo";
 
 const handler = async (req, res) => {
+  if (!req.method === "POST") {
+    return;
+  }
   const data = req.body;
 
   const { firstName, lastName, email, password, confirmPassword } = data;
@@ -22,8 +25,8 @@ const handler = async (req, res) => {
 
   const db = client.db();
 
-  const hashedPassword = hashPassword(password);
-  
+  const hashedPassword = await hashPassword(password);
+
   let result;
   try {
     result = await db.collection("users").insertOne({
@@ -34,9 +37,10 @@ const handler = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
+    client.close();
     return res.status(500).json({ message: "Could not create user" });
   }
-
+  client.close();
   res.status(201).json({ message: "User is created" });
 };
 

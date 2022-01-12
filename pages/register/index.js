@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Input from "../../components/UI/input";
+import { createUser } from "../../lib/auth";
 import styles from "./index.module.scss";
 
 const Register = () => {
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
+
     if (firstName === "") {
       setFirstNameError(true);
     }
@@ -19,6 +21,38 @@ const Register = () => {
     }
     if (password !== confirmPassword) {
       setConfirmPasswordError(true);
+    }
+
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      !email.includes("@") ||
+      !email.includes(".") ||
+      password.length < 6 ||
+      password !== confirmPassword
+    ) {
+      return;
+    }
+
+    if (
+      !firstNameError &&
+      !lastNameError &&
+      !emailError &&
+      !passwordError &&
+      !confirmPasswordError
+    ) {
+      try {
+        const result = await createUser(
+          firstName,
+          lastName,
+          email,
+          password,
+          confirmPassword
+        );
+        console.log(result);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -41,34 +75,27 @@ const Register = () => {
     switch (id) {
       case "first-name":
         setFirstName(value);
-        if (value !== "") {
-          setFirstNameError(false);
-        }
+        value !== "" ? setFirstNameError(false) : null;
         break;
       case "last-name":
         setLastName(value);
-        if (value !== "") {
-          setLastNameError(false);
-        }
+        value !== "" ? setLastNameError(false) : null;
         break;
       case "email":
         setEmail(value);
-        if (value.includes("@") && value.includes(".")) {
-          setEmailError(false);
-        }
+        value.includes("@") && value.includes(".")
+          ? setEmailError(false)
+          : null;
         break;
       case "password":
         setPassword(value);
-        if (value.length >= 6) {
-          setPasswordError(false);
-        }
+        value.length >= 6 ? setPasswordError(false) : null;
         break;
       case "confirm-password":
         setConfirmPassword(value);
-        if (value === password) {
-          setConfirmPasswordError(false);
-        }
+        value === password ? setConfirmPasswordError(false) : null;
         break;
+
       default:
         break;
     }
@@ -77,7 +104,7 @@ const Register = () => {
   return (
     <div className={`container ${styles["register-page"]} py-5`}>
       <h1 className="text-center mb-4">Sign Up</h1>
-      <form onSubmit={submitHandler}>
+      <form noValidate onSubmit={submitHandler}>
         <Input
           label="First Name"
           type="text"
