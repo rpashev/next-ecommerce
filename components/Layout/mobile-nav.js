@@ -2,14 +2,23 @@ import Link from "next/link";
 import styles from "./mobile-nav.module.scss";
 import { CSSTransition } from "react-transition-group";
 import { useSession, signOut } from "next-auth/client";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const MobileNav = (props) => {
   const [session, loading] = useSession();
 
+  const router = useRouter();
+
   const logoutHandler = () => {
     signOut();
   };
+
+  useEffect(() => {
+    if (props.opened) {
+      props.close();
+    }
+  }, [router]);
 
   const nodeRef = useRef(null);
 
@@ -33,13 +42,13 @@ const MobileNav = (props) => {
             <Link href="/">HOME</Link>
           </li>
           <li>
-            <Link href="/">SHOP</Link>
+            <Link href="/shop">SHOP</Link>
           </li>
           <li>
-            <Link href="/">ABOUT</Link>
+            <Link href="/about">ABOUT</Link>
           </li>
           <li>
-            <Link href="/">MY CART</Link>
+            <Link href="/cart">MY CART</Link>
           </li>
           {!session && !loading && (
             <li>
