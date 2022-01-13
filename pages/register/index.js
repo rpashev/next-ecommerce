@@ -54,7 +54,7 @@ const Register = () => {
       });
 
       if (loggedResult.error === null) {
-        router.push("/shop");
+        router.replace("/shop");
       }
     } catch (err) {
       console.log(err);

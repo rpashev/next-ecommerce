@@ -26,9 +26,9 @@ const Login = () => {
       email,
       password,
     });
-    
-    if (result.error === null) {
-      router.push("/shop");
+
+    if (!result.error) {
+      router.replace("/shop");
     }
   };
 

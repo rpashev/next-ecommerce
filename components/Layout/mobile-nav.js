@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "./mobile-nav.module.scss";
 import { CSSTransition } from "react-transition-group";
 import { useSession, signOut } from "next-auth/client";
+import { useRef } from "react";
 
 const MobileNav = (props) => {
   const [session, loading] = useSession();
@@ -9,6 +10,8 @@ const MobileNav = (props) => {
   const logoutHandler = () => {
     signOut();
   };
+
+  const nodeRef = useRef(null);
 
   return (
     <CSSTransition
@@ -22,6 +25,7 @@ const MobileNav = (props) => {
         exit: styles["slide-exit"],
         exitActive: styles["slide-exit-active"],
       }}
+      nodeRef={nodeRef}
     >
       <nav className={`${styles["mobile-nav"]}`}>
         <ul className={`${styles["nav-links"]}`}>

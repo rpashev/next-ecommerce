@@ -18,6 +18,10 @@ const Header = (props) => {
     signOut();
   };
 
+  if (loading) {
+    return <header className={styles.header}></header>;
+  }
+
   return (
     <header className={styles.header}>
       <div className="container h-100">
@@ -54,13 +58,13 @@ const Header = (props) => {
                   </a>
                 </Link>
               </li>
-              {!session && !loading && (
+              {!session && (
                 <li>
                   <Link href="/login">LOGIN</Link>
                 </li>
               )}
 
-              {!session && !loading && (
+              {!session && (
                 <li>
                   <Link href="/register">SIGN UP</Link>
                 </li>
