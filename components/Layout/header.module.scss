@@ -22,7 +22,7 @@
         padding: 0;
         margin: 0;
 
-        li a {
+        li a, li button {
           text-decoration: none;
           margin: 0 1rem;
           color: $gray-light;
@@ -32,8 +32,12 @@
           transition: all 0.2s ease-out;
         }
 
-        li a:hover {
+        li a:hover, li button:hover {
           background-color: $gray-darkest;
+        }
+        li button {
+          background-color: transparent;
+          border: none;
         }
 
         .cart-icon {

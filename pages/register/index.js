@@ -34,25 +34,17 @@ const Register = () => {
       return;
     }
 
-    if (
-      !firstNameError &&
-      !lastNameError &&
-      !emailError &&
-      !passwordError &&
-      !confirmPasswordError
-    ) {
-      try {
-        const result = await createUser(
-          firstName,
-          lastName,
-          email,
-          password,
-          confirmPassword
-        );
-        console.log(result);
-      } catch (err) {
-        console.log(err);
-      }
+    try {
+      const result = await createUser(
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword
+      );
+      console.log(result);
+    } catch (err) {
+      console.log(err);
     }
   };
 

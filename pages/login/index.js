@@ -1,9 +1,10 @@
 import styles from "./index.module.scss";
 import Input from "../../components/UI/input";
 import { useState } from "react";
+import { signIn } from "next-auth/client";
 
 const Login = () => {
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
 
     if (!email.includes("@") || !email.includes(".")) {
@@ -12,21 +13,29 @@ const Login = () => {
     if (password.length < 6) {
       setPasswordError(true);
     }
+
+    if (!email.includes("@") || !email.includes(".") || password.length < 6) {
+      return;
+    }
+
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
   };
 
   const onChangeHandler = (value, id) => {
     switch (id) {
       case "email":
         setEmail(value);
-        if (value.includes("@") && value.includes(".")) {
-          setEmailError(false);
-        }
+        value.includes("@") && value.includes(".")
+          ? setEmailError(false)
+          : null;
         break;
       case "password":
         setPassword(value);
-        if (value.length >= 6) {
-          setPasswordError(false);
-        }
+        value.length >= 6 ? setPasswordError(false) : null;
         break;
 
       default:

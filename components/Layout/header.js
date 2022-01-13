@@ -4,12 +4,18 @@ import CartIcon from "../UI/cart-icon";
 import styles from "./header.module.scss";
 import MobileNav from "./mobile-nav";
 import Backdrop from "../UI/backdrop";
+import { useSession, signOut } from "next-auth/client";
 
 const Header = (props) => {
   const [showMobileNav, setShowMobileNav] = useState(false);
+  const [session, loading] = useSession();
 
   const toggleMobileNav = () => {
     setShowMobileNav((prevState) => !prevState);
+  };
+
+  const logoutHandler = () => {
+    signOut();
   };
 
   return (
@@ -48,12 +54,22 @@ const Header = (props) => {
                   </a>
                 </Link>
               </li>
-              <li>
-                <Link href="/login">LOGIN</Link>
-              </li>
-              <li>
-                <Link href="/register">SIGN UP</Link>
-              </li>
+              {!session && !loading && (
+                <li>
+                  <Link href="/login">LOGIN</Link>
+                </li>
+              )}
+
+              {!session && !loading && (
+                <li>
+                  <Link href="/register">SIGN UP</Link>
+                </li>
+              )}
+              {session && (
+                <li>
+                  <button onClick={logoutHandler}>LOGOUT</button>
+                </li>
+              )}
             </ul>
           </nav>
         </div>
