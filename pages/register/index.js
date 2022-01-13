@@ -1,9 +1,14 @@
 import { useState } from "react";
 import Input from "../../components/UI/input";
 import { createUser } from "../../lib/auth";
+import { getSession, signIn } from "next-auth/client";
+
 import styles from "./index.module.scss";
+import { useRouter } from "next/router";
 
 const Register = () => {
+  const router = useRouter();
+
   const submitHandler = async (event) => {
     event.preventDefault();
 
@@ -42,7 +47,15 @@ const Register = () => {
         password,
         confirmPassword
       );
-      console.log(result);
+      const loggedResult = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (loggedResult.error === null) {
+        router.push("/shop");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -153,5 +166,21 @@ const Register = () => {
     </div>
   );
 };
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {},
+    };
+  }
+}
 
 export default Register;

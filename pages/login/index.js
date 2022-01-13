@@ -2,8 +2,11 @@ import styles from "./index.module.scss";
 import Input from "../../components/UI/input";
 import { useState } from "react";
 import { signIn } from "next-auth/client";
+import { getSession } from "next-auth/client";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const router = useRouter();
   const submitHandler = async (event) => {
     event.preventDefault();
 
@@ -23,6 +26,10 @@ const Login = () => {
       email,
       password,
     });
+    
+    if (result.error === null) {
+      router.push("/shop");
+    }
   };
 
   const onChangeHandler = (value, id) => {
@@ -81,5 +88,21 @@ const Login = () => {
     </div>
   );
 };
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: {},
+    };
+  }
+}
 
 export default Login;

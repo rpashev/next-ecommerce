@@ -1,8 +1,15 @@
 import Link from "next/link";
 import styles from "./mobile-nav.module.scss";
 import { CSSTransition } from "react-transition-group";
+import { useSession, signOut } from "next-auth/client";
 
 const MobileNav = (props) => {
+  const [session, loading] = useSession();
+
+  const logoutHandler = () => {
+    signOut();
+  };
+
   return (
     <CSSTransition
       mountOnEnter
@@ -30,12 +37,23 @@ const MobileNav = (props) => {
           <li>
             <Link href="/">MY CART</Link>
           </li>
-          <li>
-            <Link href="/">LOGIN</Link>
-          </li>
-          <li>
-            <Link href="/">SIGN UP</Link>
-          </li>
+          {!session && !loading && (
+            <li>
+              <Link href="/login">LOGIN</Link>
+            </li>
+          )}
+          {!session && !loading && (
+            <li>
+              <Link href="/register">SIGN UP</Link>
+            </li>
+          )}
+          {session && (
+            <li>
+              <button onClick={logoutHandler} className={styles["btn-logout"]}>
+                LOGOUT
+              </button>
+            </li>
+          )}
         </ul>
         <button
           type="button"
