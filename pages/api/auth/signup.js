@@ -25,6 +25,14 @@ const handler = async (req, res) => {
 
   const db = client.db();
 
+  const existingUser = await db.collection("users").findOne({ email: email });
+  if (existingUser) {
+    client.close();
+    return res
+      .status(422)
+      .json({ message: "User with this email already exists" });
+  }
+
   const hashedPassword = await hashPassword(password);
 
   let result;
