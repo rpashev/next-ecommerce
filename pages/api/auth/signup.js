@@ -42,6 +42,7 @@ const handler = async (req, res) => {
       lastName,
       email,
       password: hashedPassword,
+      cart: []
     });
   } catch (err) {
     console.log(err);
