@@ -36,7 +36,7 @@ const MobileNav = (props) => {
       }}
       nodeRef={nodeRef}
     >
-      <nav className={`${styles["mobile-nav"]}`}>
+      <nav className={`${styles["mobile-nav"]}`} ref={nodeRef}>
         <ul className={`${styles["nav-links"]}`}>
           <li>
             <Link href="/">HOME</Link>
