@@ -35,6 +35,11 @@ const cartSlice = createSlice({
         (item) => item.slug !== slug && item.size !== size
       );
     },
+
+    setCart(state, action) {
+      state.items = action.payload.items;
+    },
+
   },
 });
 
