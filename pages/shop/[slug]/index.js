@@ -1,3 +1,6 @@
+import { cartActions } from "../../../store/cart-slice";
+import { useDispatch } from "react-redux";
+
 import Breadcrumbs from "../../../components/UI/breadcrumbs";
 import styles from "./index.module.scss";
 import Image from "next/image";
@@ -8,13 +11,30 @@ import ProductBadge from "../../../components/products/product-badge";
 import ButtonOperation from "../../../components/UI/btn-operation";
 import { getByField } from "../../../lib/mongo";
 import ProductList from "../../../components/products/product-list";
+import { useRouter } from "next/router";
 
 const Details = (props) => {
   const product = props.product;
+  const {
+    name,
+    price,
+    onSale,
+    bestSeller,
+    images,
+    sizes,
+    description,
+    available,
+    slug,
+    brand,
+  } = product;
 
-  const [imgLink, setImgLink] = useState(product.images[0]);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const [imgLink, setImgLink] = useState(images[0]);
 
   const [amount, setAmount] = useState(1);
+  const [size, setSize] = useState("M");
 
   const amountHandler = (operation) => {
     if (operation === "add") {
@@ -25,6 +45,10 @@ const Details = (props) => {
     return;
   };
 
+  const sizeHandler = (event) => {
+    setSize(event.target.textContent);
+  };
+
   const links = ["Home", "Shop"];
 
   const changePhoto = (link) => {
@@ -33,10 +57,23 @@ const Details = (props) => {
     }
   };
 
+  const addToCart = () => {
+    const payload = {
+      name,
+      size,
+      quantity: amount,
+      slug,
+      price,
+      imgLink: images[0],
+    };
+    dispatch(cartActions.addItem({ ...payload }));
+    router.push("/cart");
+  };
+
   return (
     <section className="container py-4 ">
       <div className={`${styles["product-page"]}`}>
-        <Breadcrumbs links={links} current={product.name} />
+        <Breadcrumbs links={links} current={name} />
 
         <hr></hr>
         <div className={`${styles.product} row mx-auto mx-md-0 `}>
@@ -46,46 +83,47 @@ const Details = (props) => {
               alt="product"
               width={650}
               height={650}
-              key={product.slug}
+              key={slug}
             />
 
-            <Slideshow images={product.images} changePhoto={changePhoto} />
+            <Slideshow images={images} changePhoto={changePhoto} />
             <div className={`my-4`}>
               <h3>Product information</h3>
-              <p className="lead pe-md-5">{product.description}</p>
+              <p className="lead pe-md-5">{description}</p>
             </div>
           </div>
           <div
             className={`col-12 col-md-6 mt-5 mt-md-2 ps-md-5 position-relative`}
           >
-            <h3>{product.brand}</h3>
-            <h1 className={`display-5 mb-3`}>{product.name}</h1>
+            <h3>{brand}</h3>
+            <h1 className={`display-5 mb-3`}>{name}</h1>
             <div className={styles["price-info"]}>
-              <h1 className={`${styles.price}`}>${product.price}</h1>
-              {product.onSale && (
-                <ProductBadge onSale={product.onSale} details />
-              )}
-              {product.bestSeller && (
-                <ProductBadge bestSeller={product.bestSeller} details />
-              )}
+              <h1 className={`${styles.price}`}>${price}</h1>
+              {onSale && <ProductBadge onSale={onSale} details />}
+              {bestSeller && <ProductBadge bestSeller={bestSeller} details />}
             </div>
 
             <h6>
               Availability:{" "}
               <span
                 className={`${
-                  product.available ? "text-success" : "text-danger"
+                  available ? "text-success" : "text-danger"
                 } fw-bold mt-2`}
               >
-                {product.available ? "In Stock" : "Out Of Stock"}
+                {available ? "In Stock" : "Out Of Stock"}
               </span>
             </h6>
 
             <div className={styles.sizes}>
               <h6>Choose a size: </h6>
-              {product.sizes.map((s) => {
+              {sizes.map((s) => {
                 return (
-                  <SizeButton size={s} key={s} available={product.available} />
+                  <SizeButton
+                    size={s}
+                    key={s}
+                    available={available}
+                    sizeHandler={sizeHandler}
+                  />
                 );
               })}
             </div>
@@ -102,13 +140,14 @@ const Details = (props) => {
 
             <button
               className={`${styles["btn-cta"]} ${
-                product.available ? "" : styles.disabled
+                available ? "" : styles.disabled
               }`}
-              disabled={!product.available}
+              disabled={!available}
+              onClick={addToCart}
             >
               ADD TO CART
             </button>
-            <p className="lead">Total: ${product.price * amount}</p>
+            <p className="lead">Total: ${price * amount}</p>
           </div>
         </div>
         <ProductList
@@ -129,12 +168,11 @@ export const getStaticProps = async (context) => {
 
   const onSaleProducts = await getByField({ onSale: true });
 
-  
   return {
     props: {
       product: product,
       onSaleProducts: onSaleProducts,
-      key: product.slug
+      key: product.slug,
     },
   };
 };
