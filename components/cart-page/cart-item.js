@@ -14,7 +14,20 @@ const CartItem = (props) => {
   const removeHandler = () => {
     const payload = { slug, size };
     // if session - send http request, if error - set error state and return without updating redux
-    dispatch(cartActions.removeItem({ ...payload }));
+    dispatch(cartActions.removeItem(payload));
+  };
+
+  const updateQuantity = (event) => {
+    if (event.target.value === "0/remove") {
+      const payload = { slug, size };
+      dispatch(cartActions.removeItem(payload));
+    } else if (+event.target.value === quantity) {
+      return;
+    } else {
+      let updatedQuantity = +event.target.value;
+      const payload = { slug, updatedQuantity, size };
+      dispatch(cartActions.updateQuantity(payload));
+    }
   };
 
   return (
@@ -38,9 +51,27 @@ const CartItem = (props) => {
         </div>
 
         <h5 className={`col-1`}>${price}</h5>
-        <h5 className={`col-3`}>{quantity}</h5>
+        <h5 className={`col-3`}>
+          <select
+            className="form-select shadow-none w-50"
+            defaultValue={quantity}
+            onChange={updateQuantity}
+          >
+            <option>0/remove</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
+        </h5>
         <h5 className={`col-1`}>${quantity * price}</h5>
-        <DeleteIcon onRemove={removeHandler}/>
+        <DeleteIcon onRemove={removeHandler} />
 
         <hr></hr>
       </div>

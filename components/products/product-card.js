@@ -36,8 +36,8 @@ const ProductCard = (props) => {
       imgLink: props.images[0],
       quantity: 1,
     };
-    // if session - send http request, if error - set error state and return without updating redux 
-    dispatch(cartActions.addItem({ ...payload }));
+    // if session - send http request, if error - set error state and return without updating redux
+    dispatch(cartActions.addItem(payload));
     router.push("/cart");
   };
 

@@ -22,12 +22,12 @@ const cartSlice = createSlice({
 
     updateQuantity(state, action) {
       const data = action.payload;
-      const { slug, quantity, size } = data;
+      const { slug, updatedQuantity, size } = data;
 
       const existingItem = state.items.find(
         (item) => item.slug === slug && item.size === size
       );
-      existingItem.quantity = quantity;
+      existingItem.quantity = updatedQuantity;
     },
 
     removeItem(state, action) {
