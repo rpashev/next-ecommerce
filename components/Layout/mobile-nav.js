@@ -4,15 +4,22 @@ import { CSSTransition } from "react-transition-group";
 import { useSession, signOut } from "next-auth/client";
 import { useRef, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/cart-slice";
 
 const MobileNav = (props) => {
   const [session, loading] = useSession();
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
-  const logoutHandler = () => {
-    signOut();
-    // clear redux
+  const logoutHandler = async () => {
+    try {
+      await signOut();
+    } catch (err) {
+      console.log(err);
+    }
+    dispatch(cartActions.setCart({ items: [] }));
   };
 
   useEffect(() => {

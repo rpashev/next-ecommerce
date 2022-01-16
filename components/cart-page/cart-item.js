@@ -5,15 +5,22 @@ import styles from "./cart-item.module.scss";
 import { useDispatch } from "react-redux";
 import DeleteIcon from "../UI/delete-icon";
 import { Fragment } from "react";
+import { useSession } from "next-auth/client";
+import { deleteItem } from "../../lib/cart-operations";
 
 const CartItem = (props) => {
   const { imgLink, name, price, quantity, size, slug } = props;
 
   const dispatch = useDispatch();
+  const [session, loading] = useSession();
 
-  const removeHandler = () => {
+  const removeHandler = async () => {
     const payload = { slug, size };
     // if session - send http request, if error - set error state and return without updating redux
+    if (session && !loading) {
+      await deleteItem(slug, size);
+    }
+
     dispatch(cartActions.removeItem(payload));
   };
 

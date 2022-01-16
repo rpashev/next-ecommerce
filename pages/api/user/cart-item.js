@@ -20,7 +20,7 @@ const handler = async (req, res) => {
   const usersCollection = await client.db().collection("users");
   const user = await usersCollection.findOne({ email: session.user.email });
 
-  const cart = user.cart;
+  let cart = user.cart;
 
   if (req.method === "PATCH") {
     const { slug, size, updatedQuantity } = req.body;
@@ -30,6 +30,22 @@ const handler = async (req, res) => {
     );
 
     existingItem.quantity += updatedQuantity;
+  }
+
+  if (req.method === "DELETE") {
+    const { slug, size, all } = req.body;
+
+    if (slug && size && !all) {
+      const index = cart.findIndex(
+        (item) => item.slug === slug && item.size === size
+      );
+
+      cart.splice(index, 1);
+    }
+    if (all === true) {
+      console.log("here");
+      cart = [];
+    }
   }
 
   try {
