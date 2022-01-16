@@ -12,8 +12,8 @@ const Layout = (props) => {
   const cart = useSelector((state) => state.items);
 
   useEffect(() => {
-    if (session) {
-      console.log(session);
+    if (session && !loading) {
+      // console.log(session);
       if (!cart || cart.length === 0) {
         dispatch(cartActions.setCart({ items: session.user.cart }));
       }

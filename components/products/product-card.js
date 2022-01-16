@@ -1,8 +1,10 @@
+import { useSession } from "next-auth/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCart } from "../../lib/cart-operations";
 import { cartActions } from "../../store/cart-slice";
 import ProductBadge from "./product-badge";
 import styles from "./product-card.module.scss";
@@ -13,8 +15,10 @@ const ProductCard = (props) => {
 
   const { name, price, slug } = props;
 
+  const cart = useSelector((state) => state.items);
   const dispatch = useDispatch();
   const router = useRouter();
+  const [session, loading] = useSession();
 
   const onHoverHandler = () => {
     setShowButton(true);
@@ -26,7 +30,7 @@ const ProductCard = (props) => {
     setImgLink(props.images[0]);
   };
 
-  const addToCart = (event) => {
+  const addToCart = async (event) => {
     event.stopPropagation();
     const payload = {
       name,
@@ -37,6 +41,16 @@ const ProductCard = (props) => {
       quantity: 1,
     };
     // if session - send http request, if error - set error state and return without updating redux
+    // if (session) {
+    //   console.log("here")
+    //   await updateCart(slug);
+    // }
+    if (
+      session &&
+      cart.find((item) => item.slug === slug && item.size === "M")
+    ) {
+      await updateCart(slug);
+    }
     dispatch(cartActions.addItem(payload));
     router.push("/cart");
   };
