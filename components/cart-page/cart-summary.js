@@ -3,7 +3,7 @@ import styles from "./cart-summary.module.scss";
 const CartSummary = (props) => {
   return (
     <div className={styles.summary}>
-      <h6>CART TOTALS</h6>
+      <h5>CART TOTALS</h5>
       <hr></hr>
       <h6>Cart Subtotal: ${props.subtotal}</h6>
       <hr></hr>

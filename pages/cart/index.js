@@ -1,8 +1,9 @@
-import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 import CartHeaders from "../../components/cart-page/cart-headers";
 import CartItem from "../../components/cart-page/cart-item";
 import CartSummary from "../../components/cart-page/cart-summary";
-import { selectTotalPrice } from "../../store/cart-slice";
+import { cartActions, selectTotalPrice } from "../../store/cart-slice";
 import styles from "./index.module.scss";
 
 const CartPage = (props) => {
@@ -13,6 +14,18 @@ const CartPage = (props) => {
   }
 
   const totalPrice = selectTotalPrice(items);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const clearCart = () => {
+    const payload = { items: [] };
+    dispatch(cartActions.setCart(payload));
+  };
+
+  const goBack = () => {
+    router.back();
+  };
 
   return (
     <div
@@ -32,6 +45,14 @@ const CartPage = (props) => {
             slug={item.slug}
           ></CartItem>
         ))}
+        <div className={`d-flex w-100 justify-content-between`}>
+          <button onClick={goBack} className={`btn btn-secondary btn-lg shadow-none`}>
+            <i className="bi bi-arrow-left-circle me-3"></i>BACK TO SHOP
+          </button>
+          <button onClick={clearCart} className={`btn btn-danger shadown-none`}>
+            CLEAR CART
+          </button>
+        </div>
       </div>
 
       <CartSummary subtotal={totalPrice} />
