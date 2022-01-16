@@ -1,0 +1,9 @@
+@import "../../styles/colors.scss";
+.remove {
+  color: $danger;
+  transition: all 0.2s ease-out;
+}
+.remove:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}

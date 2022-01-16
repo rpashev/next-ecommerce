@@ -28,6 +28,7 @@ const Login = () => {
     });
 
     if (!result.error) {
+      // set redux cart = user cart
       router.replace("/shop");
     }
   };

@@ -53,7 +53,9 @@ const Register = () => {
         password,
       });
 
-      if (loggedResult.error === null) {
+      if (!loggedResult.error) {
+      // set redux cart = user cart
+
         router.replace("/shop");
       }
     } catch (err) {

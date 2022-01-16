@@ -31,11 +31,14 @@ export default NextAuth({
           throw new Error("Couldn't log you in!");
         }
 
+        // if credentials.cart.length > 0, set user's cart on db to credentials.cart
+
         client.close();
 
         return {
           email: user.email,
           name: { firstName: user.firstName, lastName: user.lastName },
+          // cart here and set redux state on front end
         };
       },
     }),

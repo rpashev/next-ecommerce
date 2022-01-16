@@ -66,6 +66,7 @@ const Details = (props) => {
       price,
       imgLink: images[0],
     };
+    // if session - send http request, if error - set error state and return without updating redux 
     dispatch(cartActions.addItem({ ...payload }));
     router.push("/cart");
   };

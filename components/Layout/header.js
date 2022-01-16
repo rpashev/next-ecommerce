@@ -16,6 +16,7 @@ const Header = (props) => {
 
   const logoutHandler = () => {
     signOut();
+    // clear redux
   };
 
   if (loading) {

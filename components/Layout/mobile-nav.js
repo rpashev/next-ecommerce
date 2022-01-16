@@ -12,6 +12,7 @@ const MobileNav = (props) => {
 
   const logoutHandler = () => {
     signOut();
+    // clear redux
   };
 
   useEffect(() => {
