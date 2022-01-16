@@ -49,27 +49,17 @@ const cartSlice = createSlice({
 });
 
 export const selectTotalQuantity = (items) => {
-  return items.reduce(
-    prevValue,
-    (current) => {
-      prevValue += current.quantity;
-    },
-    0
-  );
+  return items.reduce((prevValue, current) => {
+    prevValue += current.quantity;
+    return prevValue;
+  }, 0);
 };
 
 export const selectTotalPrice = (items) => {
-  return items.reduce(
-    prevValue,
-    (current) => {
-      prevValue += current.price * current.quantity;
-    },
-    0
-  );
-};
-
-export const selectTotalProductPrice = (item) => {
-  return item.price * item.quantity;
+  return items.reduce((prevValue, current) => {
+    prevValue += current.price * current.quantity;
+    return prevValue;
+  }, 0);
 };
 
 export const cartActions = cartSlice.actions;
