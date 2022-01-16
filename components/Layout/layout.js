@@ -1,8 +1,25 @@
-import { Fragment } from "react";
+import { useSession } from "next-auth/client";
+import { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../store/cart-slice";
 import Footer from "./footer";
 import Header from "./header";
 
 const Layout = (props) => {
+  const [session, loading] = useSession();
+  const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.items);
+
+  useEffect(() => {
+    if (session) {
+      console.log(session);
+      if (!cart || cart.length === 0) {
+        dispatch(cartActions.setCart({ items: session.user.cart }));
+      }
+    }
+  }, [session]);
+
   return (
     <Fragment>
       <Header />

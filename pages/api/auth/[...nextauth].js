@@ -7,6 +7,18 @@ export default NextAuth({
   session: {
     jwt: true,
   },
+  callbacks: {
+    jwt(token, cart) {
+      if (cart) {
+        return { user: cart };
+      }
+      return token;
+    },
+    session(session, token) {
+      
+      return token;
+    },
+  },
   providers: [
     Providers.Credentials({
       async authorize(credentials) {
@@ -31,13 +43,27 @@ export default NextAuth({
           throw new Error("Couldn't log you in!");
         }
 
-        // if credentials.cart.length > 0, set user's cart on db to credentials.cart
+        let cart = JSON.parse(credentials.stringifiedCart);
+        
+        if (cart.length > 0) {
+          try {
+            await usersCollection.updateOne(
+              { email: credentials.email },
+              { $set: { cart: cart } }
+            );
+          } catch (err) {
+            client.close();
+
+            return res.status(500).json({ message: "Could not login!" });
+          }
+        }
 
         client.close();
 
         return {
           email: user.email,
           name: { firstName: user.firstName, lastName: user.lastName },
+          cart: user.cart,
           // cart here and set redux state on front end
         };
       },

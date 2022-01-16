@@ -9,8 +9,8 @@ import styles from "./index.module.scss";
 const CartPage = (props) => {
   const items = useSelector((state) => state.items);
 
-  if (items.length === 0) {
-    return <p>Your cart s empty!</p>;
+  if (!items || items.length === 0) {
+    return <p>Your cart is empty!</p>;
   }
 
   const totalPrice = selectTotalPrice(items);
@@ -45,9 +45,9 @@ const CartPage = (props) => {
             slug={item.slug}
           ></CartItem>
         ))}
-        <div className={`d-flex w-100 justify-content-between`}>
+        <div className={`d-flex w-100 justify-content-between mt-2`}>
           <button onClick={goBack} className={`btn btn-secondary btn-lg shadow-none`}>
-            <i className="bi bi-arrow-left-circle me-3"></i>BACK TO SHOP
+            <i className="bi bi-arrow-left-circle me-3"></i>BACK TO SHOPPING
           </button>
           <button onClick={clearCart} className={`btn btn-danger shadown-none`}>
             CLEAR CART

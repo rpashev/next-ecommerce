@@ -1,22 +1,30 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CartIcon from "../UI/cart-icon";
 import styles from "./header.module.scss";
 import MobileNav from "./mobile-nav";
 import Backdrop from "../UI/backdrop";
 import { useSession, signOut } from "next-auth/client";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/cart-slice";
 
 const Header = (props) => {
   const [showMobileNav, setShowMobileNav] = useState(false);
+
   const [session, loading] = useSession();
+  const dispatch = useDispatch();
 
   const toggleMobileNav = () => {
     setShowMobileNav((prevState) => !prevState);
   };
 
-  const logoutHandler = () => {
-    signOut();
-    // clear redux
+  const logoutHandler = async () => {
+    try {
+      await signOut();
+    } catch (err) {
+      console.log(err);
+    }
+    dispatch(cartActions.setCart({ items: [] }));
   };
 
   if (loading) {

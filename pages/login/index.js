@@ -1,15 +1,20 @@
 import styles from "./index.module.scss";
 import Input from "../../components/UI/input";
 import { useState } from "react";
-import { signIn } from "next-auth/client";
+import { signIn, useSession } from "next-auth/client";
 import { getSession } from "next-auth/client";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../store/cart-slice";
 
 const Login = () => {
   const router = useRouter();
+  const cart = useSelector((state) => state.items);
+  const [session, loading] = useSession();
+  const dispatch = useDispatch();
+
   const submitHandler = async (event) => {
     event.preventDefault();
-
     if (!email.includes("@") || !email.includes(".")) {
       setEmailError(true);
     }
@@ -21,14 +26,26 @@ const Login = () => {
       return;
     }
 
-    const result = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
+    let result;
+    let stringifiedCart = JSON.stringify(cart);
+
+    try {
+      result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+        stringifiedCart,
+      });
+    } catch (err) {
+      console.log(err);
+    }
 
     if (!result.error) {
       // set redux cart = user cart
+      if (cart.length === 0) {
+        console.log(session);
+        // dispatch(cartActions.setCart(session.user.cart));
+      }
       router.replace("/shop");
     }
   };

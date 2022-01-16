@@ -5,9 +5,11 @@ import { getSession, signIn } from "next-auth/client";
 
 import styles from "./index.module.scss";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 const Register = () => {
   const router = useRouter();
+  const cart = useSelector((state) => state.items);
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -51,10 +53,11 @@ const Register = () => {
         redirect: false,
         email,
         password,
+        cart
       });
 
       if (!loggedResult.error) {
-      // set redux cart = user cart
+        // set redux cart = user cart
 
         router.replace("/shop");
       }
