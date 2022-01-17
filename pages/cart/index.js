@@ -9,17 +9,16 @@ import { cartActions, selectTotalPrice } from "../../store/cart-slice";
 import styles from "./index.module.scss";
 
 const CartPage = (props) => {
+
   const items = useSelector((state) => state.items);
   const [session, loading] = useSession();
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const totalPrice = selectTotalPrice(items);
 
   if (!items || items.length === 0) {
     return <p>Your cart is empty!</p>;
   }
-
-  const totalPrice = selectTotalPrice(items);
-
-  const dispatch = useDispatch();
-  const router = useRouter();
 
   const clearCart = async () => {
     const payload = { items: [] };

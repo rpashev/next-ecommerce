@@ -1,15 +1,24 @@
 import styles from "./size-button.module.scss";
 
-const SizeButton = (props) => {
+const SizeButtons = (props) => {
   return (
-    <button
-      onFocus={props.sizeHandler}
-      className={`${styles.btn} ${props.available ? "" : styles.disabled}`}
-      disabled={!props.available}
-    >
-      {props.size}
-    </button>
+    <ul className={`${styles.sizes}`}>
+      {props.sizes.map((s) => {
+        return (
+          <li key={s}>
+            <input
+              type="radio"
+              id={s}
+              name="size"
+              onChange={props.sizeHandler}
+              value={s}
+            />
+            <label htmlFor={s}>{s}</label>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 
-export default SizeButton;
+export default SizeButtons;

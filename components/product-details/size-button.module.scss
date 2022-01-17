@@ -1,27 +1,73 @@
 @import "../../styles/colors.scss";
 
-.btn {
-  display: inline-block;
-  background-color: $gray-light;
-  color: $gray-darkest;
-  padding: 1rem;
-  border: 1px solid $gray-darker;
-  border-right: none;
-  width: 4rem;
-  height: 4rem;
-  transition: all 0.2s ease-out;
-  margin-top: 0.5rem;
-}
+// .btn {
+//   display: inline-block;
+//   background-color: $gray-light;
+//   color: $gray-darkest;
+//   padding: 1rem;
+//   border: 1px solid $gray-darker;
+//   border-right: none;
+//   width: 4rem;
+//   height: 4rem;
+//   transition: all 0.2s ease-out;
+//   margin-top: 0.5rem;
+// }
 
-.btn:hover,
-.btn:focus {
-  background-color: $gray-darker;
-  color: $gray-light;
-}
-.disabled {
-  cursor: not-allowed;
-}
-.disabled:hover {
-  background-color: $gray-light;
-  color: $gray-darkest;
+// .btn:hover,
+// .btn:focus {
+//   background-color: $gray-darker;
+//   color: $gray-light;
+// }
+// .disabled {
+//   cursor: not-allowed;
+// }
+// .disabled:hover {
+//   background-color: $gray-light;
+//   color: $gray-darkest;
+// }
+
+.sizes {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 1rem;
+
+  li {
+    float: left;
+    width: 4rem;
+    height: 4rem;
+    position: relative;
+
+    label,
+    input {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      text-align: center;
+      line-height: 4rem;
+    }
+
+    input[type="radio"] {
+      opacity: 0.011;
+      z-index: 100;
+    }
+
+    input[type="radio"]:checked + label,
+    label:hover {
+      background-color: $gray-darker;
+      color: $gray-light;
+    }
+
+    label {
+      cursor: pointer;
+      z-index: 90;
+      border: 1px solid $gray-darker;
+      border-right: none;
+    }
+  }
+  li:last-child label {
+    border-right: 1px solid $gray-darker;
+  }
 }

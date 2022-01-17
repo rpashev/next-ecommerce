@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Breadcrumbs from "../../../components/UI/breadcrumbs";
 import styles from "./index.module.scss";
 import Image from "next/image";
-import SizeButton from "../../../components/product-details/size-button";
+import SizeButtons from "../../../components/product-details/size-button";
 import Slideshow from "../../../components/product-details/slideshow";
 import { useState } from "react";
 import ProductBadge from "../../../components/products/product-badge";
@@ -50,7 +50,7 @@ const Details = (props) => {
   };
 
   const sizeHandler = (event) => {
-    setSize(event.target.textContent);
+    setSize(event.target.value);
   };
 
   const links = ["Home", "Shop"];
@@ -131,16 +131,11 @@ const Details = (props) => {
 
             <div className={styles.sizes}>
               <h6>Choose a size: </h6>
-              {sizes.map((s) => {
-                return (
-                  <SizeButton
-                    size={s}
-                    key={s}
-                    available={available}
-                    sizeHandler={sizeHandler}
-                  />
-                );
-              })}
+              <SizeButtons
+                sizes={sizes}
+                available={available}
+                sizeHandler={sizeHandler}
+              />
             </div>
             <div className={styles.operations}>
               <ButtonOperation
