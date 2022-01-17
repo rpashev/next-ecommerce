@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCart } from "../../lib/cart-operations";
+import { addItem, updateCart } from "../../lib/cart-operations";
 import { cartActions } from "../../store/cart-slice";
 import ProductBadge from "./product-badge";
 import styles from "./product-card.module.scss";
@@ -40,16 +40,15 @@ const ProductCard = (props) => {
       imgLink: props.images[0],
       quantity: 1,
     };
-    // if session - send http request, if error - set error state and return without updating redux
-    // if (session) {
-    //   console.log("here")
-    //   await updateCart(slug);
-    // }
-    if (
-      session &&
-      cart.find((item) => item.slug === slug && item.size === "M")
-    ) {
+
+    const existingItem = cart.find(
+      (item) => item.slug === slug && item.size === "M"
+    );
+
+    if (session && existingItem) {
       await updateCart(slug);
+    } else if (session && !existingItem) {
+      await addItem(payload)
     }
     dispatch(cartActions.addItem(payload));
     router.push("/cart");

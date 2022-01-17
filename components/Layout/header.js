@@ -42,7 +42,7 @@ const Header = (props) => {
           </button>
           <div className={`${styles.logo} col-6 col-md-4 h3`}>My Shop</div>
 
-          <MobileNav close={toggleMobileNav} opened={showMobileNav} />
+          <MobileNav close={toggleMobileNav} opened={showMobileNav} logout={logoutHandler} />
           {showMobileNav && <Backdrop close={toggleMobileNav} />}
 
           <nav

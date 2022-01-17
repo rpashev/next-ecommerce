@@ -48,6 +48,11 @@ const handler = async (req, res) => {
     }
   }
 
+  if (req.method === "POST") {
+    const newItem = req.body;
+    cart.push(newItem);
+  }
+
   try {
     await usersCollection.updateOne(
       { email: session.user.email },
