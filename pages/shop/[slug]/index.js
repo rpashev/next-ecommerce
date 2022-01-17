@@ -1,5 +1,5 @@
 import { cartActions } from "../../../store/cart-slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Breadcrumbs from "../../../components/UI/breadcrumbs";
 import styles from "./index.module.scss";
@@ -12,6 +12,8 @@ import ButtonOperation from "../../../components/UI/btn-operation";
 import { getByField } from "../../../lib/mongo";
 import ProductList from "../../../components/products/product-list";
 import { useRouter } from "next/router";
+import { addItem, updateCart } from "../../../lib/cart-operations";
+import { useSession } from "next-auth/client";
 
 const Details = (props) => {
   const product = props.product;
@@ -28,8 +30,10 @@ const Details = (props) => {
     brand,
   } = product;
 
+  const [session, loading] = useSession();
   const dispatch = useDispatch();
   const router = useRouter();
+  const cart = useSelector((state) => state.items);
 
   const [imgLink, setImgLink] = useState(images[0]);
 
@@ -57,7 +61,7 @@ const Details = (props) => {
     }
   };
 
-  const addToCart = () => {
+  const addToCart = async () => {
     const payload = {
       name,
       size,
@@ -66,7 +70,17 @@ const Details = (props) => {
       price,
       imgLink: images[0],
     };
-    // if session - send http request, if error - set error state and return without updating redux
+
+    const existingItem = cart.find(
+      (item) => item.slug === slug && item.size === size
+    );
+
+    if (session && existingItem) {
+      await updateCart(slug, size, amount);
+    } else if (session && !existingItem) {
+      await addItem(payload);
+    }
+
     dispatch(cartActions.addItem(payload));
     router.push("/cart");
   };

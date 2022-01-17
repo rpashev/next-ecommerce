@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import DeleteIcon from "../UI/delete-icon";
 import { Fragment } from "react";
 import { useSession } from "next-auth/client";
-import { deleteItem } from "../../lib/cart-operations";
+import { deleteItem, updateCart } from "../../lib/cart-operations";
 
 const CartItem = (props) => {
   const { imgLink, name, price, quantity, size, slug } = props;
@@ -24,15 +24,28 @@ const CartItem = (props) => {
     dispatch(cartActions.removeItem(payload));
   };
 
-  const updateQuantity = (event) => {
+  const updateQuantity = async (event) => {
     if (event.target.value === "0/remove") {
       const payload = { slug, size };
+
+      if (session) {
+        await deleteItem(slug, size);
+      }
+
       dispatch(cartActions.removeItem(payload));
+
     } else if (+event.target.value === quantity) {
       return;
+
     } else {
       let updatedQuantity = +event.target.value;
+
+      if (session) {
+        await updateCart(slug, size, updatedQuantity, true);
+      }
+
       const payload = { slug, updatedQuantity, size };
+
       dispatch(cartActions.updateQuantity(payload));
     }
   };

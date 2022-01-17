@@ -23,13 +23,18 @@ const handler = async (req, res) => {
   let cart = user.cart;
 
   if (req.method === "PATCH") {
-    const { slug, size, updatedQuantity } = req.body;
+    const { slug, size, updatedQuantity, fromCart } = req.body;
+    console.log(req.body);
 
     const existingItem = cart.find(
       (item) => item.slug === slug && item.size === size
     );
 
-    existingItem.quantity += updatedQuantity;
+    if (fromCart) {
+      existingItem.quantity = updatedQuantity;
+    } else {
+      existingItem.quantity += updatedQuantity;
+    }
   }
 
   if (req.method === "DELETE") {
