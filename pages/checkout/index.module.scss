@@ -1,0 +1,21 @@
+.checkout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 2rem;
+
+  .cart-checkout {
+    margin-top: 1rem;
+    width: 38%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .checkout {
+    flex-direction: column;
+    .cart-checkout {
+      margin: 2rem 0;
+      width: 90%;
+    }
+  }
+}

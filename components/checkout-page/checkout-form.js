@@ -4,7 +4,7 @@ import styles from "./checkout-form.module.scss";
 const CheckoutForm = (props) => {
   return (
     <form className={`${styles.form}`}>
-      <h2>Your details</h2>
+      <h2 className="text-center mb-4">Shipping Information</h2>
       <InputCheckout
         label="First Name"
         id="first-name"
@@ -37,7 +37,7 @@ const CheckoutForm = (props) => {
       />
       <div className="form-group row mb-3">
         <label
-          for="country"
+          htmlFor="country"
           className={`${styles.required} col-sm-3 col-form-label fw-bold`}
         >
           Country
@@ -59,7 +59,7 @@ const CheckoutForm = (props) => {
           name="delivery"
           id="standard"
           value="standard"
-          checked
+          defaultChecked
         />
         <label className="form-check-label" htmlFor="standard">
           Standart<span className="text-success h5 ps-1">FREE </span>

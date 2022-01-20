@@ -61,8 +61,9 @@ const CartPage = (props) => {
           </button>
         </div>
       </div>
-
-      <CartSummary subtotal={totalPrice} loggedIn={!!session} />
+      <div className={styles["summary-container"]}>
+        <CartSummary subtotal={totalPrice} loggedIn={!!session}/>
+      </div>
     </div>
   );
 };
