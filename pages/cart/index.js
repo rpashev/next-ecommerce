@@ -33,7 +33,7 @@ const CartPage = (props) => {
 
   return (
     <div
-      className={`container d-block d-md-flex justify-content-between py-5 flex-wrap `}
+      className={`container d-block d-md-flex justify-content-between py-5 mb-5 flex-wrap `}
     >
       <div className={`${styles.content}`}>
         <CartHeaders />
@@ -56,7 +56,7 @@ const CartPage = (props) => {
           >
             <i className="bi bi-arrow-left-circle me-3"></i>BACK TO SHOPPING
           </button>
-          <button onClick={clearCart} className={`btn btn-danger shadown-none`}>
+          <button onClick={clearCart} className={`btn btn-danger shadow-none`}>
             CLEAR CART
           </button>
         </div>
