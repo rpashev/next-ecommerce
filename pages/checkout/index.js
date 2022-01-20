@@ -1,4 +1,5 @@
 import { getSession } from "next-auth/client";
+import Link from "next/link";
 import CartSummary from "../../components/cart-page/cart-summary";
 import CheckoutForm from "../../components/checkout-page/checkout-form";
 import CheckoutItem from "../../components/checkout-page/checkout-item";
@@ -30,6 +31,9 @@ const Checkout = (props) => {
                 />
               );
             })}
+            <Link href="/cart">
+              <button className="btn btn-info shadow-none">EDIT CART</button>
+            </Link>
           </div>
         </div>
       </div>

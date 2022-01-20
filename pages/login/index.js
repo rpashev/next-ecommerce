@@ -6,6 +6,7 @@ import { getSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../store/cart-slice";
+import Link from "next/link";
 
 const Login = () => {
   const router = useRouter();
@@ -103,6 +104,14 @@ const Login = () => {
           Login
         </button>
       </form>
+      <div className="mt-3">
+        <p>
+          Don't have an account?{" "}
+          <Link href="/register">
+            <a className="text-decoration-none">Sign up here!</a>
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

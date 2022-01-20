@@ -24,7 +24,6 @@ const handler = async (req, res) => {
 
   if (req.method === "PATCH") {
     const { slug, size, updatedQuantity, fromCart } = req.body;
-    console.log(req.body);
 
     const existingItem = cart.find(
       (item) => item.slug === slug && item.size === size
@@ -48,7 +47,6 @@ const handler = async (req, res) => {
       cart.splice(index, 1);
     }
     if (all === true) {
-      console.log("here");
       cart = [];
     }
   }

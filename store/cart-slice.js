@@ -58,7 +58,6 @@ export const selectTotalQuantity = (items) => {
 };
 
 export const selectTotalPrice = (items) => {
-  console.log(items)
   if (items.length === 0) {
     return;
   }

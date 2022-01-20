@@ -1,4 +1,5 @@
 import { useSession } from "next-auth/client";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import CartHeaders from "../../components/cart-page/cart-headers";
@@ -16,7 +17,18 @@ const CartPage = (props) => {
   const totalPrice = selectTotalPrice(items);
 
   if (!items || items.length === 0) {
-    return <p>Your cart is empty!</p>;
+    return (
+      <div className="container">
+        <div className="py-5">
+          <h2 className="text-center">Your cart is empty!</h2>
+          <Link href="/shop">
+            <button className="btn btn-success btn-lg mx-auto d-block shadow-none mt-4">
+              START SHOPPING
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   const clearCart = async () => {
@@ -62,7 +74,7 @@ const CartPage = (props) => {
         </div>
       </div>
       <div className={styles["summary-container"]}>
-        <CartSummary subtotal={totalPrice} loggedIn={!!session}/>
+        <CartSummary subtotal={totalPrice} loggedIn={!!session} />
       </div>
     </div>
   );

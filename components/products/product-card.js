@@ -82,7 +82,7 @@ const ProductCard = (props) => {
           onClick={addToCart}
           className={`${
             showButton ? styles.visible : ""
-          } btn btn-info w-100 position-absolute bottom-0 text-light d-none rounded-0`}
+          } btn btn-info w-100 position-absolute bottom-0 text-light d-none rounded-0 shadow-none`}
         >
           ADD TO CART
         </button>

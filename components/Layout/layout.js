@@ -13,8 +13,6 @@ const Layout = (props) => {
 
   useEffect(() => {
     if (session && !loading) {
-      console.log("here")
-      // console.log(session);
       if (!cart || cart.length === 0) {
         dispatch(cartActions.setCart({ items: session.user.cart }));
       }

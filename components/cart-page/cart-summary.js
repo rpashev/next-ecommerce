@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./cart-summary.module.scss";
 
 const CartSummary = (props) => {
-  console.log(props.loggedIn);
+  
   return (
     <div className={styles.summary}>
       <h5>CART TOTALS</h5>
