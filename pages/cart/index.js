@@ -9,7 +9,6 @@ import { cartActions, selectTotalPrice } from "../../store/cart-slice";
 import styles from "./index.module.scss";
 
 const CartPage = (props) => {
-
   const items = useSelector((state) => state.items);
   const [session, loading] = useSession();
   const dispatch = useDispatch();
@@ -63,7 +62,7 @@ const CartPage = (props) => {
         </div>
       </div>
 
-      <CartSummary subtotal={totalPrice} />
+      <CartSummary subtotal={totalPrice} loggedIn={!!session} />
     </div>
   );
 };
