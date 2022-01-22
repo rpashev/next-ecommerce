@@ -15,7 +15,6 @@ export default NextAuth({
       return token;
     },
     session(session, token) {
-      
       return token;
     },
   },
@@ -30,7 +29,8 @@ export default NextAuth({
         });
 
         if (!user) {
-          throw new Error("No user with this credentials!");
+          client.close();
+          return res.status(404).json({ message: "No user with this email!" });
         }
 
         const isValid = await verifyPassword(
@@ -40,11 +40,11 @@ export default NextAuth({
 
         if (!isValid) {
           client.close();
-          throw new Error("Couldn't log you in!");
+          return res.status(401).json({ message: "Invalid password!" });
         }
 
         let cart = JSON.parse(credentials.stringifiedCart);
-        
+
         if (cart.length > 0) {
           try {
             await usersCollection.updateOne(
