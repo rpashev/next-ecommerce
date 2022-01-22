@@ -4,7 +4,6 @@ import Image from "next/image";
 import styles from "./cart-item.module.scss";
 import { useDispatch } from "react-redux";
 import DeleteIcon from "../UI/delete-icon";
-import { Fragment } from "react";
 import { useSession } from "next-auth/client";
 import { deleteItem, updateCart } from "../../lib/cart-operations";
 
