@@ -21,7 +21,11 @@ const handler = async (req, res) => {
   try {
     client = await connectToDatabase();
   } catch (err) {
-    return res.status(500).json({ message: "Connecting to server failed!" });
+    return res.status(500).json({ message: "Connection to server failed!" });
+  }
+
+  if (!client) {
+    return res.status(500).json({ message: "Connection to server failed!" });
   }
 
   const usersCollection = await client.db().collection("users");
@@ -38,12 +42,12 @@ const handler = async (req, res) => {
     const { slug, size, updatedQuantity, fromCart } = req.body;
 
     const existingItem = cart.find(
-      (item) => item.slug === slug && item.size === size
+      (item) => item.slug === slug && item.size === size+"s"
     );
 
     if (!existingItem) {
       client.close();
-      return res.status(500).json({ message: "Could not perform operation!" });
+      return res.status(500).json({ message: "Could not update cart!" });
     }
 
     if (fromCart) {
@@ -62,9 +66,7 @@ const handler = async (req, res) => {
       );
       if (index === -1) {
         client.close();
-        return res
-          .status(500)
-          .json({ message: "Could not perform operation!" });
+        return res.status(500).json({ message: "Could not remove from cart!" });
       }
 
       cart.splice(index, 1);
@@ -75,11 +77,11 @@ const handler = async (req, res) => {
   }
 
   if (req.method === "POST") {
-    const { name, price, slug, size, imgLink, quantity } = req.body;
-
+    let { name, price, slug, size, imgLink, quantity } = req.body;
+    name="";
     if (!name || !price || !slug || !size || !imgLink || !quantity) {
       client.close();
-      return res.status(500).json({ message: "Could not perform operation!" });
+      return res.status(500).json({ message: "Could not add to cart!" });
     }
 
     const newItem = {

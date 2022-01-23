@@ -76,9 +76,17 @@ const Details = (props) => {
     );
 
     if (session && existingItem) {
-      await updateCart(slug, size, amount);
+      try {
+        await updateCart(slug, size, amount);
+      } catch (err) {
+        return console.log(err.response?.data?.message);
+      }
     } else if (session && !existingItem) {
-      await addItem(payload);
+      try {
+        await addItem(payload);
+      } catch (err) {
+        return console.log(err.response?.data?.message);
+      }
     }
 
     dispatch(cartActions.addItem(payload));

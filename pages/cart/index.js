@@ -34,7 +34,11 @@ const CartPage = (props) => {
   const clearCart = async () => {
     const payload = { items: [] };
     if (session && !loading) {
-      await deleteItem(null, null, true);
+      try {
+        await deleteItem(null, null, true);
+      } catch (err) {
+        return console.log(err.response?.data?.message);
+      }
     }
     dispatch(cartActions.setCart(payload));
   };

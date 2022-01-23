@@ -2,7 +2,7 @@ import { useSession } from "next-auth/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, updateCart } from "../../lib/cart-operations";
 import { cartActions } from "../../store/cart-slice";
@@ -11,6 +11,8 @@ import styles from "./product-card.module.scss";
 
 const ProductCard = (props) => {
   const [showButton, setShowButton] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [imgLink, setImgLink] = useState(props.images[0]);
 
   const { name, price, slug } = props;
@@ -18,7 +20,7 @@ const ProductCard = (props) => {
   const cart = useSelector((state) => state.items);
   const dispatch = useDispatch();
   const router = useRouter();
-  const [session, loading] = useSession();
+  const [session, loadingSession] = useSession();
 
   const onHoverHandler = () => {
     setShowButton(true);
@@ -32,6 +34,9 @@ const ProductCard = (props) => {
 
   const addToCart = async (event) => {
     event.stopPropagation();
+    setLoading(true);
+    setError(null);
+
     const payload = {
       name,
       price,
@@ -46,48 +51,80 @@ const ProductCard = (props) => {
     );
 
     if (session && existingItem) {
-      await updateCart(slug);
+      try {
+        await updateCart(slug);
+      } catch (err) {
+        setLoading(false);
+        setError(err.response?.data?.message || "Could not add item to cart!!");
+        return;
+      }
     } else if (session && !existingItem) {
-      await addItem(payload)
+      try {
+        await addItem(payload);
+      } catch (err) {
+        setLoading(false);
+        setError(err.response?.data?.message || "Could not add item to cart!!");
+        return;
+      }
     }
     dispatch(cartActions.addItem(payload));
+    setLoading(false);
+
     router.push("/cart");
   };
 
-  return (
-    <Link href={`/shop/${slug}`} passHref>
-      <div
-        className={`${styles.card}`}
-        onMouseEnter={onHoverHandler}
-        onMouseLeave={onMouseLeaveHandler}
-      >
-        <Image
-          src={`/images/products/${imgLink}.jpg`}
-          alt="product"
-          width={400}
-          height={400}
-        />
-        <div className={`${styles.info}`}>
-          <div>
-            <h3>{props.brand}</h3>
-            <p className={`lead`}>{name}</p>
-          </div>
-          <h2 className={`${styles.price} opacity-75`}>${price}</h2>
-        </div>
-        {(props.onSale || props.bestSeller) && (
-          <ProductBadge onSale={props.onSale} bestSeller={props.bestSeller} />
-        )}
+  const buttonContent = "ADD TO CART";
+  if (loading) {
+    buttonContent = "LOADING...";
+  }
+  if (error) {
+    buttonContent = error;
+  }
 
-        <button
-          onClick={addToCart}
-          className={`${
-            showButton ? styles.visible : ""
-          } btn btn-info w-100 position-absolute bottom-0 text-light d-none rounded-0 shadow-none`}
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => setError(null), 2000);
+    }
+  }, [error]);
+
+  return (
+    <Fragment>
+      <Link href={`/shop/${slug}`} passHref>
+        <div
+          className={`${styles.card}`}
+          onMouseEnter={onHoverHandler}
+          onMouseLeave={onMouseLeaveHandler}
         >
-          ADD TO CART
-        </button>
-      </div>
-    </Link>
+          <Image
+            src={`/images/products/${imgLink}.jpg`}
+            alt="product"
+            width={400}
+            height={400}
+          />
+          <div className={`${styles.info}`}>
+            <div>
+              <h3>{props.brand}</h3>
+              <p className={`lead`}>{name}</p>
+            </div>
+            <h2 className={`${styles.price} opacity-75`}>${price}</h2>
+          </div>
+          {(props.onSale || props.bestSeller) && (
+            <ProductBadge onSale={props.onSale} bestSeller={props.bestSeller} />
+          )}
+
+          <button
+            onClick={addToCart}
+            className={`${
+              showButton ? styles.visible : ""
+            } btn w-100 position-absolute bottom-0 text-light d-none rounded-0 shadow-none ${
+              error ? "btn-danger" : "btn-info"
+            }`}
+          >
+            {buttonContent}
+          </button>
+        </div>
+      </Link>
+    </Fragment>
   );
 };
 

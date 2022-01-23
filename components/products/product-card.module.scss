@@ -19,6 +19,13 @@
   .visible {
     display: block !important;
   }
+
+  .error {
+    color: $danger;
+    font-weight: bold;
+    // position: absolute;
+    // top: 10;
+  }
 }
 
 .card:hover {

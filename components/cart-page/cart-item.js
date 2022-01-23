@@ -15,9 +15,13 @@ const CartItem = (props) => {
 
   const removeHandler = async () => {
     const payload = { slug, size };
-    // if session - send http request, if error - set error state and return without updating redux
+
     if (session && !loading) {
-      await deleteItem(slug, size);
+      try {
+        await deleteItem(slug, size);
+      } catch (err) {
+        return console.log(err.response?.data?.message);
+      }
     }
 
     dispatch(cartActions.removeItem(payload));
@@ -28,19 +32,25 @@ const CartItem = (props) => {
       const payload = { slug, size };
 
       if (session) {
-        await deleteItem(slug, size);
+        try {
+          await deleteItem(slug, size);
+        } catch (err) {
+          return console.log(err.response?.data?.message);
+        }
       }
 
       dispatch(cartActions.removeItem(payload));
-
     } else if (+event.target.value === quantity) {
       return;
-
     } else {
       let updatedQuantity = +event.target.value;
 
       if (session) {
-        await updateCart(slug, size, updatedQuantity, true);
+        try {
+          await updateCart(slug, size, updatedQuantity, true);
+        } catch (err) {
+          return console.log(err.response?.data?.message);
+        }
       }
 
       const payload = { slug, updatedQuantity, size };
