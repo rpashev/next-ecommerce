@@ -17,6 +17,20 @@
     .cart-checkout {
       margin: 2rem 0;
       width: 90%;
+      button {
+        width: 40%;
+      }
+    }
+  }
+}
+@media (max-width: 40rem) {
+  .checkout {
+    .cart-checkout {
+      button {
+        width: 100%;
+        margin: 0 auto;
+        display: block;
+      }
     }
   }
 }

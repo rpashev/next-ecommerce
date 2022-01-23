@@ -7,8 +7,8 @@ const CheckoutItem = (props) => {
       <Image
         src={`/images/products/${props.imgLink}.jpg`}
         alt="product"
-        width={150}
-        height={150}
+        width={200}
+        height={200}
       />
 
       <div className={styles.info}>

@@ -19,7 +19,16 @@
     width: 100%;
   }
   .summary-container {
-    width: 60%;
-    margin-top: 2rem;
+    width: 50%;
+    // margin: 0 auto;
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 40rem) {
+  .summary-container {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 3rem;
   }
 }

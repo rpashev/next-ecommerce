@@ -72,7 +72,7 @@ const CartItem = (props) => {
       <div
         className={`${styles.item} row justify-content-start align-items-center`}
       >
-        <div className={`${styles["main-product"]} col-6`}>
+        <div className={`${styles["main-product"]} col-10 col-md-6`}>
           <div className={`${styles.img}`}>
             <Image
               src={`/images/products/${imgLink}.jpg`}
@@ -87,10 +87,10 @@ const CartItem = (props) => {
           </div>
         </div>
 
-        <h5 className={`col-1`}>${price}</h5>
-        <h5 className={`col-3`}>
+        <h5 className={`col-2 col-md-1`}>${price}</h5>
+        <div className={`col-5 col-md-3 px-0`}>
           <select
-            className="form-select shadow-none w-50"
+            className="form-select shadow-none w-75"
             value={quantity}
             onChange={updateQuantity}
           >
@@ -107,8 +107,13 @@ const CartItem = (props) => {
             <option>10</option>
             {quantity > 10 ? <option>{quantity}</option> : null}
           </select>
+        </div>
+        <h5 className={`col-4 col-md-1 text-primary`}>
+          <span className="d-inline d-md-none h6 opacity-50 text-dark">
+            Total:{" "}
+          </span>
+          ${quantity * price}
         </h5>
-        <h5 className={`col-1`}>${quantity * price}</h5>
         <DeleteIcon onRemove={removeHandler} />
 
         <hr></hr>

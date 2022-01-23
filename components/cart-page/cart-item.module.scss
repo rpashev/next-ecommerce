@@ -23,3 +23,9 @@
     padding: 0;
   }
 }
+
+@media (max-width: 48rem) {
+  .item {
+    height: 200px;
+  }
+}
