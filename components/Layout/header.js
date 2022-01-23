@@ -24,10 +24,10 @@ const Header = (props) => {
   const logoutHandler = async () => {
     try {
       await signOut();
+      dispatch(cartActions.setCart({ items: [] }));
     } catch (err) {
       console.log(err);
     }
-    dispatch(cartActions.setCart({ items: [] }));
   };
 
   if (loading) {

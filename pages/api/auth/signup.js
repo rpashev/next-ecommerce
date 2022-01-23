@@ -20,8 +20,14 @@ const handler = async (req, res) => {
     res.status(422).json({ message: "Invalid input!" });
     return;
   }
+  let client;
+  client = await connectToDatabase();
 
-  const client = await connectToDatabase();
+  if (!client) {
+    return res
+      .status(500)
+      .json({ message: "Could not connect to server" });
+  }
 
   const db = client.db();
 
@@ -42,7 +48,7 @@ const handler = async (req, res) => {
       lastName,
       email,
       password: hashedPassword,
-      cart: []
+      cart: [],
     });
   } catch (err) {
     console.log(err);

@@ -1,18 +1,17 @@
 import styles from "./index.module.scss";
 import Input from "../../components/UI/input";
 import { useState } from "react";
-import { signIn, useSession } from "next-auth/client";
+import { signIn } from "next-auth/client";
 import { getSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../../store/cart-slice";
+import { useSelector } from "react-redux";
 import Link from "next/link";
+import Spinner from "../../components/UI/spinner";
 
 const Login = () => {
   const router = useRouter();
-  const cart = useSelector((state) => state.items);
-  const [session, loadingSession] = useSession();
 
+  const cart = useSelector((state) => state.items);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -49,12 +48,7 @@ const Login = () => {
     }
 
     if (!result.error) {
-      // set redux cart = user cart
-      if (cart.length === 0) {
-        dispatch(cartActions.setCart(session.user.cart));
-        setLoading(false);
-        router.replace("/shop");
-      }
+      router.replace("/shop");
     } else {
       setError(result.error || "Could not log you in!");
       setLoading(false);
@@ -114,7 +108,8 @@ const Login = () => {
           Login
         </button>
       </form>
-      {error && !loading && <p className="text-danger mt-1 text-center fw-bold">{error}</p>}
+      {loading && <Spinner />}
+      {error && !loading && <p className="text-danger mt-2 fw-bold">{error}</p>}
       <div className="mt-3">
         <p>
           Don't have an account?{" "}

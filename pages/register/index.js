@@ -11,6 +11,9 @@ const Register = () => {
   const router = useRouter();
   const cart = useSelector((state) => state.items);
 
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const submitHandler = async (event) => {
     event.preventDefault();
 
@@ -40,29 +43,37 @@ const Register = () => {
     ) {
       return;
     }
+    let result;
+    let loggedResult;
+
+    setLoading(true);
+    setError(null);
 
     try {
-      const result = await createUser(
+      result = await createUser(
         firstName,
         lastName,
         email,
         password,
         confirmPassword
       );
-      const loggedResult = await signIn("credentials", {
-        redirect: false,
-        email,
-        password,
-        cart
-      });
-
-      if (!loggedResult.error) {
-        // set redux cart = user cart
-
-        router.replace("/shop");
-      }
     } catch (err) {
-      console.log(err);
+      setError(err.response?.data?.message || "Could not sign you up!");
+      setLoading(false);
+      return;
+    }
+
+    loggedResult = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+      cart,
+    });
+    if (!loggedResult.error) {
+      router.replace("/shop");
+    } else {
+      setError(result.error || "Could not sign up!");
+      setLoading(false);
     }
   };
 
@@ -168,6 +179,7 @@ const Register = () => {
           Sign Up
         </button>
       </form>
+      {error && !loading && <p className="text-danger mt-2 fw-bold">{error}</p>}
     </div>
   );
 };
