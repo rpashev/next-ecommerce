@@ -1,11 +1,13 @@
+import styles from "./index.module.scss";
+
 import { useState } from "react";
-import Input from "../../components/UI/input";
 import { createUser } from "../../lib/auth";
 import { getSession, signIn } from "next-auth/client";
-
-import styles from "./index.module.scss";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+
+import Input from "../../components/UI/input";
+import Spinner from "../../components/UI/spinner";
 
 const Register = () => {
   const router = useRouter();
@@ -63,16 +65,18 @@ const Register = () => {
       return;
     }
 
+    const stringifiedCart = JSON.stringify(cart);
+
     loggedResult = await signIn("credentials", {
       redirect: false,
       email,
       password,
-      cart,
+      stringifiedCart,
     });
     if (!loggedResult.error) {
       router.replace("/shop");
     } else {
-      setError(result.error || "Could not sign up!");
+      setError(loggedResult.error || "Signed up but could not log you in!");
       setLoading(false);
     }
   };
@@ -179,6 +183,7 @@ const Register = () => {
           Sign Up
         </button>
       </form>
+      {loading && <Spinner />}
       {error && !loading && <p className="text-danger mt-2 fw-bold">{error}</p>}
     </div>
   );
