@@ -11,8 +11,10 @@ import Link from "next/link";
 const Login = () => {
   const router = useRouter();
   const cart = useSelector((state) => state.items);
-  const [session, loading] = useSession();
-  const dispatch = useDispatch();
+  const [session, loadingSession] = useSession();
+
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -30,6 +32,9 @@ const Login = () => {
     let result;
     let stringifiedCart = JSON.stringify(cart);
 
+    setError(null);
+    setLoading(true);
+
     try {
       result = await signIn("credentials", {
         redirect: false,
@@ -38,16 +43,21 @@ const Login = () => {
         stringifiedCart,
       });
     } catch (err) {
-      console.log(err);
+      setError("Could not log you in!");
+      setLoading(false);
+      return;
     }
 
     if (!result.error) {
       // set redux cart = user cart
       if (cart.length === 0) {
-        console.log(session);
-        // dispatch(cartActions.setCart(session.user.cart));
+        dispatch(cartActions.setCart(session.user.cart));
+        setLoading(false);
+        router.replace("/shop");
       }
-      router.replace("/shop");
+    } else {
+      setError(result.error || "Could not log you in!");
+      setLoading(false);
     }
   };
 
@@ -104,6 +114,7 @@ const Login = () => {
           Login
         </button>
       </form>
+      {error && !loading && <p className="text-danger mt-1 text-center fw-bold">{error}</p>}
       <div className="mt-3">
         <p>
           Don't have an account?{" "}

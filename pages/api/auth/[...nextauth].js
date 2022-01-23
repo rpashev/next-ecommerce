@@ -21,7 +21,12 @@ export default NextAuth({
   providers: [
     Providers.Credentials({
       async authorize(credentials) {
-        const client = await connectToDatabase();
+        let client;
+        client = await connectToDatabase();
+
+        if (!client) {
+          throw new Error("Could not connect to server!");
+        }
 
         const usersCollection = client.db().collection("users");
         const user = await usersCollection.findOne({
@@ -29,8 +34,9 @@ export default NextAuth({
         });
 
         if (!user) {
+          console.log("here");
           client.close();
-          return res.status(404).json({ message: "No user with this email!" });
+          throw new Error("No user with this email!");
         }
 
         const isValid = await verifyPassword(
@@ -40,7 +46,7 @@ export default NextAuth({
 
         if (!isValid) {
           client.close();
-          return res.status(401).json({ message: "Invalid password!" });
+          throw new Error("Invalid password!");
         }
 
         let cart = JSON.parse(credentials.stringifiedCart);
