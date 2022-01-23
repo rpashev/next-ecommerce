@@ -53,7 +53,8 @@ const CartPage = (props) => {
   };
 
   const goBack = () => {
-    router.back();
+    // console.log(document.referrer)
+    router.push("/shop");
   };
 
   return (

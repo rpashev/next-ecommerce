@@ -24,13 +24,14 @@ const Header = (props) => {
   };
 
   const logoutHandler = async () => {
+    let data;
     try {
-      const data = await signOut({redirect: false, callbackUrl: "/"});
-      dispatch(cartActions.setCart({ items: [] }));
-      router.push(data.url)
+      data = await signOut({ redirect: false, callbackUrl: "/" });
     } catch (err) {
-      console.log(err);
+      return console.log(err);
     }
+    dispatch(cartActions.setCart({ items: [] }));
+    router.push(data.url);
   };
 
   if (loading) {
@@ -73,7 +74,7 @@ const Header = (props) => {
               <li>
                 <Link href="/cart">
                   <a className={styles["cart-icon"]}>
-                    <CartIcon totalQuantity={totalQuantity}/>
+                    <CartIcon totalQuantity={totalQuantity} />
                   </a>
                 </Link>
               </li>

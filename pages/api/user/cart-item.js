@@ -77,8 +77,8 @@ const handler = async (req, res) => {
   }
 
   if (req.method === "POST") {
-    let { name, price, slug, size, imgLink, quantity } = req.body;
-    name = "";
+    const { name, price, slug, size, imgLink, quantity } = req.body;
+    
     if (!name || !price || !slug || !size || !imgLink || !quantity) {
       client.close();
       return res.status(500).json({ message: "Could not add to cart!" });

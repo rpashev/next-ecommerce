@@ -91,7 +91,6 @@ const CartItem = (props) => {
         <h5 className={`col-3`}>
           <select
             className="form-select shadow-none w-50"
-            defaultValue={quantity}
             value={quantity}
             onChange={updateQuantity}
           >
@@ -106,6 +105,7 @@ const CartItem = (props) => {
             <option>8</option>
             <option>9</option>
             <option>10</option>
+            {quantity > 10 ? <option>{quantity}</option> : null}
           </select>
         </h5>
         <h5 className={`col-1`}>${quantity * price}</h5>

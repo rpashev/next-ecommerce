@@ -77,7 +77,7 @@ const ProductCard = (props) => {
 
   const buttonContent = "ADD TO CART";
   if (loading) {
-    buttonContent = "LOADING...";
+    buttonContent = "ADDING...";
   }
   if (error) {
     buttonContent = error;
