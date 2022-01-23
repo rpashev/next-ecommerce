@@ -4,7 +4,7 @@ import styles from "./cart-summary.module.scss";
 const CartSummary = (props) => {
   
   return (
-    <div className={styles.summary}>
+    <div className={`${styles.summary} ${props.loading ? "opacity-25" : ""}`}>
       <h5>CART TOTALS</h5>
       <hr></hr>
       <h6>Cart Subtotal: ${props.subtotal}</h6>

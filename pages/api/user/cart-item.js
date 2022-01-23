@@ -42,7 +42,7 @@ const handler = async (req, res) => {
     const { slug, size, updatedQuantity, fromCart } = req.body;
 
     const existingItem = cart.find(
-      (item) => item.slug === slug && item.size === size+"s"
+      (item) => item.slug === slug && item.size === size
     );
 
     if (!existingItem) {
@@ -78,7 +78,7 @@ const handler = async (req, res) => {
 
   if (req.method === "POST") {
     let { name, price, slug, size, imgLink, quantity } = req.body;
-    name="";
+    name = "";
     if (!name || !price || !slug || !size || !imgLink || !quantity) {
       client.close();
       return res.status(500).json({ message: "Could not add to cart!" });

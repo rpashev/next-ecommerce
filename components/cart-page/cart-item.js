@@ -11,37 +11,40 @@ const CartItem = (props) => {
   const { imgLink, name, price, quantity, size, slug } = props;
 
   const dispatch = useDispatch();
-  const [session, loading] = useSession();
+  const [session, loadingSession] = useSession();
 
   const removeHandler = async () => {
+    props.onLoading(true);
+    props.onError(null);
+
     const payload = { slug, size };
 
-    if (session && !loading) {
+    if (session && !loadingSession) {
       try {
         await deleteItem(slug, size);
       } catch (err) {
-        return console.log(err.response?.data?.message);
+        props.onLoading(false);
+        return props.onError(
+          err.response?.data?.message || "Error! Could not remove item!"
+        );
       }
     }
 
     dispatch(cartActions.removeItem(payload));
+    props.onLoading(false);
   };
 
   const updateQuantity = async (event) => {
+    props.onLoading(true);
+    props.onError(null);
+
     if (event.target.value === "0/remove") {
-      const payload = { slug, size };
-
-      if (session) {
-        try {
-          await deleteItem(slug, size);
-        } catch (err) {
-          return console.log(err.response?.data?.message);
-        }
-      }
-
-      dispatch(cartActions.removeItem(payload));
+      removeHandler();
     } else if (+event.target.value === quantity) {
-      return;
+      props.onLoading(false);
+      return props.onError(
+        "Can't update, selected value must be different than the previous!"
+      );
     } else {
       let updatedQuantity = +event.target.value;
 
@@ -49,13 +52,18 @@ const CartItem = (props) => {
         try {
           await updateCart(slug, size, updatedQuantity, true);
         } catch (err) {
-          return console.log(err.response?.data?.message);
+          props.onLoading(false);
+          return props.onError(
+            err.response?.data?.message || "Error! Could not update cart!"
+          );
         }
       }
 
       const payload = { slug, updatedQuantity, size };
 
       dispatch(cartActions.updateQuantity(payload));
+
+      props.onLoading(false);
     }
   };
 
@@ -84,6 +92,7 @@ const CartItem = (props) => {
           <select
             className="form-select shadow-none w-50"
             defaultValue={quantity}
+            value={quantity}
             onChange={updateQuantity}
           >
             <option>0/remove</option>

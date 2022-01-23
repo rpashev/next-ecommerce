@@ -55,16 +55,18 @@ const ProductCard = (props) => {
         await updateCart(slug);
       } catch (err) {
         setLoading(false);
-        setError(err.response?.data?.message || "Could not add item to cart!!");
-        return;
+        return setError(
+          err.response?.data?.message || "Could not add item to cart!!"
+        );
       }
     } else if (session && !existingItem) {
       try {
         await addItem(payload);
       } catch (err) {
         setLoading(false);
-        setError(err.response?.data?.message || "Could not add item to cart!!");
-        return;
+        return setError(
+          err.response?.data?.message || "Could not add item to cart!!"
+        );
       }
     }
     dispatch(cartActions.addItem(payload));
@@ -114,10 +116,9 @@ const ProductCard = (props) => {
 
           <button
             onClick={addToCart}
-            className={`${
-              showButton ? styles.visible : ""
-            } btn w-100 position-absolute bottom-0 text-light d-none rounded-0 shadow-none ${
-              error ? "btn-danger" : "btn-info"
+            className={`${showButton || error ? styles.visible : ""} 
+            btn w-100 position-absolute bottom-0 text-light d-none rounded-0 shadow-none ${
+              error ? `btn-danger` : "btn-info"
             }`}
           >
             {buttonContent}

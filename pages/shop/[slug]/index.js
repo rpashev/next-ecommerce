@@ -30,13 +30,15 @@ const Details = (props) => {
     brand,
   } = product;
 
-  const [session, loading] = useSession();
+  const [session, loadingSession] = useSession();
   const dispatch = useDispatch();
   const router = useRouter();
   const cart = useSelector((state) => state.items);
 
-  const [imgLink, setImgLink] = useState(images[0]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
+  const [imgLink, setImgLink] = useState(images[0]);
   const [amount, setAmount] = useState(1);
   const [size, setSize] = useState("M");
 
@@ -62,6 +64,9 @@ const Details = (props) => {
   };
 
   const addToCart = async () => {
+    setLoading(true);
+    setError(null);
+
     const payload = {
       name,
       size,
@@ -79,17 +84,24 @@ const Details = (props) => {
       try {
         await updateCart(slug, size, amount);
       } catch (err) {
-        return console.log(err.response?.data?.message);
+        setLoading(false);
+        return setError(
+          err.response?.data?.message || "Could not update cart!"
+        );
       }
     } else if (session && !existingItem) {
       try {
         await addItem(payload);
       } catch (err) {
-        return console.log(err.response?.data?.message);
+        setLoading(false);
+        return setError(
+          err.response?.data?.message || "Could not add to cart!"
+        );
       }
     }
 
     dispatch(cartActions.addItem(payload));
+    setLoading(false);
     router.push("/cart");
   };
 
@@ -163,9 +175,12 @@ const Details = (props) => {
               disabled={!available}
               onClick={addToCart}
             >
-              ADD TO CART
+              {loading ? "ADDING..." : "ADD TO CART"}
             </button>
-            <p className="lead">Total: ${price * amount}</p>
+            <p className="lead fw-bold">Total: ${price * amount}</p>
+            {error && !loading && (
+              <p className="text-danger mt-2 fw-bold">{error}</p>
+            )}
           </div>
         </div>
         <ProductList

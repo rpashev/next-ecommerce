@@ -1,20 +1,26 @@
 import { useSession } from "next-auth/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartHeaders from "../../components/cart-page/cart-headers";
 import CartItem from "../../components/cart-page/cart-item";
 import CartSummary from "../../components/cart-page/cart-summary";
+import Spinner from "../../components/UI/spinner";
 import { deleteItem } from "../../lib/cart-operations";
 import { cartActions, selectTotalPrice } from "../../store/cart-slice";
 import styles from "./index.module.scss";
 
 const CartPage = (props) => {
   const items = useSelector((state) => state.items);
-  const [session, loading] = useSession();
+  const [session, loadingSession] = useSession();
   const dispatch = useDispatch();
   const router = useRouter();
+
   const totalPrice = selectTotalPrice(items);
+
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   if (!items || items.length === 0) {
     return (
@@ -32,15 +38,18 @@ const CartPage = (props) => {
   }
 
   const clearCart = async () => {
+    setLoading(true);
     const payload = { items: [] };
-    if (session && !loading) {
+    if (session && !loadingSession) {
       try {
         await deleteItem(null, null, true);
       } catch (err) {
-        return console.log(err.response?.data?.message);
+        setLoading(false);
+        return setError(err.response?.data?.message);
       }
     }
     dispatch(cartActions.setCart(payload));
+    setLoading(false);
   };
 
   const goBack = () => {
@@ -49,9 +58,9 @@ const CartPage = (props) => {
 
   return (
     <div
-      className={`container d-block d-md-flex justify-content-between py-5 mb-5 flex-wrap `}
+      className={`container d-block d-md-flex justify-content-between py-5 mb-5 flex-wrap position-relative`}
     >
-      <div className={`${styles.content}`}>
+      <div className={`${styles.content} ${loading ? "opacity-25" : ""}`}>
         <CartHeaders />
         <hr></hr>
         {items.map((item) => (
@@ -63,6 +72,8 @@ const CartPage = (props) => {
             size={item.size}
             quantity={item.quantity}
             slug={item.slug}
+            onLoading={setLoading}
+            onError={setError}
           ></CartItem>
         ))}
         <div className={`d-flex w-100 justify-content-between mt-2`}>
@@ -76,10 +87,22 @@ const CartPage = (props) => {
             CLEAR CART
           </button>
         </div>
+        {error && !loading && (
+          <p className="mt-3 text-center text-danger fw-bold h5">{error}</p>
+        )}
       </div>
       <div className={styles["summary-container"]}>
-        <CartSummary subtotal={totalPrice} loggedIn={!!session} />
+        <CartSummary
+          subtotal={totalPrice}
+          loggedIn={!!session}
+          loading={loading}
+        />
       </div>
+      {loading && (
+        <div className={styles.spinner}>
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 };

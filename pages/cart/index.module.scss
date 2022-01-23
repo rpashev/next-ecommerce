@@ -8,6 +8,11 @@
 .summary-container {
   width: 20%;
 }
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
 
 @media (max-width: 1024px) {
   .content {
