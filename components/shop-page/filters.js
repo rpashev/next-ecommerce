@@ -6,10 +6,11 @@ const Filters = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("ALL");
   const [brand, setBrand] = useState("All brands");
+  const [ascending, setAscending] = useState(true);
 
   useEffect(() => {
-    props.filter(category, searchQuery, brand, priceRange);
-  }, [category, searchQuery, brand, priceRange]);
+    props.filter(category, searchQuery, brand, priceRange, ascending);
+  }, [category, searchQuery, brand, priceRange, ascending]);
 
   const categoryHandler = (event) => {
     if (event.target instanceof HTMLButtonElement) {
@@ -17,6 +18,10 @@ const Filters = (props) => {
         setCategory(event.target.textContent);
       }
     }
+  };
+
+  const ascendingHandler = (event) => {
+    setAscending((prevState) => !prevState);
   };
 
   const brandHandler = (event) => {
@@ -60,6 +65,13 @@ const Filters = (props) => {
         </div>
       </div>
       <div className="my-3">
+        <h3>Sort By Price</h3>
+        <select className="form-select shadow-none" onChange={ascendingHandler}>
+          <option defaultValue>Ascending</option>
+          <option>Descending</option>
+        </select>
+      </div>
+      <div className="my-3">
         <h3>Brand</h3>
         <select className="form-select shadow-none" onChange={brandHandler}>
           <option defaultValue>All brands</option>
@@ -68,7 +80,7 @@ const Filters = (props) => {
         </select>
       </div>
       <div className="my-3">
-        <h3>Price</h3>
+        <h3>Price Range</h3>
         <label htmlFor="customRange1" className="form-label">
           Select price range
         </label>

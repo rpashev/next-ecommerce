@@ -10,12 +10,19 @@ const ShopPage = (props) => {
   const { products } = props;
   const [filteredProducts, setFilteredProducts] = useState(products);
 
-  const loadFilteredProducts = (category, searchQuery, brand, priceRange) => {
+  const loadFilteredProducts = (
+    category,
+    searchQuery,
+    brand,
+    priceRange,
+    ascending
+  ) => {
     const resultProducts = filterProducts(
       category,
       searchQuery,
       brand,
       priceRange,
+      ascending,
       products
     );
     setFilteredProducts(resultProducts);

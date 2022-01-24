@@ -3,15 +3,17 @@ export const filterProducts = (
   searchQuery = "",
   brand = "All brands",
   priceRange = 200,
+  ascending = true,
   products
 ) => {
   if (
     category === "ALL" &&
     brand === "All brands" &&
     searchQuery === "" &&
-    priceRange === 200
+    priceRange === 200 &&
+    ascending
   ) {
-    return products;
+    return products.sort((a, b) => a.price - b.price);
   }
   const updatedProducts = products.filter((p) => {
     if (
@@ -26,5 +28,9 @@ export const filterProducts = (
       return p;
     }
   });
-  return updatedProducts;
+  if (ascending) {
+    return updatedProducts.sort((a, b) => a.price - b.price);
+  } else {
+    return updatedProducts.sort((a, b) => b.price - a.price);
+  }
 };
