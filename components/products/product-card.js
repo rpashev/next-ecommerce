@@ -15,7 +15,7 @@ const ProductCard = (props) => {
   const [error, setError] = useState(null);
   const [imgLink, setImgLink] = useState(props.images[0]);
 
-  const { name, price, slug } = props;
+  const { name, price, slug, available } = props;
 
   const cart = useSelector((state) => state.items);
   const dispatch = useDispatch();
@@ -36,6 +36,11 @@ const ProductCard = (props) => {
     event.stopPropagation();
     setLoading(true);
     setError(null);
+
+    if (!available) {
+      setLoading(false);
+      return setError("Out of stock!");
+    }
 
     const payload = {
       name,
@@ -118,7 +123,7 @@ const ProductCard = (props) => {
             onClick={addToCart}
             className={`${showButton || error ? styles.visible : ""} 
             btn w-100 position-absolute bottom-0 text-light d-none rounded-0 shadow-none ${
-              error ? `btn-danger` : "btn-info"
+              error ? `btn-danger` : "btn-secondary"
             }`}
           >
             {buttonContent}

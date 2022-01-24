@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import DeleteIcon from "../UI/delete-icon";
 import { useSession } from "next-auth/client";
 import { deleteItem, updateCart } from "../../lib/cart-operations";
+import Link from "next/link";
 
 const CartItem = (props) => {
   const { imgLink, name, price, quantity, size, slug } = props;
@@ -73,18 +74,22 @@ const CartItem = (props) => {
         className={`${styles.item} row justify-content-start align-items-center`}
       >
         <div className={`${styles["main-product"]} col-10 col-md-6`}>
-          <div className={`${styles.img}`}>
-            <Image
-              src={`/images/products/${imgLink}.jpg`}
-              alt="product"
-              width={150}
-              height={150}
-            />
-          </div>
-          <div className={`text-center px-1 mx-auto`}>
-            <h6 className={``}>{name}</h6>
-            <h6 className={`opacity-50 mt-1`}>Size: {size}</h6>
-          </div>
+          <Link href={`/shop/${slug}`}>
+            <div className={`${styles.img}`} title="View Product">
+              <Image
+                src={`/images/products/${imgLink}.jpg`}
+                alt="product"
+                width={150}
+                height={150}
+              />
+            </div>
+          </Link>
+          <Link href={`/shop/${slug}`}>
+            <div className={`text-center px-1 mx-auto ${styles.link}`} title="View Product">
+              <h6 className={``}>{name}</h6>
+              <h6 className={`opacity-50 mt-1`}>Size: {size}</h6>
+            </div>
+          </Link>
         </div>
 
         <h5 className={`col-2 col-md-1`}>${price}</h5>

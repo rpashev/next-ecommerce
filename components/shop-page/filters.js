@@ -52,9 +52,9 @@ const Filters = (props) => {
           <button className={styles.btn}>ALL</button>
           <button className={styles.btn}>Hats & Beanies</button>
           <button className={styles.btn}>Gloves</button>
-          <button className={styles.btn}>Bags</button>
+          <button className={styles.btn}>Bags & Backpacks</button>
           <button className={styles.btn}>Socks</button>
-          <button className={styles.btn}>Masks</button>
+          <button className={styles.btn}>Face Covers</button>
           <button className={styles.btn}>Sunglasses</button>
           <button className={styles.btn}>Water Bottles</button>
         </div>

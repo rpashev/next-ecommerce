@@ -47,7 +47,9 @@ const Header = (props) => {
             <span className={styles["toggle-button__bar"]}></span>
             <span className={styles["toggle-button__bar"]}></span>
           </button>
-          <div className={`${styles.logo} col-6 col-md-4 h3`}>My Shop</div>
+          <Link href="/">
+            <div className={`${styles.logo} col-6 col-md-4 h3`}>My Shop</div>
+          </Link>
 
           <MobileNav
             close={toggleMobileNav}

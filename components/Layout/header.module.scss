@@ -12,6 +12,9 @@
     .logo {
       color: $color-primary;
     }
+    .logo:hover {
+      cursor: pointer;
+    }
 
     .main-nav {
       ul {

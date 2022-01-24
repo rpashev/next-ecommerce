@@ -22,6 +22,9 @@
     height: 100px;
     padding: 0;
   }
+  .img:hover, .link:hover {
+    cursor:pointer;
+  }
 }
 
 @media (max-width: 48rem) {

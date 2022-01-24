@@ -34,6 +34,7 @@ const ShopPage = (props) => {
           brand={p.brand}
           images={p.images}
           slug={p.slug}
+          available={p.available}
         />
       );
     });
