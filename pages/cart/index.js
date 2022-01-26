@@ -28,7 +28,7 @@ const CartPage = (props) => {
         <div className="py-5">
           <h2 className="text-center">Your cart is empty!</h2>
           <Link href="/shop">
-            <button className="btn btn-success btn-lg mx-auto d-block shadow-none mt-4">
+            <button className="btn btn-primary btn-lg mx-auto d-block shadow-none mt-4">
               START SHOPPING
             </button>
           </Link>

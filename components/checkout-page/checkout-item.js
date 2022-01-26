@@ -15,7 +15,7 @@ const CheckoutItem = (props) => {
         <h5>{props.name}</h5>
         <h6>Size: {props.size}</h6>
         <h6>Quantity: {props.quantity}</h6>
-        <h5 className="text-primary">${props.price * props.quantity}</h5>
+        <h5 className="text-warning">${props.price * props.quantity}</h5>
       </div>
     </div>
   );

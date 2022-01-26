@@ -109,7 +109,7 @@ const CheckoutForm = (props) => {
       <p className={`${styles.legend} my-3 fw-italic`}>
         <small>Required fields</small>
       </p>
-      <button className={`btn btn-lg btn-warning d-block mt-4`}>
+      <button className={`btn btn-lg btn-warning text-light d-block mt-4`}>
         TO BILLING
       </button>
     </form>

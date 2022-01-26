@@ -19,12 +19,16 @@
   .intro .prompt {
     position: static;
     width: 100%;
-    background: $gray-darkest;
+    background: rgb(92, 92, 92);
     text-align: center;
     padding: 2rem;
     p {
-        // width: 90% !important;
-        margin: 1rem auto;
+      width: 100% !important;
+      margin: 1rem 0;
+    }
+    a {
+      background-color: $color-primary;
+      color: $gray-darkest;
     }
   }
 }

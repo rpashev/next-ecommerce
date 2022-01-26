@@ -21,7 +21,7 @@ const HomeIntro = () => {
           Welcome to <span className="text-primary">My Shop</span>
         </h1>
         <p className="lead muted w-75">
-          Your best choice for hats, gloves, socks and much more accessories
+          Your best choice for hats, gloves, socks and many more accessories
         </p>
         <Link href="/shop">
           <a className={`btn btn-outline-primary btn-lg shadow-none`}>SHOP</a>

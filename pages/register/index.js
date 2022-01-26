@@ -176,10 +176,7 @@ const Register = () => {
           updateInputState={onChangeHandler}
         />
 
-        <button
-          className="btn btn-outline-secondary btn-lg shadow-none"
-          type="submit"
-        >
+        <button className={`btn btn-primary btn-lg shadow-none ${styles.btn}`} type="submit">
           Sign Up
         </button>
       </form>

@@ -32,7 +32,7 @@ const Checkout = (props) => {
               );
             })}
             <Link href="/cart">
-              <button className="btn btn-info shadow-none">EDIT CART</button>
+              <button className="btn btn-secondary shadow-none">EDIT CART</button>
             </Link>
           </div>
         </div>

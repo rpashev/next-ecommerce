@@ -113,7 +113,7 @@ const CartItem = (props) => {
             {quantity > 10 ? <option>{quantity}</option> : null}
           </select>
         </div>
-        <h5 className={`col-4 col-md-1 text-primary`}>
+        <h5 className={`col-4 col-md-1 text-warning`}>
           <span className="d-inline d-md-none h6 opacity-50 text-dark">
             Total:{" "}
           </span>

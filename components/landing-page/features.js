@@ -7,7 +7,7 @@ const Features = () => {
         <h2 className="text-center mt-5 text-dark">
           Why are we the best?
         </h2>
-        <ul className={`${styles.features} row justify-content-center mb-5`}>
+        <ul className={`${styles.features} row justify-content-center mb-5 px-0`}>
           <li className={`${styles["features-item"]} col-12 col-md-4`}>
             <i className="bi bi-currency-dollar"></i>
             <h4>Top prices on the market</h4>

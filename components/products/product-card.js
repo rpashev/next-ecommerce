@@ -123,7 +123,7 @@ const ProductCard = (props) => {
             onClick={addToCart}
             className={`${showButton || error ? styles.visible : ""} 
             btn w-100 position-absolute bottom-0 text-light d-none rounded-0 shadow-none ${
-              error ? `btn-danger` : "btn-secondary"
+              error ? `btn-danger` : "btn-warning"
             }`}
           >
             {buttonContent}
