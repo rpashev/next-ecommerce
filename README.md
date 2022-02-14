@@ -24,30 +24,26 @@ I wanted to dive deeper into the React ecosystem and building a basic e-commerce
 - api - having mostly used Express with its middleware feature, it was harder for me to implement the api for this app, especially in terms or error handling
 - redux - I was familiar with Redux in theory but this was the first time I actually used it in the form of redux-toolkit. I found that redux-toolkit greatly improves the developer experience in comparison with plain Redux.
 - redux-persist - usually I manually persist the data in local storage/cookies but this time I used another library which meant a lot of research
-- styling - I decided to combine Bootstrap(with custom colors) with SCSS with the main idea to lessen the media queries I have to write by using Bootstrap's responsive grid system. I am happy with the decision as I wanted to practice Bootstrap as well, but such a combination at points make the styling code less readable and all over the place.
+- styling - I decided to combine Bootstrap(with custom colors) with SCSS with the main idea to lessen the media queries I have to write by using Bootstrap's responsive grid system. I am happy with the decision as I wanted to practice Bootstrap as well, but such a combination at points makes the styling code less readable and all over the place.
 - cart feature - this is a very interesting issue that made me spend a lot of time doing research on how e-commerce apps implement it. The most interesting and challenging problem for me was how a potential conflict between the non-empty cart of an anonymous user and a non-empty (old) cart of this same user once he logs in is resolved. I just replaced the old user cart with the more recent one as I didn't want to directly merge them, but it might be better to prompt the user to resolve this potential conflict himself once he logs in.
 - gathering all the data for the products was time-consuming (I manually got the data for some products from Adidas/Reebok and pushed it to Mongo Atlas)
 - using Mongo without an ORM was new to me and more troublesome than expected
 - image caching issues - there are some issues in development mode with image caching that break the app but they seem resolved in a production build. I've spent many hours on this problem and have no solution for it which was/is super frustrating at times(but at least it seems to work fine in production...)
+- page/route guards - this worked differently than with SPAs and it took a while before finding a relatively good solution
 
 
 ## Technologies Used  
-
-### Front End
-- Vue 3 with Composition API
-- Vue Router
-- VueX
-- Vue3-editor
-- Axios
-  
- ### Back End
- - Node
- - Express 
- - MongoDB
- - Mongo Atlas
- - Mongoose
- - JWT
- - Axios
+- React 17.0.2
+- Next 12
+- NextAuth
+- Redux Toolkit
+- Redux Persist
+- Bootstrap 5
+- SCSS
+- React Transition Group
+- MongoDB
+- Mongo Atlas
+- Axios  
 
 
 ## Features
