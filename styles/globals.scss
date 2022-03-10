@@ -1,8 +1,18 @@
 @import "../node_modules/bootstrap/scss/functions";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 html,
 body {
   overflow-x: hidden;
+  font-family: "Open Sans", sans-serif !important;
 }
 
 main {
@@ -20,5 +30,16 @@ $theme-colors: (
   "dark": #101010,
   "info": #2563eb,
 );
+
+@media (max-width: 75em) {
+  html {
+    font-size: 85%;
+  }
+}
+@media (max-width: 56.25em) {
+  html {
+    font-size: 78%;
+  }
+}
 
 @import "../node_modules/bootstrap/scss/bootstrap";

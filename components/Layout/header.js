@@ -40,66 +40,61 @@ const Header = (props) => {
 
   return (
     <header className={styles.header}>
-      <div className="container h-100">
-        <div className={`${styles.navbar} row h-100`}>
-          <button className={styles["toggle-button"]} onClick={toggleMobileNav}>
-            <span className={styles["toggle-button__bar"]}></span>
-            <span className={styles["toggle-button__bar"]}></span>
-            <span className={styles["toggle-button__bar"]}></span>
-          </button>
-          <Link href="/">
-            <div className={`${styles.logo} col-6 col-md-4 h3`}>My Shop</div>
-          </Link>
+      <button className={styles["toggle-button"]} onClick={toggleMobileNav}>
+        <span className={styles["toggle-button__bar"]}></span>
+        <span className={styles["toggle-button__bar"]}></span>
+        <span className={styles["toggle-button__bar"]}></span>
+      </button>
 
-          <MobileNav
-            close={toggleMobileNav}
-            opened={showMobileNav}
-            logout={logoutHandler}
-          />
-          {showMobileNav && <Backdrop close={toggleMobileNav} />}
-
-          <nav
-            className={`${styles["main-nav"]} col-8 row justify-content-between align-items-center`}
-          >
-            <ul className={`${styles["general-nav"]} col-6`}>
-              <li>
-                <Link href="/">HOME</Link>
-              </li>
-              <li>
-                <Link href="/shop">SHOP</Link>
-              </li>
-              <li>
-                <Link href="/">ABOUT</Link>
-              </li>
-            </ul>
-            <ul className={`${styles["user-nav"]} col-6`}>
-              <li>
-                <Link href="/cart">
-                  <a className={styles["cart-icon"]}>
-                    <CartIcon totalQuantity={totalQuantity} />
-                  </a>
-                </Link>
-              </li>
-              {!session && (
-                <li>
-                  <Link href="/login">LOGIN</Link>
-                </li>
-              )}
-
-              {!session && (
-                <li>
-                  <Link href="/register">SIGN UP</Link>
-                </li>
-              )}
-              {session && (
-                <li>
-                  <button onClick={logoutHandler}>LOGOUT</button>
-                </li>
-              )}
-            </ul>
-          </nav>
-        </div>
+      <div className={`${styles.logo}`}>
+        <Link href="/">My Shop</Link>
       </div>
+
+      <MobileNav
+        close={toggleMobileNav}
+        opened={showMobileNav}
+        logout={logoutHandler}
+      />
+      {showMobileNav && <Backdrop close={toggleMobileNav} />}
+
+      <nav className={`${styles["main-nav"]}`}>
+        <ul className={`${styles["general-nav"]}`}>
+          <li>
+            <Link href="/">HOME</Link>
+          </li>
+          <li>
+            <Link href="/shop">SHOP</Link>
+          </li>
+          <li>
+            <Link href="/">ABOUT</Link>
+          </li>
+        </ul>
+        <ul className={`${styles["user-nav"]}`}>
+          <li>
+            <Link href="/cart">
+              <a className={styles["cart-icon"]}>
+                <CartIcon totalQuantity={totalQuantity} />
+              </a>
+            </Link>
+          </li>
+          {!session && (
+            <li>
+              <Link href="/login">LOGIN</Link>
+            </li>
+          )}
+
+          {!session && (
+            <li>
+              <Link href="/register">SIGN UP</Link>
+            </li>
+          )}
+          {session && (
+            <li>
+              <button onClick={logoutHandler}>LOGOUT</button>
+            </li>
+          )}
+        </ul>
+      </nav>
     </header>
   );
 };

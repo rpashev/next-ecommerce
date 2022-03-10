@@ -14,17 +14,19 @@ const HomeIntro = () => {
           layout="responsive"
           priority
         />
+        <div className={styles.overlay}></div>
       </div>
 
       <div className={styles.prompt}>
         <h1>
-          Welcome to <span className="text-primary">My Shop</span>
+          Welcome to <span>My Shop</span>
         </h1>
-        <p className="lead muted w-75">
-          Your best choice for hats, gloves, socks and many more accessories
+        <p className={styles.description}>
+          Your best choice for hats, gloves, socks and many more accessories by
+          top brands.
         </p>
         <Link href="/shop">
-          <a className={`btn btn-outline-primary btn-lg shadow-none`}>SHOP</a>
+          <a className={styles.btn}>Start shopping</a>
         </Link>
       </div>
     </section>
