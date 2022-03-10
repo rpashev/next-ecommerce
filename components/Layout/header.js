@@ -47,7 +47,7 @@ const Header = (props) => {
       </button>
 
       <div className={`${styles.logo}`}>
-        <Link href="/">My Shop</Link>
+        <Link href="/">MyShop</Link>
       </div>
 
       <MobileNav

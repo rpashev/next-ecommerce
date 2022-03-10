@@ -1,10 +1,16 @@
-.product-list {
-    display: flex;
-    flex-wrap: wrap;
+.shop-page {
+  padding: 2rem 5rem;
+}
+.content {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
-@media (max-width: 1024px) {
-    .product-list {
-        justify-content: center;
-    }
+.product-list {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  gap: 2.75rem 2rem;
+  flex-wrap: wrap;
 }

@@ -98,10 +98,12 @@
     background: rgb(92, 92, 92);
     text-align: center;
     padding: 2rem;
-    p {
-      width: 100% !important;
-      margin: 1rem 0;
+
+    .description {
+      max-width: 25rem;
+      margin: 1rem auto;
     }
+
     a {
       background-color: $color-primary;
       color: $gray-darkest;

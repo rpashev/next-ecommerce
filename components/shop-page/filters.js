@@ -81,7 +81,7 @@ const Filters = (props) => {
       </div>
       <div className="my-3">
         <h3>Price Range</h3>
-        <label htmlFor="customRange1" className="form-label">
+        <label htmlFor="customRange1" className="form-label d-block">
           Select price range
         </label>
         <input

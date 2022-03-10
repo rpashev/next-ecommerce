@@ -105,15 +105,15 @@ const ProductCard = (props) => {
           <Image
             src={`/images/products/${imgLink}.jpg`}
             alt="product"
-            width={400}
-            height={400}
+            width={300}
+            height={300}
           />
           <div className={`${styles.info}`}>
             <div>
               <h3>{props.brand}</h3>
-              <p className={`lead`}>{name}</p>
+              <p>{name}</p>
             </div>
-            <h2 className={`${styles.price} opacity-75`}>${price}</h2>
+            <h2 className={styles.price}>${price}</h2>
           </div>
           {(props.onSale || props.bestSeller) && (
             <ProductBadge onSale={props.onSale} bestSeller={props.bestSeller} />

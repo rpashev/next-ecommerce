@@ -80,11 +80,11 @@ const CartPage = (props) => {
         <div className={`d-flex w-100 justify-content-between mt-2`}>
           <button
             onClick={goBack}
-            className={`btn btn-secondary btn-sm shadow-none`}
+            className={`btn btn-secondary btn shadow-none`}
           >
             <i className="bi bi-arrow-left-circle me-3"></i>BACK TO SHOPPING
           </button>
-          <button onClick={clearCart} className={`btn btn-sm btn-danger shadow-none`}>
+          <button onClick={clearCart} className={`btn btn btn-danger shadow-none`}>
             CLEAR CART
           </button>
         </div>

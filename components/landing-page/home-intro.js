@@ -19,7 +19,7 @@ const HomeIntro = () => {
 
       <div className={styles.prompt}>
         <h1>
-          Welcome to <span>My Shop</span>
+          Welcome to <span>MyShop</span>
         </h1>
         <p className={styles.description}>
           Your best choice for hats, gloves, socks and many more accessories by

@@ -48,12 +48,12 @@ const ShopPage = (props) => {
   }
 
   return (
-    <div className="container pt-5">
+    <div className={styles["shop-page"]}>
       <Breadcrumbs links={["Home"]} current="Shop" />
       <hr></hr>
-      <div className="row py-3">
+      <div className={styles.content}>
         <Filters filter={loadFilteredProducts} />
-        <div className={`${styles["product-list"]} col`}>{content}</div>
+        <div className={`${styles["product-list"]}`}>{content}</div>
       </div>
     </div>
   );

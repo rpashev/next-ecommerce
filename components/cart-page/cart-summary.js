@@ -2,7 +2,6 @@ import Link from "next/link";
 import styles from "./cart-summary.module.scss";
 
 const CartSummary = (props) => {
-  
   return (
     <div className={`${styles.summary} ${props.loading ? "opacity-25" : ""}`}>
       <h5>CART TOTALS</h5>
@@ -15,7 +14,10 @@ const CartSummary = (props) => {
       <hr></hr>
       <h6>Taxes: $10</h6>
       <hr></hr>
-      <h5>CART TOTAL: <span className="ps-1 h4 text-warning">${props.subtotal + 10}</span></h5>
+      <h5>
+        CART TOTAL:{" "}
+        <span className="ps-1 h4 text-warning">${props.subtotal + 10}</span>
+      </h5>
       <hr></hr>
       {!props.loggedIn && !props.fromCheckout && (
         <Link href="/login">
@@ -26,8 +28,10 @@ const CartSummary = (props) => {
       )}
       {props.loggedIn && !props.fromCheckout && (
         <Link href="/checkout">
-          <button className={`btn btn-lg btn-warning shadow-none w-100 text-light`}>
-            PROCEED TO CHECKOUT
+          <button
+            className={`btn btn-lg btn-warning shadow-none w-100 text-light`}
+          >
+            TO CHECKOUT
           </button>
         </Link>
       )}
