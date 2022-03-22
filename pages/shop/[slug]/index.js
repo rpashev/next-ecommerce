@@ -177,7 +177,7 @@ const Details = (props) => {
             >
               {loading ? "ADDING..." : "ADD TO CART"}
             </button>
-            <p className="lead fw-bold">
+            <p className="lead fw-bold mt-1">
               Total: <span className="text-warning">${price * amount}</span>
             </p>
             {error && !loading && (
