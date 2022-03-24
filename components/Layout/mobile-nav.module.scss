@@ -40,12 +40,12 @@
   .btn-close {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 1rem;
     background-color: transparent;
     color: $gray-light;
-    font-size: 2rem;
-    width: 2.5rem;
-    height: 2.5rem;
+    font-size: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
     border: none;
   }
 }

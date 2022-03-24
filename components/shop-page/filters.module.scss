@@ -3,7 +3,7 @@
 .filters {
   input,
   select {
-    width: 60%;
+    width: 100%;
   }
   h3 {
     font-weight: normal;
@@ -29,11 +29,10 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 63em) {
   .filters {
-    input,
-    select {
-      width: 100%;
-    }
+    width: 95%;
+    max-width: 50rem;
+    margin: 0 auto;
   }
 }

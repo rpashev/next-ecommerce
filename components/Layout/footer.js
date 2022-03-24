@@ -3,7 +3,7 @@ import styles from "./footer.module.scss";
 
 const Footer = () => {
   return (
-    <footer className={`${styles.footer} bg-secondary text-light py-3 py-md-5`}>
+    <footer className={`${styles.footer} bg-secondary text-light py-4 py-md-5`}>
       <div className="container">
         <div className="row">
           <div

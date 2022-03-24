@@ -43,11 +43,11 @@ const Filters = (props) => {
   };
 
   return (
-    <div className={`${styles.filters} col-12 col-md-4 col-lg-3`}>
+    <div className={styles.filters}>
       <input
         placeholder="Search for products"
         type="text"
-        className="form-control shadow-none"
+        className="form-control shadow-none py-3 py-lg-2"
         aria-label="Search"
         onChange={searchQueryHandler}
       />

@@ -2,21 +2,29 @@
 
 .features {
   list-style: none;
+  padding: 0;
   padding-bottom: 3rem;
-  .features-item {
-    // background: $gray-darkest;
-    opacity: 0.9;
-    padding: 1rem;
-    min-width: 280px;
-    max-width: 400px;
-    border-radius: 30px;
-    height: 10rem;
-    width: 25%;
-    margin: 1rem 2rem;
-    text-align: center;
-    font-size: 1.1rem;
-    i {
-      font-size: 4rem;
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 24rem);
+  justify-items: center;
+  justify-content: center;
+  gap: 2rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features-item {
+  opacity: 0.9;
+  padding: 1rem;
+  border-radius: 30px;
+  width: 100%;
+  text-align: center;
+
+  i {
+    font-size: 4rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
   }
 }

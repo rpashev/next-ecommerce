@@ -88,10 +88,11 @@
   }
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 40em) {
   .img {
     display: none;
   }
+
   .intro .prompt {
     position: static;
     width: 100%;
