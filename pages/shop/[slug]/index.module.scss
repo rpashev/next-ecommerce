@@ -61,7 +61,14 @@
   box-shadow: 0 0 2px $gray-darker;
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 767px) {
+  .product {
+    display: flex;
+    flex-direction: column;
+    & > div:last-of-type {
+      order: -1;
+    }
+  }
   .btn-cta {
     width: 100%;
   }

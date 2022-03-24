@@ -123,8 +123,8 @@ const Details = (props) => {
 
             <Slideshow images={images} changePhoto={changePhoto} />
             <div className={`my-4`}>
-              <h3>Product information</h3>
-              <p className="lead pe-md-5">{description}</p>
+              <h3 className="my-3">Product information</h3>
+              <p className="pe-md-5">{description}</p>
             </div>
           </div>
           <div

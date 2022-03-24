@@ -64,6 +64,7 @@ const CartPage = (props) => {
       <div className={`${styles.content} ${loading ? "opacity-25" : ""}`}>
         <CartHeaders />
         <hr></hr>
+
         {items.map((item) => (
           <CartItem
             key={item.slug + item.size}
@@ -77,6 +78,7 @@ const CartPage = (props) => {
             onError={setError}
           ></CartItem>
         ))}
+
         <div className={`d-flex w-100 justify-content-between mt-2`}>
           <button
             onClick={goBack}
@@ -84,7 +86,10 @@ const CartPage = (props) => {
           >
             <i className="bi bi-arrow-left-circle me-3"></i>BACK TO SHOPPING
           </button>
-          <button onClick={clearCart} className={`btn btn btn-danger shadow-none`}>
+          <button
+            onClick={clearCart}
+            className={`btn btn btn-danger shadow-none`}
+          >
             CLEAR CART
           </button>
         </div>
