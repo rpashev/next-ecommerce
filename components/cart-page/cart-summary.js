@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { useState } from "react";
 import styles from "./cart-summary.module.scss";
 
 const CartSummary = (props) => {
+  const [loading, setLoading] = useState(false);
   return (
     <div className={`${styles.summary} ${props.loading ? "opacity-25" : ""}`}>
       <h5>CART TOTALS</h5>
@@ -21,8 +23,11 @@ const CartSummary = (props) => {
       <hr></hr>
       {!props.loggedIn && !props.fromCheckout && (
         <Link href="/login">
-          <button className={`btn btn-lg btn-success shadow-none w-100`}>
-            LOGIN TO CHECKOUT
+          <button
+            className={`btn btn btn-success shadow-none w-100`}
+            onClick={() => setLoading(true)}
+          >
+            {loading ? "LOADING..." : "LOGIN TO CHECKOUT"}
           </button>
         </Link>
       )}

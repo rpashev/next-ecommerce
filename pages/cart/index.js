@@ -58,9 +58,7 @@ const CartPage = (props) => {
   };
 
   return (
-    <div
-      className={`container d-block d-md-flex justify-content-between py-5 mb-5 flex-wrap position-relative`}
-    >
+    <div className={styles.page}>
       <div className={`${styles.content} ${loading ? "opacity-25" : ""}`}>
         <CartHeaders />
         <hr></hr>
@@ -79,7 +77,7 @@ const CartPage = (props) => {
           ></CartItem>
         ))}
 
-        <div className={`d-flex w-100 justify-content-between mt-2`}>
+        <div className={styles.actions}>
           <button
             onClick={goBack}
             className={`btn btn-secondary btn shadow-none`}

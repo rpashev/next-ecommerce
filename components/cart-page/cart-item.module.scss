@@ -1,10 +1,10 @@
 @import "../../styles/colors.scss";
 .cart-item {
   display: grid;
-  grid-template-columns: 5fr 1fr 2fr 1fr 1fr;
+  grid-template-columns: 2fr 3fr 1fr 2fr 1fr 1fr;
   align-items: center;
-  justify-items: center;
-  gap: 1rem;
+  justify-items: start;
+  gap: 2rem;
   height: 9rem;
 
   h5,
@@ -13,31 +13,22 @@
   }
 }
 
-.main-product {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+.img {
+  min-width: 7.5rem;
+  max-width: 7.5rem;
+  transition: all 0.25s;
   justify-self: start;
   cursor: pointer;
 
-  .img {
-    min-width: 7.5rem;
-    max-width: 7.5rem;
-    transition: all 0.25s;
-
-    &:hover {
-      transform: scale(1.03);
-    }
+  &:hover {
+    transform: scale(1.03);
   }
+}
 
+.title {
   .size {
     opacity: 0.5;
     margin-top: 0.25rem;
-  }
-
-  a {
-    cursor: pointer;
-    background-color: red;
   }
 }
 
@@ -51,48 +42,46 @@
   display: none;
 }
 
+.per-item {
+  display: none;
+}
+
 .price {
   font-size: 1.3rem;
   font-weight: 400;
+  text-align: center;
 }
 
-// @media (max-width: 48rem) {
-//   .item {
-//     height: 200px;
-//   }
-// }
+@media (max-width: 40em) {
+  .cart-item {
+    grid-template-columns: min-content 3fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    height: auto;
+    margin-bottom: 3rem;
+    gap: 0 2rem;
+  }
 
-// @import "../../styles/colors.scss";
-// .item {
-//   height: 120px;
-//   // padding: 0.2rem;
-//   .main-product {
-//     padding-left: 0;
-//     display: flex;
-//     align-items: center;
-//   }
-//   h6,
-//   h5 {
-//     margin: 0;
-//     padding-left: 0;
-//     padding-right: 0;
-//   }
-//   hr {
-//     margin: 0.25rem 0;
-//   }
-//   .img {
-//     width: 100px;
-//     min-width: 100px;
-//     height: 100px;
-//     padding: 0;
-//   }
-//   .img:hover, .link:hover {
-//     cursor:pointer;
-//   }
-// }
+  .img {
+    grid-row: 1/3;
+  }
 
-// @media (max-width: 48rem) {
-//   .item {
-//     height: 200px;
-//   }
-// }
+  .select {
+    grid-column: 2/3;
+    grid-row: 2/3;
+  }
+  .total-label {
+    display: inline;
+    color: rgba($gray-darker, 0.7);
+    font-size: 1rem;
+  }
+  .per-item {
+    display: inline;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 23em) {
+  .cart-item {
+    gap: 0 1rem;
+  }
+}

@@ -1,12 +1,26 @@
+.page {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 3rem 5rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
 .content {
-  width: 70%;
+  width: 65%;
 
   hr {
     margin: 0.25rem 0;
   }
 }
 .summary-container {
-  width: 20%;
+  width: 25%;
+  margin-top: 1.5rem;
 }
 .spinner {
   position: absolute;
@@ -14,21 +28,27 @@
   left: 50%;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 70em) {
+  .page {
+    flex-direction: column;
+    max-width: 65em;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
   .content {
     width: 100%;
   }
+
   .summary-container {
-    width: 50%;
-    // margin: 0 auto;
     margin-top: 3rem;
+    width: 100%;
+    max-width: 30rem;
   }
 }
 
 @media (max-width: 40rem) {
-  .summary-container {
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 3rem;
+  .page {
+    padding: 3rem 1rem;
   }
 }
