@@ -1,17 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./home-intro.module.scss";
+import background from "../../public/images/landing-page/slide1.jpg";
 
 const HomeIntro = () => {
   return (
     <section className={styles.intro}>
       <div className={styles.img}>
         <Image
-          src="/images/landing-page/slide1.jpg"
+          // src="/images/landing-page/slide1.jpg"
+          src={background}
           alt="First slide"
           width={1600}
           height={676}
           layout="responsive"
+          placeholder="blur"
           priority
         />
         <div className={styles.overlay}></div>

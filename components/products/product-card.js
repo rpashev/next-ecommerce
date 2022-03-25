@@ -107,6 +107,8 @@ const ProductCard = (props) => {
             alt="product"
             width={300}
             height={300}
+            placeholder="blur"
+            blurDataURL={`/images/products/${props.images[0]}.jpg`}
           />
           <div className={`${styles.info}`}>
             <div>
