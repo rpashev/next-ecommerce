@@ -101,7 +101,10 @@ const Login = () => {
           id="password"
           updateInputState={onChangeHandler}
         />
-        <button className={`btn btn-primary btn-lg shadow-none ${styles.btn}`} type="submit">
+        <button
+          className={`btn btn-primary btn-lg shadow-none ${styles.btn}`}
+          type="submit"
+        >
           Login
         </button>
       </form>
@@ -109,7 +112,7 @@ const Login = () => {
       {error && !loading && <p className="text-danger mt-2 fw-bold">{error}</p>}
       <div className="mt-3">
         <p>
-          Don't have an account?{" "}
+          Don't have an account?
           <Link href="/register">
             <a className="text-decoration-none">Sign up here!</a>
           </Link>
