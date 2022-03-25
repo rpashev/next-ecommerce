@@ -16,6 +16,9 @@ function MyApp({ Component, pageProps }) {
     <ReduxProvider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Provider session={pageProps.session}>
+          <Head>
+            <title>MyShop</title>
+          </Head>
           <Layout>
             <Component {...pageProps} />
           </Layout>

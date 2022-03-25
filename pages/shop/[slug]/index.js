@@ -119,6 +119,8 @@ const Details = (props) => {
               width={650}
               height={650}
               key={slug}
+              placeholder="blur"
+              blurDataURL={`/images/placeholders/${imgLink}.jpg`}
             />
 
             <Slideshow images={images} changePhoto={changePhoto} />
