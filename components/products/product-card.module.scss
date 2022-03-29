@@ -41,8 +41,10 @@
 
 @media (hover: none) {
   .card {
+    padding-bottom: 4.25rem;
     button {
       display: block !important;
+      font-size: 1.5rem;
     }
   }
 }
