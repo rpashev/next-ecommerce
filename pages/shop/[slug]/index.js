@@ -5,6 +5,7 @@ import Breadcrumbs from "../../../components/UI/breadcrumbs";
 import styles from "./index.module.scss";
 import Image from "next/image";
 import SizeButtons from "../../../components/product-details/size-button";
+import Button from "../../../components/UI/button";
 import Slideshow from "../../../components/product-details/slideshow";
 import { useState } from "react";
 import ProductBadge from "../../../components/products/product-badge";
@@ -170,15 +171,9 @@ const Details = (props) => {
               />
             </div>
 
-            <button
-              className={`${styles["btn-cta"]} ${
-                available ? "" : styles.disabled
-              }`}
-              disabled={!available}
-              onClick={addToCart}
-            >
+            <Button dark disabled={!available} onClick={addToCart}>
               {loading ? "ADDING..." : "ADD TO CART"}
-            </button>
+            </Button>
             <p className="lead fw-bold mt-1">
               Total: <span className="text-warning">${price * amount}</span>
             </p>

@@ -47,8 +47,17 @@
   }
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 40em) {
   .page {
     padding: 3rem 1rem;
+  }
+}
+@media (max-width: 29em) {
+  .actions {
+    flex-direction: column;
+    gap: 0.5rem;
+    button {
+      font-size: 1rem;
+    }
   }
 }

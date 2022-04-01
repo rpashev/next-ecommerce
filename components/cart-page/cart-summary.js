@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import Button from "../UI/button";
 import styles from "./cart-summary.module.scss";
 
 const CartSummary = (props) => {
@@ -22,23 +23,14 @@ const CartSummary = (props) => {
       </h5>
       <hr></hr>
       {!props.loggedIn && !props.fromCheckout && (
-        <Link href="/login">
-          <button
-            className={`btn btn btn-success shadow-none w-100`}
-            onClick={() => setLoading(true)}
-          >
-            {loading ? "LOADING..." : "LOGIN TO CHECKOUT"}
-          </button>
-        </Link>
+        <Button full green large to="/login" onClick={() => setLoading(true)}>
+          {loading ? "LOADING..." : "LOGIN TO CHECKOUT"}
+        </Button>
       )}
       {props.loggedIn && !props.fromCheckout && (
-        <Link href="/checkout">
-          <button
-            className={`btn btn-lg btn-warning shadow-none w-100 text-light`}
-          >
-            TO CHECKOUT
-          </button>
-        </Link>
+        <Button full large to="/checkout">
+          CHECKOUT
+        </Button>
       )}
     </div>
   );

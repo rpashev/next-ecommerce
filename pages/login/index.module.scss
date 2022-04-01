@@ -1,8 +1,5 @@
 .login-page {
   width: 30%;
-  .btn {
-    width: 30%;
-  }
 }
 
 @media (max-width: 1024px) {
@@ -14,7 +11,7 @@
   }
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 40em) {
   .login-page {
     width: 80%;
     .btn {

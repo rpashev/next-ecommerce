@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 import Input from "../../components/UI/input";
 import Spinner from "../../components/UI/spinner";
+import Button from "../../components/UI/button";
 
 const Register = () => {
   const router = useRouter();
@@ -176,9 +177,9 @@ const Register = () => {
           updateInputState={onChangeHandler}
         />
 
-        <button className={`btn btn-primary btn-lg shadow-none ${styles.btn}`} type="submit">
-          Sign Up
-        </button>
+        <Button primary type="submit">
+          SIGN UP
+        </Button>
       </form>
       {loading && <Spinner />}
       {error && !loading && <p className="text-danger mt-2 fw-bold">{error}</p>}

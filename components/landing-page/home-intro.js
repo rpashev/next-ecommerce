@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./home-intro.module.scss";
 import background from "../../public/images/landing-page/slide1.jpg";
+import Button from "../UI/button";
 
 const HomeIntro = () => {
   return (
@@ -28,9 +29,9 @@ const HomeIntro = () => {
           Your best choice for hats, gloves, socks and many more accessories by
           top brands.
         </p>
-        <Link href="/shop">
-          <a className={styles.btn}>Start shopping</a>
-        </Link>
+        <Button outline to="/shop">
+          Start shopping
+        </Button>
       </div>
     </section>
   );

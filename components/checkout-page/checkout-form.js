@@ -1,4 +1,5 @@
 import InputCheckout from "./input-checkout";
+import Button from "../UI/button";
 import styles from "./checkout-form.module.scss";
 
 const CheckoutForm = (props) => {
@@ -109,9 +110,7 @@ const CheckoutForm = (props) => {
       <p className={`${styles.legend} my-3 fw-italic`}>
         <small>Required fields</small>
       </p>
-      <button className={`btn btn-lg btn-warning text-light d-block mt-4`}>
-        TO BILLING
-      </button>
+      <Button primary>TO BILLING</Button>
     </form>
   );
 };

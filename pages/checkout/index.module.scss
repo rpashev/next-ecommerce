@@ -10,27 +10,22 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 64em) {
   .checkout {
     flex-direction: column;
     align-items: center;
     .cart-checkout {
       margin: 2rem 0;
       width: 90%;
-      button {
-        width: 40%;
-      }
     }
   }
 }
-@media (max-width: 40rem) {
+@media (max-width: 29em) {
   .checkout {
-    .cart-checkout {
-      button {
-        width: 100%;
-        margin: 0 auto;
-        display: block;
-      }
+    button,
+    a {
+      width: 100%;
+      font-size: 1.1rem;
     }
   }
 }

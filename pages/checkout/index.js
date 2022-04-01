@@ -3,6 +3,7 @@ import Link from "next/link";
 import CartSummary from "../../components/cart-page/cart-summary";
 import CheckoutForm from "../../components/checkout-page/checkout-form";
 import CheckoutItem from "../../components/checkout-page/checkout-item";
+import Button from "../../components/UI/button";
 import { connectToDatabase } from "../../lib/mongo";
 import { selectTotalPrice } from "../../store/cart-slice";
 import styles from "./index.module.scss";
@@ -31,9 +32,9 @@ const Checkout = (props) => {
                 />
               );
             })}
-            <Link href="/cart">
-              <button className="btn btn-secondary shadow-none">EDIT CART</button>
-            </Link>
+            <Button dark small to="/cart">
+              EDIT CART
+            </Button>
           </div>
         </div>
       </div>

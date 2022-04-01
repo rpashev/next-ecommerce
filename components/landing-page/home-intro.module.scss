@@ -41,36 +41,6 @@
   }
 }
 
-.btn {
-  font: inherit;
-  text-decoration: none;
-  padding: 0.6rem 1.5rem;
-  background-color: transparent;
-  border: 2px solid $color-primary;
-  cursor: pointer;
-  display: inline-block;
-  color: $color-primary;
-  letter-spacing: 1px;
-  font-size: 0.9rem;
-  border-radius: 4px;
-  transition: all 0.2s;
-  text-transform: uppercase;
-  font-weight: 600;
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  }
-
-  &:hover {
-    background-color: $color-primary;
-    color: $gray-darker;
-  }
-  &:active {
-    transform: translateY(-2px);
-  }
-}
-
 @media (max-width: 75em) {
   .prompt {
     top: 20%;

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import Spinner from "../../components/UI/spinner";
+import Button from "../../components/UI/button";
 
 const Login = () => {
   const router = useRouter();
@@ -101,14 +102,10 @@ const Login = () => {
           id="password"
           updateInputState={onChangeHandler}
         />
-        <button
-          className={`btn btn-primary btn-lg shadow-none ${styles.btn}`}
-          type="submit"
-        >
-          Login
-        </button>
+        <Button primary type="submit">
+          LOGIN
+        </Button>
       </form>
-      {loading && <Spinner />}
       {error && !loading && <p className="text-danger mt-2 fw-bold">{error}</p>}
       <div className="mt-3">
         <p>
@@ -118,6 +115,7 @@ const Login = () => {
           </Link>
         </p>
       </div>
+      {loading && <Spinner />}
     </div>
   );
 };

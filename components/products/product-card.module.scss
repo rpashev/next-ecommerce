@@ -26,6 +26,8 @@
   }
   .visible {
     display: block !important;
+    letter-spacing: 1px;
+    font-weight: 500;
   }
 
   .error {
@@ -41,10 +43,12 @@
 
 @media (hover: none) {
   .card {
-    padding-bottom: 4.25rem;
+    padding-bottom: 4.5rem;
     button {
       display: block !important;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 0.7rem 0.5rem;
     }
   }
 }

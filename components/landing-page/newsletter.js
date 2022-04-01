@@ -1,4 +1,5 @@
 import styles from "./newsletter.module.scss";
+import Button from "../UI/button";
 
 const Newsletter = (props) => {
   return (
@@ -6,7 +7,9 @@ const Newsletter = (props) => {
       <h3>Sign Up For Our Newsletter</h3>
       <div className={styles["form-control"]}>
         <input type="text" placeholder="Enter Email" />
-        <button type="button">Subscribe</button>
+        <Button large type="button">
+          Subscribe
+        </Button>
       </div>
     </section>
   );
