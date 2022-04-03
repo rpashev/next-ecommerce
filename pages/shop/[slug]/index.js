@@ -171,7 +171,7 @@ const Details = (props) => {
               />
             </div>
 
-            <Button dark disabled={!available} onClick={addToCart}>
+            <Button dark wide disabled={!available} onClick={addToCart}>
               {loading ? "ADDING..." : "ADD TO CART"}
             </Button>
             <p className="lead fw-bold mt-1">

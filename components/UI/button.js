@@ -18,7 +18,7 @@ const Button = (props) => {
             props.large && styles["button--large"]
           } ${props.small && styles["button--small"]} ${
             props.full && styles["button--full"]
-          }`}
+          } ${props.wide && styles["button--wide"]}`}
         >
           {props.children}
         </a>
@@ -35,7 +35,9 @@ const Button = (props) => {
         props.primary && styles["button--primary"]
       }  ${props.large && styles["button--large"]}  ${
         props.small && styles["button--small"]
-      } ${props.full && styles["button--full"]}`}
+      } ${props.full && styles["button--full"]} ${
+        props.wide && styles["button--wide"]
+      }`}
       type={props.type}
       onClick={props.onClick}
       disabled={props.disabled}

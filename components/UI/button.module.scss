@@ -85,7 +85,6 @@
 .button--dark {
   background-color: $gray-darker;
   color: $gray-light;
-  min-width: 20rem;
 
   &:hover,
   &:active {
@@ -114,6 +113,10 @@
 }
 .button--full {
   display: flex;
+}
+
+.button--wide {
+  min-width: 20rem;
 }
 
 .button:disabled,
