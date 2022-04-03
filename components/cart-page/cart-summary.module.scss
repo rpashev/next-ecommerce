@@ -1,3 +1,11 @@
 .summary {
   width: 100%;
 }
+
+@media (max-width: 40em) {
+  .summary {
+    a {
+      font-size: 1.4rem;
+    }
+  }
+}

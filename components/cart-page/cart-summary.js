@@ -28,8 +28,8 @@ const CartSummary = (props) => {
         </Button>
       )}
       {props.loggedIn && !props.fromCheckout && (
-        <Button full large to="/checkout">
-          CHECKOUT
+        <Button full large to="/checkout" onClick={() => setLoading(true)}>
+          {loading ? "LOADING..." : "CHECKOUT"}
         </Button>
       )}
     </div>

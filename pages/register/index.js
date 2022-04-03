@@ -129,8 +129,8 @@ const Register = () => {
 
   return (
     <div className={`container ${styles["register-page"]} py-5`}>
-      <h1 className="text-center mb-4">Sign Up</h1>
-      <form noValidate onSubmit={submitHandler}>
+      <h1>Sign Up</h1>
+      <form noValidate onSubmit={submitHandler} className={styles.form}>
         <Input
           label="First Name"
           type="text"
@@ -180,9 +180,11 @@ const Register = () => {
         <Button primary type="submit">
           SIGN UP
         </Button>
+        {error && !loading && (
+          <p className="text-danger mt-2 fw-bold">{error}</p>
+        )}
       </form>
       {loading && <Spinner />}
-      {error && !loading && <p className="text-danger mt-2 fw-bold">{error}</p>}
     </div>
   );
 };

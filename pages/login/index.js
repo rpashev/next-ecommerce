@@ -82,8 +82,8 @@ const Login = () => {
 
   return (
     <div className={`container ${styles["login-page"]} py-5`}>
-      <h1 className="text-center mb-4">Login</h1>
-      <form onSubmit={submitHandler}>
+      <h1>Login</h1>
+      <form onSubmit={submitHandler} className={styles.form}>
         <Input
           label="Email"
           type="email"
@@ -105,16 +105,19 @@ const Login = () => {
         <Button primary type="submit">
           LOGIN
         </Button>
+        <div className="mt-3">
+          <p>
+            Don't have an account?
+            <Link href="/register">
+              <a className="text-decoration-none"> Sign up here!</a>
+            </Link>
+          </p>
+        </div>
+        {error && !loading && (
+          <p className="text-danger mt-2 fw-bold">{error}</p>
+        )}
       </form>
-      {error && !loading && <p className="text-danger mt-2 fw-bold">{error}</p>}
-      <div className="mt-3">
-        <p>
-          Don't have an account?
-          <Link href="/register">
-            <a className="text-decoration-none"> Sign up here!</a>
-          </Link>
-        </p>
-      </div>
+
       {loading && <Spinner />}
     </div>
   );
