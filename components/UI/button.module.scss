@@ -127,3 +127,10 @@
   border-color: #ccc;
   cursor: not-allowed;
 }
+
+@media (max-width: 40em) {
+  .button--wide {
+    width: 100%;
+    font-size: 1.3rem;
+  }
+}
