@@ -81,6 +81,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
+    z-index: 200;
 
     &__bar {
       width: 100%;

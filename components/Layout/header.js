@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CartIcon from "../UI/cart-icon";
 import styles from "./header.module.scss";
 import MobileNav from "./mobile-nav";
@@ -34,9 +34,13 @@ const Header = (props) => {
     router.push(data.url);
   };
 
-  if (loading) {
-    return <header className={styles.header}></header>;
-  }
+  useEffect(() => {
+    if (showMobileNav) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showMobileNav]);
 
   return (
     <header className={styles.header}>
@@ -69,31 +73,33 @@ const Header = (props) => {
             <Link href="/">ABOUT</Link>
           </li>
         </ul>
-        <ul className={`${styles["user-nav"]}`}>
-          <li>
-            <Link href="/cart">
-              <a className={styles["cart-icon"]}>
-                <CartIcon totalQuantity={totalQuantity} />
-              </a>
-            </Link>
-          </li>
-          {!session && (
+        {!loading && (
+          <ul className={`${styles["user-nav"]}`}>
             <li>
-              <Link href="/login">LOGIN</Link>
+              <Link href="/cart">
+                <a className={styles["cart-icon"]}>
+                  <CartIcon totalQuantity={totalQuantity} />
+                </a>
+              </Link>
             </li>
-          )}
+            {!session && (
+              <li>
+                <Link href="/login">LOGIN</Link>
+              </li>
+            )}
 
-          {!session && (
-            <li>
-              <Link href="/register">SIGN UP</Link>
-            </li>
-          )}
-          {session && (
-            <li>
-              <button onClick={logoutHandler}>LOGOUT</button>
-            </li>
-          )}
-        </ul>
+            {!session && (
+              <li>
+                <Link href="/register">SIGN UP</Link>
+              </li>
+            )}
+            {session && (
+              <li>
+                <button onClick={logoutHandler}>LOGOUT</button>
+              </li>
+            )}
+          </ul>
+        )}
       </nav>
     </header>
   );
