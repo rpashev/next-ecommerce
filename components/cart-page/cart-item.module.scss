@@ -26,9 +26,14 @@
 }
 
 .title {
+  transition: all 0.25s;
+  cursor: pointer;
   .size {
     opacity: 0.5;
     margin-top: 0.25rem;
+  }
+  &:hover {
+    transform: scale(1.03);
   }
 }
 
