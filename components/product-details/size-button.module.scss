@@ -39,6 +39,9 @@
       z-index: 90;
       border: 1px solid $gray-darker;
       border-right: none;
+      &:focus {
+        outline: 3px solid $color-primary;
+      }
     }
   }
   li:last-child label {

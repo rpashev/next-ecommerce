@@ -20,13 +20,13 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 64em) {
   .item {
     min-width: auto;
   }
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 40em) {
   .item {
     height: 180px;
     img {
@@ -35,7 +35,7 @@
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 22em) {
   .item {
     height: 200px;
   }

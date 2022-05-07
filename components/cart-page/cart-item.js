@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import DeleteIcon from "../UI/delete-icon";
 import { useSession } from "next-auth/client";
 import { deleteItem, updateCart } from "../../lib/cart-operations";
-import Link from "next/link";
 
 const CartItem = (props) => {
   const { imgLink, name, price, quantity, size, slug } = props;
@@ -71,12 +70,20 @@ const CartItem = (props) => {
     }
   };
 
+  const keyHandler = (e) => {
+    if (e.keyCode === 13) {
+      router.push(`/shop/${slug}`);
+    }
+  };
+
   return (
     <div className={styles["cart-item"]}>
       <div
         className={`${styles.img}`}
         title="View Product"
         onClick={() => router.push(`/shop/${slug}`)}
+        tabIndex={0}
+        onKeyDown={keyHandler}
       >
         <Image
           src={`/images/products/${imgLink}.jpg`}

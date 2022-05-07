@@ -2,10 +2,13 @@
 .remove {
   transition: all 0.2s ease-out;
   min-width: 2rem !important;
-}
-.remove:hover {
-  transform: scale(1.2);
-  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.2);
+    cursor: pointer;
+    outline: none;
+  }
 }
 
 @media (max-width: 40em) {

@@ -1,6 +1,11 @@
 import styles from "./delete-icon.module.scss";
 
 const DeleteIcon = (props) => {
+  const keyHandler = (e) => {
+    if (e.keyCode === 13) {
+      props.onRemove();
+    }
+  };
   return (
     <svg
       onClick={props.onRemove}
@@ -12,6 +17,8 @@ const DeleteIcon = (props) => {
       // className={`bi bi-trash col-3 col-md-1 px-0 ${styles.remove}`}
       viewBox="0 0 16 16"
       className={styles.remove}
+      tabIndex={0}
+      onKeyDown={keyHandler}
     >
       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
       <path

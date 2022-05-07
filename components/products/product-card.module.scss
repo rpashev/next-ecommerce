@@ -9,6 +9,12 @@
   cursor: pointer;
   box-shadow: 0 0 2px rgba(black, 0.5);
 
+  &:hover,
+  &:focus {
+    outline: none;
+    transform: translateY(-3px) scale(1.01);
+  }
+
   .info {
     display: flex;
     align-items: flex-start;
@@ -20,7 +26,7 @@
       font-size: 1.15rem;
     }
     .price {
-      font-size: 2.3rem;
+      font-size: 2.5rem;
       font-weight: 300;
     }
   }
@@ -35,10 +41,6 @@
     font-weight: bold;
     text-align: center;
   }
-}
-
-.card:hover {
-  transform: translateY(-3px) scale(1.01);
 }
 
 @media (hover: none) {

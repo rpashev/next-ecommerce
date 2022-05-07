@@ -133,7 +133,7 @@ const Details = (props) => {
           <div
             className={`col-12 col-md-6 mt-5 mt-md-2 ps-md-5 position-relative`}
           >
-            <h3>{brand}</h3>
+            <h3 className={styles.brand}>{brand}</h3>
             <h1 className={`display-5 mb-3`}>{name}</h1>
             <div className={styles["price-info"]}>
               <h1 className={`${styles.price}`}>${price}</h1>

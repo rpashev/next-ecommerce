@@ -1,6 +1,11 @@
 import styles from "./size-button.module.scss";
 
 const SizeButtons = (props) => {
+  const keyHandler = (e) => {
+    if (e.keyCode === 13) {
+      e.target.click();
+    }
+  };
   return (
     <ul className={`${styles.sizes}`}>
       {props.sizes.map((s) => {
@@ -13,7 +18,9 @@ const SizeButtons = (props) => {
               onChange={props.sizeHandler}
               value={s}
             />
-            <label htmlFor={s}>{s}</label>
+            <label tabIndex={0} htmlFor={s} onKeyDown={keyHandler}>
+              {s}
+            </label>
           </li>
         );
       })}

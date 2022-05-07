@@ -20,8 +20,10 @@
   justify-self: start;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:focus {
     transform: scale(1.03);
+    outline: none;
   }
 }
 

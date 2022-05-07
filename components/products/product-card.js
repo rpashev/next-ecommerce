@@ -97,10 +97,13 @@ const ProductCard = (props) => {
   return (
     <Fragment>
       <Link href={`/shop/${slug}`} passHref>
-        <div
+        <article
           className={`${styles.card}`}
           onMouseEnter={onHoverHandler}
+          onFocus={onHoverHandler}
           onMouseLeave={onMouseLeaveHandler}
+          onBlur={onMouseLeaveHandler}
+          tabIndex={0}
         >
           <Image
             src={`/images/products/${imgLink}.jpg`}
@@ -130,7 +133,7 @@ const ProductCard = (props) => {
           >
             {buttonContent}
           </button>
-        </div>
+        </article>
       </Link>
     </Fragment>
   );
