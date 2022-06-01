@@ -8,7 +8,6 @@ A fully responsive Next.js dummy e-commerce application created by using Static 
 * [Challenges](#challenges)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Screenshots](#screenshots)
 * [Setup](#setup)
 * [Room for Improvement](#room-for-improvement)
 * [Contact](#contact)
@@ -64,10 +63,6 @@ I wanted to dive deeper into the React ecosystem and building a basic e-commerce
 ### Authenticated users are able to:
 - access the checkout page (no real checkout feature)
 - logout
-
-
-## Screenshots
-![Example screenshot](./img/screenshot.png)
 
 
 ## Setup
