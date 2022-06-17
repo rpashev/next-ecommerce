@@ -28,7 +28,7 @@ const ShopPage = (props) => {
     setFilteredProducts(resultProducts);
   };
 
-  let content = <h2 className="text-center w-75">No products found!</h2>;
+  let content = <h2 className={styles.notification}>No products found!</h2>;
   if (filteredProducts.length > 0) {
     content = filteredProducts.map((p) => {
       return (

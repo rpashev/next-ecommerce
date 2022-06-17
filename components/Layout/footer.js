@@ -12,13 +12,13 @@ const Footer = () => {
             <h4 className="text-center text-md-start">ABOUT STORE</h4>
             <ul className="text-center text-md-start">
               <li>
-                <Link href="#">address</Link>
+                <Link href="#">Cherry Street 1100, New York</Link>
               </li>
               <li>
-                <Link href="#">0894 123 421</Link>
+                <Link href="#">555 123 456</Link>
               </li>
               <li>
-                <Link href="#">contLinkctus@myshop.com</Link>
+                <Link href="#">dummy@myshop.com</Link>
               </li>
               <li>
                 <Link href="#">Our Partners</Link>
@@ -34,19 +34,19 @@ const Footer = () => {
                 <Link href="#">My Account</Link>
               </li>
               <li>
-                <Link href="#">Login</Link>
+                <Link href="/login">Login</Link>
               </li>
               <li>
-                <Link href="#">Sign Up</Link>
+                <Link href="/register">Sign Up</Link>
               </li>
               <li>
-                <Link href="#">My Cart</Link>
+                <Link href="/cart">My Cart</Link>
               </li>
               <li>
                 <Link href="#">Wishlist</Link>
               </li>
               <li>
-                <Link href="#">Checkout</Link>
+                <Link href="/checkout">Checkout</Link>
               </li>
             </ul>
           </div>
