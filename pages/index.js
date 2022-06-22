@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import Features from "../components/landing-page/features";
 import FinalPrompt from "../components/landing-page/final-prompt";
 import HomeIntro from "../components/landing-page/home-intro";

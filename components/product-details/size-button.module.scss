@@ -26,12 +26,7 @@
     input[type="radio"] {
       opacity: 0.011;
       z-index: 100;
-    }
-
-    input[type="radio"]:checked + label,
-    label:hover {
-      background-color: $gray-darker;
-      color: $gray-light;
+      cursor: pointer;
     }
 
     label {
@@ -42,6 +37,13 @@
       &:focus {
         outline: 3px solid $color-primary;
       }
+    }
+
+    input[type="radio"]:checked + label,
+    label:hover,
+    input[type="radio"]:hover + label {
+      background-color: $gray-darker;
+      color: $gray-light;
     }
   }
   li:last-child label {

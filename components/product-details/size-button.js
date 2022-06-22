@@ -18,7 +18,12 @@ const SizeButtons = (props) => {
               onChange={props.sizeHandler}
               value={s}
             />
-            <label tabIndex={0} htmlFor={s} onKeyDown={keyHandler}>
+            <label
+              tabIndex={0}
+              htmlFor={s}
+              onKeyDown={keyHandler}
+              onMouseOver={() => console.log("wtf")}
+            >
               {s}
             </label>
           </li>
