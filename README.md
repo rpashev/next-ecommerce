@@ -1,7 +1,7 @@
 # E-commerce app with Next.js
 A fully responsive Next.js dummy e-commerce application created by using Static Generation for most pages and Server Side Rendering for others.
   
-> Live demo **[HERE](https://www.dummy-shop.live/)**
+> Live demo **[HERE](https://next-ecommerce-rpashev.vercel.app/)**
 
 ## Table of Contents
 * [General Info](#general-information)
