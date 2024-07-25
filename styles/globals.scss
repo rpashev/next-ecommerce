@@ -1,0 +1,40 @@
+@import "../node_modules/bootstrap/scss/functions";
+// @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Open Sans", sans-serif;
+  height: 100%;
+}
+
+main {
+  min-height: calc(100vh - 300px);
+  min-width: 300px;
+}
+
+$theme-colors: (
+  "primary": #ffc107,
+  "success": #198754,
+  "danger": #c21423,
+  "warning": #d97706,
+  "light": #fff,
+  "secondary": #303030,
+  "dark": #101010,
+  "info": #2563eb,
+);
+
+@media (max-width: 75em) {
+  html {
+    font-size: 85%;
+  }
+}
+
+@import "../node_modules/bootstrap/scss/bootstrap";

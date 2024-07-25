@@ -1,0 +1,90 @@
+@import "../../styles/colors.scss";
+.intro {
+  position: relative;
+  color: $gray-light;
+}
+
+.prompt {
+  position: absolute;
+  padding: 2rem;
+  width: 32rem;
+  top: 25%;
+  left: 5%;
+  overflow: hidden;
+
+  h1 {
+    font-size: 2.9rem;
+    font-weight: 300;
+    span {
+      font-weight: 600;
+      color: $color-primary;
+    }
+  }
+
+  .description {
+    font-size: 1.2rem;
+    color: rgba($gray-light, 0.75);
+    margin-bottom: 1.5rem;
+  }
+}
+
+.img {
+  position: relative;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+}
+
+@media (max-width: 75em) {
+  .prompt {
+    top: 20%;
+    left: 0;
+
+    .description {
+      width: 90%;
+    }
+  }
+
+  .img {
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+@media (max-width: 40em) {
+  .img {
+    display: none;
+  }
+
+  .intro .prompt {
+    position: static;
+    width: 100%;
+    // background: rgb(92, 92, 92);
+    background: linear-gradient(
+        to top,
+        rgba($gray-darkest, 1),
+        rgba($color-primary-darkest, 0.8)
+      ),
+      url("../../public/images/landing-page/bg-mobile.svg") center/cover;
+    text-align: center;
+    padding: 2rem;
+
+    .description {
+      max-width: 25rem;
+      margin: 1rem auto;
+    }
+
+    a {
+      background-color: $color-primary;
+      color: $gray-darkest;
+      font-size: 1.1rem;
+    }
+  }
+}

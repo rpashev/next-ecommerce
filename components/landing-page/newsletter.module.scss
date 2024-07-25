@@ -1,0 +1,48 @@
+@import "../../styles/colors.scss";
+
+.section {
+  padding: 4rem 1rem;
+
+  h3 {
+    color: $gray-light;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.form-control {
+  width: 100%;
+  max-width: 45rem;
+  display: flex;
+  margin: 0 auto;
+
+  input {
+    font: inherit;
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    border: none;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    font-size: 1.2rem;
+    &:focus {
+      outline: none;
+      background-color: darken($gray-light, 10%);
+    }
+  }
+}
+
+@media (max-width: 25em) {
+  .form-control {
+    flex-direction: column;
+    gap: 0.75rem;
+    input,
+    button {
+      font-size: 1.5rem;
+      border-radius: 3px;
+    }
+    button {
+      width: 50%;
+      align-self: center;
+    }
+  }
+}

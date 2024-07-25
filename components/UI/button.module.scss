@@ -1,0 +1,136 @@
+@import "../../styles/colors.scss";
+
+.button {
+  border: none;
+  font: inherit;
+  text-decoration: none;
+  font-weight: 500;
+  color: $gray-light;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.8rem;
+  font-size: 0.9rem;
+  border-radius: 3px;
+  background: $color-primary-dark;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+  letter-spacing: 1px;
+
+  &:hover,
+  &:active {
+    outline: none;
+    background-color: lighten($color-primary-dark, 10%);
+    color: $gray-light;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px $color-primary;
+  }
+}
+
+.button--primary {
+  background-color: $color-primary;
+  color: $gray-darker;
+  font-weight: 600;
+  font-size: 1.1rem;
+  min-width: 8rem;
+
+  &:hover,
+  &:active {
+    background-color: darken($color-primary, 5%);
+    color: $gray-darker;
+  }
+}
+
+.button--danger {
+  background: $danger;
+
+  &:hover,
+  &:active {
+    background-color: darken($danger, 10%);
+  }
+}
+
+.button--light {
+  background-color: $gray-light;
+  color: $color-primary-dark;
+
+  &:hover,
+  &:active {
+    background-color: darken($gray-light, 8%);
+    color: $color-primary-dark;
+  }
+}
+
+.button--outline {
+  background-color: transparent;
+  border: 2px solid $color-primary;
+  color: $color-primary;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  &:hover {
+    background-color: $color-primary;
+    color: $gray-darker;
+  }
+  &:active {
+    transform: translateY(-2px);
+  }
+}
+
+.button--dark {
+  background-color: $gray-darker;
+  color: $gray-light;
+
+  &:hover,
+  &:active {
+    background-color: $gray-darkest;
+  }
+}
+
+.button--green {
+  background-color: $color-green;
+
+  &:hover,
+  &:active {
+    background-color: darken($color-green, 10%);
+  }
+}
+
+.button--large {
+  font-size: 1.2rem;
+  letter-spacing: 0;
+}
+.button--small {
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  padding: 0.6rem 1.6rem;
+  min-width: auto;
+}
+.button--full {
+  display: flex;
+}
+
+.button--wide {
+  min-width: 20rem;
+}
+
+.button:disabled,
+.button:hover:disabled,
+.button:active:disabled {
+  background: #ccc;
+  color: #979797;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 40em) {
+  .button--wide {
+    width: 100%;
+    font-size: 1.3rem;
+  }
+}

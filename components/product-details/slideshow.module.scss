@@ -1,0 +1,19 @@
+@import "../../styles//colors.scss";
+
+.slideshow {
+  display: flex;
+  justify-content: flex-start;
+
+  .img {
+    transition: all 0.2s ease-out;
+    margin: 0 0.5rem;
+  }
+  .img:first-child {
+    margin-left: 0;
+  }
+
+  .img:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}

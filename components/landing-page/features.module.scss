@@ -1,0 +1,30 @@
+@import "../../styles//colors.scss";
+
+.features {
+  list-style: none;
+  padding: 0;
+  padding-bottom: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 24rem);
+  justify-items: center;
+  justify-content: center;
+  gap: 2rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features-item {
+  opacity: 0.9;
+  padding: 1rem;
+  border-radius: 30px;
+  width: 100%;
+  text-align: center;
+
+  i {
+    font-size: 4rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+}

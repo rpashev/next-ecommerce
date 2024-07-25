@@ -1,0 +1,19 @@
+.form {
+  width: 60%;
+  margin-bottom: 2rem;
+
+  .required:after {
+    content: " *";
+    color: red;
+  }
+  .legend:before {
+    content: " *";
+    color: red;
+  }
+}
+
+@media (max-width: 64em) {
+  .form {
+    width: 90%;
+  }
+}

@@ -1,0 +1,23 @@
+@import "../../styles//colors.scss";
+
+.badge {
+  width: 50%;
+  padding: 0.2rem;
+  color: $gray-light;
+  text-align: center;
+  font-size: 0.8rem;
+  transform: rotate(40deg);
+  position: absolute;
+  top: 5%;
+  right: -10%;
+}
+.details {
+  position: static;
+  transform: rotate(0deg);
+  padding: 0.25rem 3rem;
+  flex-shrink: 0;
+  width: auto;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+}

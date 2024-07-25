@@ -1,0 +1,16 @@
+.headers {
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr 2fr 1fr 1fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.product {
+  grid-column: 1/3;
+}
+
+@media (max-width: 40em) {
+  .headers {
+    display: none;
+  }
+}
