@@ -2,7 +2,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, updateCart } from "../../lib/cart-operations";
@@ -11,11 +11,12 @@ import ProductBadge from "./product-badge";
 import styles from "./product-card.module.scss";
 
 const ProductCard = (props) => {
+  const router = useRouter();
+
   const [showButton, setShowButton] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [imgLink, setImgLink] = useState(props.images[0]);
-
   const { name, price, slug, available } = props;
 
   const cart = useSelector((state) => state.items);
@@ -33,7 +34,9 @@ const ProductCard = (props) => {
   };
 
   const addToCart = async (event) => {
+    console.log("here");
     event.stopPropagation();
+    event.preventDefault();
     setLoading(true);
     setError(null);
 
@@ -77,7 +80,7 @@ const ProductCard = (props) => {
     dispatch(cartActions.addItem(payload));
     setLoading(false);
 
-    redirect("/cart");
+    router.push("/cart");
   };
 
   let buttonContent = "ADD TO CART";
@@ -96,7 +99,7 @@ const ProductCard = (props) => {
 
   return (
     <Fragment>
-      <Link href={`/shop/${slug}`} passHref>
+      <Link href={`/shop/${slug}`} passHref className={styles.link}>
         <article
           className={`${styles.card}`}
           onMouseEnter={onHoverHandler}
