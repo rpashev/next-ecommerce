@@ -28,7 +28,7 @@ import Head from "next/head";
 import "../styles/globals.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-function RootLayout({ children, session, ...pageProps }) {
+function RootLayout({ children, session }) {
   let persistor = persistStore(store);
 
   return (

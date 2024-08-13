@@ -9,14 +9,15 @@ const HomeIntro = () => {
     <section className={styles.intro}>
       <div className={styles.img}>
         <Image
-          // src="/images/landing-page/slide1.jpg"
           src={background}
           alt="First slide"
-          width={1600}
-          height={676}
-          layout="responsive"
           placeholder="blur"
           priority
+          sizes="100vw"
+          style={{
+            width: "100%",
+            height: "auto",
+          }}
         />
         <div className={styles.overlay}></div>
       </div>

@@ -3,7 +3,7 @@ import { cartActions } from "../../store/cart-slice";
 import Image from "next/image";
 import styles from "./cart-item.module.scss";
 import { useDispatch } from "react-redux";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import DeleteIcon from "../UI/delete-icon";
 import { useSession } from "next-auth/react";
 import { deleteItem, updateCart } from "../../lib/cart-operations";
@@ -13,8 +13,6 @@ const CartItem = (props) => {
 
   const dispatch = useDispatch();
   const { session, loadingSession } = useSession();
-
-  const router = useRouter();
 
   const removeHandler = async () => {
     props.onLoading(true);
@@ -72,7 +70,7 @@ const CartItem = (props) => {
 
   const keyHandler = (e) => {
     if (e.keyCode === 13) {
-      router.push(`/shop/${slug}`);
+      redirect(`/shop/${slug}`);
     }
   };
 
@@ -81,7 +79,7 @@ const CartItem = (props) => {
       <div
         className={`${styles.img}`}
         title="View Product"
-        onClick={() => router.push(`/shop/${slug}`)}
+        onClick={() => redirect(`/shop/${slug}`)}
         tabIndex={0}
         onKeyDown={keyHandler}
       >
@@ -96,7 +94,7 @@ const CartItem = (props) => {
       <div
         className={styles.title}
         title="View Product"
-        onClick={() => router.push(`/shop/${slug}`)}
+        onClick={() => redirect(`/shop/${slug}`)}
       >
         <h6 className={styles.name}>{name}</h6>
         <h6 className={styles.size}>Size: {size}</h6>

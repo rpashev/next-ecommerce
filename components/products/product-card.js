@@ -1,7 +1,8 @@
+"use client";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, updateCart } from "../../lib/cart-operations";
@@ -19,7 +20,6 @@ const ProductCard = (props) => {
 
   const cart = useSelector((state) => state.items);
   const dispatch = useDispatch();
-  const router = useRouter();
   const { session, loadingSession } = useSession();
 
   const onHoverHandler = () => {
@@ -77,10 +77,10 @@ const ProductCard = (props) => {
     dispatch(cartActions.addItem(payload));
     setLoading(false);
 
-    router.push("/cart");
+    redirect("/cart");
   };
 
-  const buttonContent = "ADD TO CART";
+  let buttonContent = "ADD TO CART";
   if (loading) {
     buttonContent = "ADDING...";
   }

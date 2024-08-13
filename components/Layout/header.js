@@ -9,13 +9,12 @@ import Backdrop from "../UI/backdrop";
 import { useSession, signOut } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions, selectTotalQuantity } from "../../store/cart-slice";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const Header = (props) => {
   const [showMobileNav, setShowMobileNav] = useState(false);
 
   const { session, loading } = useSession();
-  const router = useRouter();
   const cart = useSelector((state) => state.items);
   const dispatch = useDispatch();
 
@@ -33,7 +32,7 @@ const Header = (props) => {
       return console.log(err);
     }
     dispatch(cartActions.setCart({ items: [] }));
-    router.push(data.url);
+    redirect(data.url);
   };
 
   useEffect(() => {

@@ -5,18 +5,16 @@ import styles from "./mobile-nav.module.scss";
 import { CSSTransition } from "react-transition-group";
 import { useSession, signOut } from "next-auth/react";
 import { useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const MobileNav = (props) => {
   const { session, loading } = useSession();
-
-  const router = useRouter();
 
   useEffect(() => {
     if (props.opened) {
       props.close();
     }
-  }, [router]);
+  }, []);
 
   const nodeRef = useRef(null);
 
