@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import styles from "./home-intro.module.scss";
 import background from "../../public/images/landing-page/slide1.jpg";
 import Button from "../UI/button";

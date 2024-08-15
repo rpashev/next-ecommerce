@@ -79,7 +79,10 @@ const CartItem = (props) => {
       <div
         className={`${styles.img}`}
         title="View Product"
-        onClick={() => redirect(`/shop/${slug}`)}
+        onClick={() => {
+          console.log("here");
+          redirect(`/shop/${slug}`);
+        }}
         tabIndex={0}
         onKeyDown={keyHandler}
       >
