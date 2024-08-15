@@ -1,12 +1,12 @@
 import ProductCard from "../products/product-card";
 import styles from "./product-list.module.scss";
 
-const ProductList = (props) => {
+const ProductList = ({ title, products }) => {
   return (
     <section className={styles["list-section"]}>
-      <h2 className={styles.title}>{props.title}</h2>
+      <h2 className={styles.title}>{title}</h2>
       <div className={styles.list}>
-        {props.products.map((p) => {
+        {products?.map((p) => {
           return (
             <ProductCard
               key={p.slug}

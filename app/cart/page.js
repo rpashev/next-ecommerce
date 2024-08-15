@@ -1,6 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
-import { navigate } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartHeaders from "../../components/cart-page/cart-headers";
@@ -13,6 +13,8 @@ import { cartActions, selectTotalPrice } from "../../store/cart-slice";
 import styles from "./page.module.scss";
 
 const CartPage = () => {
+  const router = useRouter();
+
   const items = useSelector((state) => state.items);
   const { session, loadingSession } = useSession();
   const dispatch = useDispatch();
@@ -52,7 +54,7 @@ const CartPage = () => {
 
   const goBack = () => {
     // console.log(document.referrer)
-    navigate("/shop");
+    router.push("/shop");
   };
 
   return (

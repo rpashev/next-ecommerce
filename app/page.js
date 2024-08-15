@@ -8,9 +8,15 @@ import ProductList from "../components/products/product-list";
 
 import { getByField } from "../lib/products";
 
-let products = await getByField({ bestSeller: true });
+export const metadata = {
+  title: "My Shop",
+  description:
+    "The place to be. Only the best products from the leading sports brands in the world - Adidas and Reebok.",
+};
 
-export default function Home() {
+export default async function Home() {
+  let products = await getByField({ bestSeller: true });
+
   return (
     <Fragment>
       <HomeIntro />

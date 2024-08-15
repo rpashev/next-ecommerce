@@ -8,7 +8,7 @@ const Slideshow = (props) => {
       {props.images.map((link) => {
         return (
           <div
-            className={styles.img}
+            className={styles.imgWrapper}
             onClick={props.changePhoto.bind(null, link)}
             key={link}
           >
@@ -16,7 +16,8 @@ const Slideshow = (props) => {
               src={`/images/products/${link}.jpg`}
               alt="product"
               width={150}
-              height={150}
+              height={0}
+              className={styles.img}
             />
           </div>
         );
