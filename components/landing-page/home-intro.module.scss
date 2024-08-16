@@ -28,9 +28,9 @@
   }
 }
 
-.img {
+.imgWrapper {
   position: relative;
-
+  height: calc(100vh - 5rem);
   .overlay {
     position: absolute;
     top: 0;
@@ -39,6 +39,12 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.25);
   }
+}
+
+.img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 75em) {
@@ -51,7 +57,7 @@
     }
   }
 
-  .img {
+  .imgWrapper {
     .overlay {
       background-color: rgba(0, 0, 0, 0.4);
     }
@@ -59,13 +65,18 @@
 }
 
 @media (max-width: 40em) {
-  .img {
+  .imgWrapper {
     display: none;
   }
 
   .intro .prompt {
     position: static;
     width: 100%;
+    height: calc(100vh - 5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
     // background: rgb(92, 92, 92);
     background: linear-gradient(
         to top,
@@ -75,16 +86,18 @@
       url("../../public/images/landing-page/bg-mobile.svg") center/cover;
     text-align: center;
     padding: 2rem;
-
+    h1 span {
+      display: block;
+    }
     .description {
       max-width: 25rem;
-      margin: 1rem auto;
     }
-
-    a span {
-      background-color: $color-primary;
-      color: $gray-darkest;
-      font-size: 1.1rem;
+    a {
+      span {
+        background-color: $color-primary;
+        color: $gray-darkest;
+        font-size: 1.1rem;
+      }
     }
   }
 }

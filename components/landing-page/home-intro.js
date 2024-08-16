@@ -1,22 +1,19 @@
 import Image from "next/image";
 import styles from "./home-intro.module.scss";
-import background from "../../public/images/landing-page/slide1.jpg";
+import background from "../../public/images/landing-page/slide2.jpg";
 import Button from "../UI/button";
 
 const HomeIntro = () => {
   return (
     <section className={styles.intro}>
-      <div className={styles.img}>
+      <div className={styles.imgWrapper}>
         <Image
           src={background}
           alt="First slide"
           placeholder="blur"
           priority
           sizes="100vw"
-          style={{
-            width: "100%",
-            height: "auto",
-          }}
+          className={styles.img}
         />
         <div className={styles.overlay}></div>
       </div>

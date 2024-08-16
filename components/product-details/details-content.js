@@ -37,7 +37,7 @@ const DetailsContent = ({ product }) => {
 
   const [imgLink, setImgLink] = useState(images[0]);
   const [amount, setAmount] = useState(1);
-  const [size, setSize] = useState("M");
+  const [size, setSize] = useState(null);
 
   const amountHandler = (operation) => {
     if (operation === "add") {
@@ -158,7 +158,13 @@ const DetailsContent = ({ product }) => {
           <ButtonOperation add changeAmount={amountHandler.bind(null, "add")} />
         </div>
 
-        <Button dark wide disabled={!available} onClick={addToCart}>
+        <Button
+          type="button"
+          dark
+          wide
+          disabled={!available || !size}
+          onClick={addToCart}
+        >
           {loading ? "ADDING..." : "ADD TO CART"}
         </Button>
         <p className="lead fw-bold mt-1">

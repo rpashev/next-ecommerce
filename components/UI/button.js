@@ -27,17 +27,17 @@ const Button = (props) => {
   }
   return (
     <button
-      className={`${styles.button} ${props.green && styles["button--green"]} ${
-        props.light && styles["button--light"]
-      } ${props.dark && styles["button--dark"]} ${
-        props.danger && styles["button--danger"]
-      } ${props.outline && styles["button--outline"]}  ${
-        props.primary && styles["button--primary"]
-      }  ${props.large && styles["button--large"]}  ${
-        props.small && styles["button--small"]
-      } ${props.full && styles["button--full"]} ${
-        props.wide && styles["button--wide"]
-      }`}
+      className={`${styles.button} btn ${
+        props.green && styles["button--green"]
+      } ${props.light && styles["button--light"]} ${
+        props.dark && styles["button--dark"]
+      } ${props.danger && styles["button--danger"]} ${
+        props.outline && styles["button--outline"]
+      }  ${props.primary && styles["button--primary"]}  ${
+        props.large && styles["button--large"]
+      }  ${props.small && styles["button--small"]} ${
+        props.full && styles["button--full"]
+      } ${props.wide && styles["button--wide"]}`}
       type={props.type}
       onClick={props.onClick}
       disabled={props.disabled}
