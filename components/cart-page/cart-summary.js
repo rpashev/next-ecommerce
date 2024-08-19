@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { useState } from "react";
 import Button from "../UI/button";
@@ -19,7 +20,9 @@ const CartSummary = (props) => {
       <hr></hr>
       <h5>
         CART TOTAL:{" "}
-        <span className="ps-1 h4 text-warning">${props.subtotal + 10}</span>
+        <span className="ps-1 h4 text-warning">
+          ${props.subtotal ? props.subtotal + 10 : 10}
+        </span>
       </h5>
       <hr></hr>
       {!props.loggedIn && !props.fromCheckout && (

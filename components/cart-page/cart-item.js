@@ -1,5 +1,5 @@
 import { cartActions } from "../../store/cart-slice";
-
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./cart-item.module.scss";
 import { useDispatch } from "react-redux";
@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import { deleteItem, updateCart } from "../../lib/cart-operations";
 
 const CartItem = (props) => {
+  const router = useRouter();
   const { imgLink, name, price, quantity, size, slug } = props;
 
   const dispatch = useDispatch();
@@ -79,10 +80,7 @@ const CartItem = (props) => {
       <div
         className={`${styles.img}`}
         title="View Product"
-        onClick={() => {
-          console.log("here");
-          redirect(`/shop/${slug}`);
-        }}
+        onClick={() => router.push(`/shop/${slug}`)}
         tabIndex={0}
         onKeyDown={keyHandler}
       >
@@ -97,7 +95,7 @@ const CartItem = (props) => {
       <div
         className={styles.title}
         title="View Product"
-        onClick={() => redirect(`/shop/${slug}`)}
+        onClick={() => router.push(`/shop/${slug}`)}
       >
         <h6 className={styles.name}>{name}</h6>
         <h6 className={styles.size}>Size: {size}</h6>
