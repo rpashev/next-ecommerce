@@ -1,9 +1,18 @@
 const Input = (props) => {
-
-  const { label, type, placeholder, errorText, error, id, updateInputState } =
-    props;
+  const {
+    label,
+    type,
+    placeholder,
+    errorText,
+    error,
+    id,
+    updateInputState,
+    name,
+    onBlurHandler,
+  } = props;
 
   const changeHandler = (event) => {
+    // TODO: refactor once all forms use useInput
     updateInputState(event.target.value.trim(), id);
   };
 
@@ -14,12 +23,16 @@ const Input = (props) => {
         className={`form-control shadow-none ${error ? "is-invalid" : ""}`}
         id={id}
         placeholder={placeholder}
-        onChange={changeHandler}
+        onChange={updateInputState}
+        name={name}
+        onBlur={onBlurHandler || null}
       />
       <label htmlFor={id} className="px-4">
         {label}
       </label>
-      <div className="invalid-feedback px-1">{errorText}</div>
+      {error && errorText && (
+        <div className="invalid-feedback px-1">{errorText}</div>
+      )}
     </div>
   );
 };

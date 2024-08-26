@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import Spinner from "../../components/UI/spinner";
 import Button from "../../components/UI/button";
+import ButtonSubmit from "@/components/UI/button-submit";
+import { validateEmail } from "@/utils/validators";
 
 const Login = () => {
   const router = useRouter();
@@ -18,69 +20,80 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const submitHandler = async (event) => {
-    event.preventDefault();
-    if (!email.includes("@") || !email.includes(".")) {
-      setEmailError(true);
-    }
-    if (password.length < 6) {
-      setPasswordError(true);
-    }
+  const {
+    value: email,
+    hasError: emailError,
+    isValid: emailIsValid,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+  } = useInput(validateEmail);
 
-    if (!email.includes("@") || !email.includes(".") || password.length < 6) {
-      return;
-    }
+  const {
+    value: password,
+    hasError: passwordError,
+    isValid: passwordIsValid,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+  } = useInput((value) => (value?.length < 6 ? false : true));
 
-    let result;
-    let stringifiedCart = JSON.stringify(cart);
+  const formIsValid = passwordIsValid && emailIsValid;
+  // const submitHandler = async (event) => {
+  //   event.preventDefault();
+  //   if (!email.includes("@") || !email.includes(".")) {
+  //     setEmailError(true);
+  //   }
+  //   if (password.length < 6) {
+  //     setPasswordError(true);
+  //   }
 
-    setError(null);
-    setLoading(true);
+  //   if (!email.includes("@") || !email.includes(".") || password.length < 6) {
+  //     return;
+  //   }
 
-    try {
-      result = await signIn("credentials", {
-        redirect: false,
-        email,
-        password,
-        stringifiedCart,
-      });
-    } catch (err) {
-      setError("Could not log you in!");
-      setLoading(false);
-      return;
-    }
+  //   let result;
+  //   let stringifiedCart = JSON.stringify(cart);
 
-    if (!result.error) {
-      router.replace("/shop");
-    } else {
-      setError(result.error || "Could not log you in!");
-      setLoading(false);
-    }
-  };
+  //   setError(null);
+  //   setLoading(true);
 
-  const onChangeHandler = (value, id) => {
-    switch (id) {
-      case "email":
-        setEmail(value);
-        value.includes("@") && value.includes(".")
-          ? setEmailError(false)
-          : null;
-        break;
-      case "password":
-        setPassword(value);
-        value.length >= 6 ? setPasswordError(false) : null;
-        break;
+  //   try {
+  //     result = await signIn("credentials", {
+  //       redirect: false,
+  //       email,
+  //       password,
+  //       stringifiedCart,
+  //     });
+  //   } catch (err) {
+  //     setError("Could not log you in!");
+  //     setLoading(false);
+  //     return;
+  //   }
 
-      default:
-        break;
-    }
-  };
+  //   if (!result.error) {
+  //     router.replace("/shop");
+  //   } else {
+  //     setError(result.error || "Could not log you in!");
+  //     setLoading(false);
+  //   }
+  // };
 
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState(false);
+  // const onChangeHandler = (value, id) => {
+  //   switch (id) {
+  //     case "email":
+  //       setEmail(value);
+  //       value.includes("@") && value.includes(".")
+  //         ? setEmailError(false)
+  //         : null;
+  //       break;
+  //     case "password":
+  //       setPassword(value);
+  //       value.length >= 6 ? setPasswordError(false) : null;
+  //       break;
 
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
+  //     default:
+  //       break;
+  //   }
+  // };
 
   return (
     <div className={`container ${styles["login-page"]} py-5`}>
@@ -93,7 +106,9 @@ const Login = () => {
           errorText="Email must be valid!"
           error={emailError}
           id="email"
-          updateInputState={onChangeHandler}
+          name="email"
+          updateInputState={emailChangeHandler}
+          onBlurHandler={emailBlurHandler}
         />
         <Input
           label="Password"
@@ -102,23 +117,26 @@ const Login = () => {
           errorText="Your password must be at least 6 symbols!"
           error={passwordError}
           id="password"
-          updateInputState={onChangeHandler}
+          name="password"
+          updateInputState={passwordChangeHandler}
+          onBlurHandler={passwordBlurHandler}
         />
-        <Button primary type="submit">
+        <ButtonSubmit primary type="submit" disabled={formIsValid}>
           LOGIN
-        </Button>
+        </ButtonSubmit>
         <div className="mt-3 d-flex gap-2">
           <p>Don't have an account?</p>
           <Link href="/register">
             <span>Sign up here!</span>
           </Link>
         </div>
-        {error && !loading && (
-          <p className="text-danger mt-2 fw-bold">{error}</p>
+        {formState?.errors && (
+          <p className="text-danger mt-2 fw-bold">
+            {formState?.errors?.message}
+          </p>
         )}
+        <Spinner />
       </form>
-
-      {loading && <Spinner />}
     </div>
   );
 };
