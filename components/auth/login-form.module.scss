@@ -1,0 +1,14 @@
+.form {
+  width: 22rem;
+  max-width: 22rem;
+}
+
+@media (max-width: 40em) {
+  .form {
+    width: 90%;
+    button {
+      width: 100%;
+      font-size: 1.2rem;
+    }
+  }
+}

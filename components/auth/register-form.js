@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./register-form.module.scss";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import Input from "../../components/UI/input";
@@ -15,18 +15,15 @@ const RegisterForm = () => {
   const router = useRouter();
   const cart = useSelector((state) => state.items);
 
-  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState(false);
 
   const {
-    value: firstName,
     hasError: firstNameError,
     isValid: firstNameIsValid,
     valueChangeHandler: firstNameChangeHandler,
     inputBlurHandler: firstNameBlurHandler,
   } = useInput((value) => !!value);
   const {
-    value: lastName,
     hasError: lastNameError,
     isValid: lastNameIsValid,
     valueChangeHandler: lastNameChangeHandler,
@@ -34,7 +31,6 @@ const RegisterForm = () => {
   } = useInput((value) => !!value);
 
   const {
-    value: email,
     hasError: emailError,
     isValid: emailIsValid,
     valueChangeHandler: emailChangeHandler,
@@ -50,7 +46,6 @@ const RegisterForm = () => {
   } = useInput((value) => (value?.length < 6 ? false : true));
 
   const {
-    value: confirmPassword,
     hasError: confirmPasswordError,
     isValid: confirmPasswordIsValid,
     valueChangeHandler: confirmPasswordChangeHandler,
@@ -66,21 +61,25 @@ const RegisterForm = () => {
     passwordIsValid &&
     confirmPasswordIsValid;
 
-  const submitHandler = async (e) => {
+  const [pending, startTransition] = useTransition();
+  const submitHandler = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    const formData = new FormData(e.currentTarget);
-    formData.append("cart", JSON.stringify(cart));
 
-    try {
-      let res = await registerUser(formData);
-      if (res.errors?.length) {
-        setErrors(res.errors);
+    startTransition(async () => {
+      setErrors(null);
+      const formData = new FormData(e.currentTarget);
+      formData.append("cart", JSON.stringify(cart));
+      try {
+        let res = await registerUser(formData);
+        if (res.errors?.length) {
+          setErrors(res.errors);
+        }
+      } catch {
+        setErrors([{ message: "Could not sign up!" }]);
       }
-    } finally {
-      setIsLoading(false);
-    }
+    });
   };
+
   return (
     <>
       <form noValidate onSubmit={submitHandler} className={styles.form}>
@@ -139,16 +138,16 @@ const RegisterForm = () => {
           updateInputState={confirmPasswordChangeHandler}
           onBlurHandler={confirmPasswordBlurHandler}
         />
-        <ButtonSubmit disabled={!formIsValid || isLoading}>
-          SIGN UP
-        </ButtonSubmit>
+        <ButtonSubmit disabled={!formIsValid || pending}>SIGN UP</ButtonSubmit>
 
         {errors &&
           errors.map((err) => (
-            <p className="text-danger mt-2 fw-bold">{err.message}</p>
+            <p key={err.message} className="text-danger mt-2 fw-bold">
+              {err.message}
+            </p>
           ))}
 
-        <Spinner isLoading={isLoading} />
+        <Spinner isLoading={pending} />
       </form>
     </>
   );
