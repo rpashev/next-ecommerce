@@ -2,17 +2,19 @@
 import styles from "./login-form.module.scss";
 import Input from "@/components/UI/input";
 import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { redirect, useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import Spinner from "@/components/UI/spinner";
 import ButtonSubmit from "@/components/UI/button-submit";
 import { validateEmail } from "@/utils/validators";
 import { useInput } from "@/hooks/use-input";
 import { loginUser } from "@/actions/auth-actions";
+import { userActions } from "@/store/user-slice";
 
 const LoginForm = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.items);
   const [errors, setErrors] = useState(null);
@@ -40,13 +42,19 @@ const LoginForm = () => {
     startTransition(async () => {
       setErrors(null);
       const formData = new FormData(e.currentTarget);
-      formData.append("cart", JSON.stringify(cart));
+      formData.append("cart", JSON.stringify(cart || []));
+      console.log(JSON.stringify(cart));
       try {
         let res = await loginUser(formData);
+        console.log(res);
         if (res.errors?.length) {
-          setErrors(res.errors);
+          return setErrors(res.errors);
         }
-      } catch {
+        dispatch(userActions.setUser(res.data));
+
+        router.push("/shop");
+      } catch (err) {
+        console.log(err);
         setErrors([{ message: "Could not log you in!" }]);
       }
     });

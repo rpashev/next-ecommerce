@@ -3,16 +3,18 @@
 import styles from "./register-form.module.scss";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Input from "../../components/UI/input";
 import { registerUser } from "@/actions/auth-actions";
 import Spinner from "../UI/spinner";
 import { useInput } from "@/hooks/use-input";
 import ButtonSubmit from "../UI/button-submit";
 import { validateEmail } from "@/utils/validators";
+import { userActions } from "@/store/user-slice";
 
 const RegisterForm = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.items);
 
   const [errors, setErrors] = useState(false);
@@ -68,12 +70,15 @@ const RegisterForm = () => {
     startTransition(async () => {
       setErrors(null);
       const formData = new FormData(e.currentTarget);
-      formData.append("cart", JSON.stringify(cart));
+      formData.append("cart", JSON.stringify(cart || []));
       try {
         let res = await registerUser(formData);
+        console.log(res);
         if (res.errors?.length) {
-          setErrors(res.errors);
+          return setErrors(res.errors);
         }
+        dispatch(userActions.setUser(res.data));
+        router.push("/shop");
       } catch {
         setErrors([{ message: "Could not sign up!" }]);
       }

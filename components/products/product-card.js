@@ -1,5 +1,4 @@
 "use client";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -9,6 +8,7 @@ import { addItem, updateCart } from "../../lib/cart-operations";
 import { cartActions } from "../../store/cart-slice";
 import ProductBadge from "./product-badge";
 import styles from "./product-card.module.scss";
+import { isLoggedIn } from "@/store/user-slice";
 
 const ProductCard = (props) => {
   const router = useRouter();
@@ -20,8 +20,9 @@ const ProductCard = (props) => {
   const { name, price, slug, available } = props;
 
   const cart = useSelector((state) => state.items);
+  const loggedIn = useSelector(isLoggedIn);
+
   const dispatch = useDispatch();
-  const { session, loadingSession } = useSession();
 
   const onHoverHandler = () => {
     setShowButton(true);
@@ -54,11 +55,11 @@ const ProductCard = (props) => {
       quantity: 1,
     };
 
-    const existingItem = cart.find(
+    const existingItem = cart?.find(
       (item) => item.slug === slug && item.size === "M"
     );
 
-    if (session && existingItem) {
+    if (loggedIn && existingItem) {
       try {
         await updateCart(slug);
       } catch (err) {
@@ -67,7 +68,7 @@ const ProductCard = (props) => {
           err.response?.data?.message || "Could not add item to cart!!"
         );
       }
-    } else if (session && !existingItem) {
+    } else if (loggedIn && !existingItem) {
       try {
         await addItem(payload);
       } catch (err) {
@@ -91,6 +92,7 @@ const ProductCard = (props) => {
     buttonContent = error;
   }
 
+  // TODO: ????
   useEffect(() => {
     if (error) {
       setTimeout(() => setError(null), 2000);

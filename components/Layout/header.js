@@ -2,37 +2,38 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import CartIcon from "../UI/cart-icon";
 import styles from "./header.module.scss";
 import MobileNav from "./mobile-nav";
 import Backdrop from "../UI/backdrop";
-import { useSession, signOut } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions, selectTotalQuantity } from "../../store/cart-slice";
-import { redirect } from "next/navigation";
+import { logoutUser } from "@/actions/auth-actions";
+import { isLoggedIn, userActions } from "@/store/user-slice";
+import LogoutButton from "../auth/logout-button";
 
 const Header = (props) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const cart = useSelector((state) => state.items);
   const [showMobileNav, setShowMobileNav] = useState(false);
 
-  const { session, loading } = useSession();
-  const cart = useSelector((state) => state.items);
-  const dispatch = useDispatch();
-
   const totalQuantity = selectTotalQuantity(cart);
+  const loggedIn = useSelector(isLoggedIn);
 
   const toggleMobileNav = () => {
     setShowMobileNav((prevState) => !prevState);
   };
 
   const logoutHandler = async () => {
-    let data;
-    try {
-      data = await signOut({ redirect: false, callbackUrl: "/" });
-    } catch (err) {
-      return console.log(err);
+    let res = await logoutUser();
+    if (res.success) {
+      dispatch(cartActions.setCart({ items: [] }));
+      dispatch(userActions.logoutUser());
+      router.push("/");
     }
-    dispatch(cartActions.setCart({ items: [] }));
-    redirect(data.url);
   };
 
   useEffect(() => {
@@ -74,33 +75,27 @@ const Header = (props) => {
             <Link href="/">ABOUT</Link>
           </li>
         </ul>
-        {!loading && (
-          <ul className={`${styles["user-nav"]}`}>
+        <ul className={`${styles["user-nav"]}`}>
+          <li>
+            <Link href="/cart">
+              <span className={styles["cart-icon"]}>
+                <CartIcon totalQuantity={totalQuantity} />
+              </span>
+            </Link>
+          </li>
+          {!loggedIn && (
             <li>
-              <Link href="/cart">
-                <span className={styles["cart-icon"]}>
-                  <CartIcon totalQuantity={totalQuantity} />
-                </span>
-              </Link>
+              <Link href="/login">LOGIN</Link>
             </li>
-            {!session && (
-              <li>
-                <Link href="/login">LOGIN</Link>
-              </li>
-            )}
+          )}
 
-            {!session && (
-              <li>
-                <Link href="/register">SIGN UP</Link>
-              </li>
-            )}
-            {session && (
-              <li>
-                <button onClick={logoutHandler}>LOGOUT</button>
-              </li>
-            )}
-          </ul>
-        )}
+          {!loggedIn && (
+            <li>
+              <Link href="/register">SIGN UP</Link>
+            </li>
+          )}
+          {loggedIn && <LogoutButton logoutHandler={logoutHandler} />}
+        </ul>
       </nav>
     </header>
   );
