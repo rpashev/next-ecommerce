@@ -11,7 +11,7 @@ import ProductBadge from "@/components/products/product-badge";
 import ButtonOperation from "@/components/UI/btn-operation";
 import { useRouter } from "next/navigation";
 import { addItem, updateCart } from "@/lib/cart-operations";
-import { useSession } from "next-auth/react";
+import { isLoggedIn } from "@/store/user-slice";
 
 const DetailsContent = ({ product }) => {
   const {
@@ -27,7 +27,8 @@ const DetailsContent = ({ product }) => {
     brand,
   } = product;
 
-  const { session } = useSession();
+  const loggedIn = useSelector(isLoggedIn);
+
   const dispatch = useDispatch();
   const router = useRouter();
   const cart = useSelector((state) => state.items);
@@ -75,7 +76,7 @@ const DetailsContent = ({ product }) => {
       (item) => item.slug === slug && item.size === size
     );
 
-    if (session && existingItem) {
+    if (loggedIn && existingItem) {
       try {
         await updateCart(slug, size, amount);
       } catch (err) {
@@ -84,7 +85,7 @@ const DetailsContent = ({ product }) => {
           err.response?.data?.message || "Could not update cart!"
         );
       }
-    } else if (session && !existingItem) {
+    } else if (loggedIn && !existingItem) {
       try {
         await addItem(payload);
       } catch (err) {

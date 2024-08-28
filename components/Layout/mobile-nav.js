@@ -3,12 +3,12 @@
 import Link from "next/link";
 import styles from "./mobile-nav.module.scss";
 import { CSSTransition } from "react-transition-group";
-import { useSession, signOut } from "next-auth/react";
 import { useRef, useEffect } from "react";
-import { redirect } from "next/navigation";
+import { useSelector } from "react-redux";
+import { isLoggedIn } from "@/store/user-slice";
 
 const MobileNav = (props) => {
-  const { session, loading } = useSession();
+  const loggedIn = useSelector(isLoggedIn);
 
   useEffect(() => {
     if (props.opened) {
@@ -46,17 +46,17 @@ const MobileNav = (props) => {
           <li>
             <Link href="/cart">MY CART</Link>
           </li>
-          {!session && !loading && (
+          {!loggedIn && (
             <li>
               <Link href="/login">LOGIN</Link>
             </li>
           )}
-          {!session && !loading && (
+          {!loggedIn && (
             <li>
               <Link href="/register">SIGN UP</Link>
             </li>
           )}
-          {session && (
+          {loggedIn && (
             <li>
               <button onClick={props.logout} className={styles["btn-logout"]}>
                 LOGOUT

@@ -2,18 +2,19 @@ import { cartActions } from "../../store/cart-slice";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./cart-item.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { redirect } from "next/navigation";
 import DeleteIcon from "../UI/delete-icon";
-import { useSession } from "next-auth/react";
 import { deleteItem, updateCart } from "../../lib/cart-operations";
+import { isLoggedIn } from "@/store/user-slice";
 
 const CartItem = (props) => {
+  const loggedIn = useSelector(isLoggedIn);
+
   const router = useRouter();
   const { imgLink, name, price, quantity, size, slug } = props;
 
   const dispatch = useDispatch();
-  const { session, loadingSession } = useSession();
 
   const removeHandler = async () => {
     props.onLoading(true);
@@ -21,7 +22,7 @@ const CartItem = (props) => {
 
     const payload = { slug, size };
 
-    if (session && !loadingSession) {
+    if (loggedIn) {
       try {
         await deleteItem(slug, size);
       } catch (err) {
@@ -50,7 +51,7 @@ const CartItem = (props) => {
     } else {
       let updatedQuantity = +event.target.value;
 
-      if (session) {
+      if (isLoggedIn) {
         try {
           await updateCart(slug, size, updatedQuantity, true);
         } catch (err) {

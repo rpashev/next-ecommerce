@@ -5,7 +5,7 @@ import styles from "./button.module.scss";
 const Button = (props) => {
   if (props.to) {
     return (
-      <Link href={props.to}>
+      <Link href={props.to} class={styles.btnLink}>
         <span
           onClick={props.onClick}
           className={`${styles.button} ${

@@ -43,7 +43,7 @@ const cartSlice = createSlice({
     },
 
     setCart(state, action) {
-      console.log("cart", action);
+      console.dir(action.payload?.items);
       state.items = action.payload.items || [];
     },
   },

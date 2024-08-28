@@ -1,0 +1,49 @@
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.content {
+  width: 65%;
+
+  hr {
+    margin: 0.25rem 0;
+  }
+}
+.summary-container {
+  width: 25%;
+  margin-top: 1.5rem;
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 70em) {
+  .content {
+    width: 100%;
+  }
+
+  .summary-container {
+    margin-top: 3rem;
+    width: 100%;
+    max-width: 30rem;
+  }
+}
+
+@media (max-width: 40em) {
+  .actions {
+    button {
+      font-size: 1.2rem;
+    }
+  }
+}
+@media (max-width: 29em) {
+  .actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

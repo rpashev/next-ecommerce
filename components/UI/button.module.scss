@@ -3,7 +3,7 @@
 .button {
   border: none;
   font: inherit;
-  text-decoration: none;
+  text-decoration: inherit;
   font-weight: 500;
   color: $gray-light;
   display: inline-flex;
@@ -28,6 +28,10 @@
     outline: none;
     box-shadow: 0 0 0 2px $color-primary;
   }
+}
+
+.btnLink {
+  text-decoration: inherit;
 }
 
 .button--primary {
