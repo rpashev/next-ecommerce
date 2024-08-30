@@ -4,20 +4,6 @@
 
 // const inter = Inter({ subsets: ["latin"] });
 
-// export const metadata = {
-//   title: "My shop",
-//   description: "A dummy e-commerce application for accesories like hats, gloves, backpacks. Built with Next.js",
-// };
-
-// export default function RootLayout({ children }) {
-//   return (
-//     <html lang="en">
-//       <body className={inter.className}>{children}</body>
-//     </html>
-//   );
-// }
-
-import { SessionProvider } from "next-auth/react";
 import { Provider as ReduxProvider } from "react-redux";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
@@ -36,12 +22,10 @@ function RootLayout({ children, session }) {
       <body>
         <ReduxProvider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <SessionProvider session={session}>
-              <Head>
-                <title>MyShop</title>
-              </Head>
-              <Layout>{children}</Layout>
-            </SessionProvider>
+            <Head>
+              <title>MyShop</title>
+            </Head>
+            <Layout>{children}</Layout>
           </PersistGate>
         </ReduxProvider>
       </body>
