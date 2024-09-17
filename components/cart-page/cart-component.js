@@ -106,7 +106,7 @@ const CartComponent = ({ cartData }) => {
       </div>
       {loading && (
         <div className={styles.spinner}>
-          <Spinner />
+          <Spinner isLoading={loading} />
         </div>
       )}
     </>
