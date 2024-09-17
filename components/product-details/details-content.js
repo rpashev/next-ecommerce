@@ -10,8 +10,8 @@ import { useState } from "react";
 import ProductBadge from "@/components/products/product-badge";
 import ButtonOperation from "@/components/UI/btn-operation";
 import { useRouter } from "next/navigation";
-import { addItem, updateCart } from "@/lib/cart-operations";
 import { isLoggedIn } from "@/store/user-slice";
+import { updateCart, addToCart } from "@/actions/cart-actions";
 
 const DetailsContent = ({ product }) => {
   const {
@@ -59,11 +59,11 @@ const DetailsContent = ({ product }) => {
     }
   };
 
-  const addToCart = async () => {
+  const handleAdd = async () => {
     setLoading(true);
     setError(null);
 
-    const payload = {
+    const cartItemData = {
       name,
       size,
       quantity: amount,
@@ -72,13 +72,19 @@ const DetailsContent = ({ product }) => {
       imgLink: images[0],
     };
 
-    const existingItem = cart.find(
+    const existingItem = cart?.find(
       (item) => item.slug === slug && item.size === size
     );
 
     if (loggedIn && existingItem) {
+      console.log("logged update");
       try {
-        await updateCart(slug, size, amount);
+        const formData = new FormData();
+        formData.append("slug", cartItemData.slug);
+        formData.append("size", cartItemData.size);
+        formData.append("updatedQuantity", cartItemData.quantity);
+        formData.append("fromCart", false);
+        await updateCart(formData);
       } catch (err) {
         setLoading(false);
         return setError(
@@ -86,17 +92,28 @@ const DetailsContent = ({ product }) => {
         );
       }
     } else if (loggedIn && !existingItem) {
+      console.log("logged add");
+
+      const formData = new FormData();
+      console.log(formData);
+      formData.append("slug", cartItemData.slug);
+      formData.append("size", cartItemData.size);
+      formData.append("name", cartItemData.name);
+      formData.append("price", cartItemData.price);
+      formData.append("imgLink", cartItemData.imgLink);
+      formData.append("quantity", cartItemData.quantity);
       try {
-        await addItem(payload);
+        await addToCart(formData);
       } catch (err) {
         setLoading(false);
+        console.log(err);
         return setError(
           err.response?.data?.message || "Could not add to cart!"
         );
       }
     }
 
-    dispatch(cartActions.addItem(payload));
+    dispatch(cartActions.addItem(cartItemData));
     setLoading(false);
     router.push("/cart");
   };
@@ -164,7 +181,7 @@ const DetailsContent = ({ product }) => {
           dark
           wide
           disabled={!available || !size}
-          onClick={addToCart}
+          onClick={handleAdd}
         >
           {loading ? "ADDING..." : "ADD TO CART"}
         </Button>

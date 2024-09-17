@@ -5,9 +5,8 @@ import styles from "./cart-item.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { redirect } from "next/navigation";
 import DeleteIcon from "../UI/delete-icon";
-import { deleteItem } from "../../lib/cart-operations";
 import { isLoggedIn } from "@/store/user-slice";
-import { updateCart } from "@/actions/cart-actions";
+import { updateCart, deleteFromCart } from "@/actions/cart-actions";
 
 const CartItem = (props) => {
   const loggedIn = useSelector(isLoggedIn);
@@ -25,16 +24,21 @@ const CartItem = (props) => {
 
     if (loggedIn) {
       try {
-        await deleteItem(slug, size);
+        const formData = new FormData();
+        formData.append("slug", slug);
+        formData.append("size", size);
+        await deleteFromCart(formData);
+        dispatch(cartActions.removeItem(payload));
       } catch (err) {
         props.onLoading(false);
         return props.onError(
           err.response?.data?.message || "Error! Could not remove item!"
         );
       }
+    } else {
+      dispatch(cartActions.removeItem(payload));
     }
 
-    dispatch(cartActions.removeItem(payload));
     props.onLoading(false);
   };
 
@@ -51,6 +55,7 @@ const CartItem = (props) => {
       );
     } else {
       let updatedQuantity = +event.target.value;
+      const payload = { slug, updatedQuantity, size };
 
       if (loggedIn) {
         try {
@@ -60,17 +65,16 @@ const CartItem = (props) => {
           formData.append("updatedQuantity", updatedQuantity);
           formData.append("fromCart", true);
           await updateCart(formData);
+          dispatch(cartActions.updateQuantity(payload));
         } catch (err) {
           props.onLoading(false);
           return props.onError(
             err.response?.data?.message || "Error! Could not update cart!"
           );
         }
+      } else {
+        dispatch(cartActions.updateQuantity(payload));
       }
-
-      const payload = { slug, updatedQuantity, size };
-
-      dispatch(cartActions.updateQuantity(payload));
 
       props.onLoading(false);
     }

@@ -7,10 +7,10 @@ import CartItem from "@/components/cart-page/cart-item";
 import CartSummary from "@/components/cart-page/cart-summary";
 import Button from "@/components/UI/button";
 import Spinner from "@/components/UI/spinner";
-import { deleteItem } from "@/lib/cart-operations";
 import { cartActions, selectTotalPrice } from "@/store/cart-slice";
 import styles from "./cart-component.module.scss";
 import { isLoggedIn } from "@/store/user-slice";
+import { deleteFromCart } from "@/actions/cart-actions";
 
 const CartComponent = ({ cartData }) => {
   const dispatch = useDispatch();
@@ -51,13 +51,17 @@ const CartComponent = ({ cartData }) => {
     const payload = { items: [] };
     if (loggedIn) {
       try {
-        await deleteItem(null, null, true);
+        const formData = new FormData();
+        formData.append("all", true);
+        await deleteFromCart(formData);
+        dispatch(cartActions.setCart(payload));
       } catch (err) {
         setLoading(false);
         return setError(err.response?.data?.message);
       }
+    } else {
+      dispatch(cartActions.setCart(payload));
     }
-    dispatch(cartActions.setCart(payload));
     setLoading(false);
   };
 
