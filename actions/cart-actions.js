@@ -2,6 +2,7 @@
 
 import { verifyAuth } from "@/lib/auth";
 import { connectToDatabase } from "@/lib/products";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 const errorResponse = (client, message) => {
@@ -64,6 +65,7 @@ export const updateCart = async (formData) => {
   }
 
   client.close();
+  revalidatePath("/cart");
 
   return {
     data: null,
@@ -132,6 +134,7 @@ export const addToCart = async (formData) => {
   }
 
   client.close();
+  revalidatePath("/cart");
 
   return {
     data: null,
@@ -205,7 +208,7 @@ export const deleteFromCart = async (formData) => {
   }
 
   client.close();
-
+  revalidatePath("/cart");
   return {
     data: null,
     errors,

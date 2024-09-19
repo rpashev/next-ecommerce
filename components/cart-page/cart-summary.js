@@ -3,14 +3,18 @@ import Link from "next/link";
 import { useState } from "react";
 import Button from "../UI/button";
 import styles from "./cart-summary.module.scss";
+import { useSelector } from "react-redux";
+import { selectTotalPrice } from "@/store/cart-slice";
 
 const CartSummary = (props) => {
+  const subtotal = useSelector(selectTotalPrice);
+
   const [loading, setLoading] = useState(false);
   return (
     <div className={`${styles.summary} ${props.loading ? "opacity-25" : ""}`}>
       <h5>CART TOTALS</h5>
       <hr></hr>
-      <h6>Cart Subtotal: ${props.subtotal}</h6>
+      <h6>Cart Subtotal: ${subtotal}</h6>
       <hr></hr>
       <h6>
         Shipping and handling: <span className="text-success h5">FREE</span>
@@ -21,7 +25,7 @@ const CartSummary = (props) => {
       <h5>
         CART TOTAL:{" "}
         <span className="ps-1 h4 text-warning">
-          ${props.subtotal ? props.subtotal + 10 : 10}
+          ${subtotal ? subtotal + 10 : 10}
         </span>
       </h5>
       <hr></hr>

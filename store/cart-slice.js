@@ -49,22 +49,22 @@ const cartSlice = createSlice({
   },
 });
 
-export const selectTotalQuantity = (items) => {
-  if (items?.length === 0) {
+export const selectTotalQuantity = (state) => {
+  if (state.cart.items?.length === 0) {
     return;
   }
-  return items?.reduce((prevValue, current) => {
-    prevValue += current.quantity;
+  return state?.cart?.items?.reduce((prevValue, current) => {
+    prevValue += +current.quantity;
     return prevValue;
   }, 0);
 };
 
-export const selectTotalPrice = (items) => {
-  if (items?.length === 0) {
+export const selectTotalPrice = (state) => {
+  if (state.cart.items?.length === 0) {
     return;
   }
-  return items?.reduce((prevValue, current) => {
-    prevValue += current.price * current.quantity;
+  return state.cart.items?.reduce((prevValue, current) => {
+    prevValue += +current.price * +current.quantity;
     return prevValue;
   }, 0);
 };

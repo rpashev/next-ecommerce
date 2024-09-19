@@ -28,7 +28,7 @@ const CartComponent = ({ cartData }) => {
   const items = useSelector((state) => state.cart.items);
   console.log(items);
 
-  const totalPrice = selectTotalPrice(items);
+  const totalPrice = useSelector(selectTotalPrice);
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);

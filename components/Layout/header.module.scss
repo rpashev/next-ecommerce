@@ -51,18 +51,13 @@
         transition: all 0.2s ease-out;
       }
 
-      li a:hover,
-      li button:hover {
+      li a:hover:not(.cart-link),
+      li button:hover:not(.cart-link) {
         background-color: $gray-darkest;
       }
       li button {
         background-color: transparent;
         border: none;
-      }
-
-      .cart-icon {
-        padding: 0.75rem;
-        border-radius: 50%;
       }
     }
 
@@ -73,6 +68,15 @@
     .user-nav {
       justify-content: flex-end;
     }
+  }
+  .cart-icon {
+    &:hover {
+      background-color: $gray-darkest;
+    }
+    padding: 0.75rem;
+    padding-bottom: 1rem !important;
+    border-radius: 50% !important;
+    transition: all 0.2s ease-out;
   }
 
   .toggle-button {

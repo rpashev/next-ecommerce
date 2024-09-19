@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, updateCart } from "../../lib/cart-operations";
 import { cartActions } from "../../store/cart-slice";
 import ProductBadge from "./product-badge";
 import styles from "./product-card.module.scss";
 import { isLoggedIn } from "@/store/user-slice";
+import { addToCart, updateCart } from "@/actions/cart-actions";
 
 const ProductCard = (props) => {
   const router = useRouter();
@@ -34,7 +34,7 @@ const ProductCard = (props) => {
     setImgLink(props.images[0]);
   };
 
-  const addToCart = async (event) => {
+  const handleAdd = async (event) => {
     console.log("here");
     event.stopPropagation();
     event.preventDefault();
@@ -46,7 +46,7 @@ const ProductCard = (props) => {
       return setError("Out of stock!");
     }
 
-    const payload = {
+    const cartItemData = {
       name,
       price,
       slug,
@@ -61,7 +61,12 @@ const ProductCard = (props) => {
 
     if (loggedIn && existingItem) {
       try {
-        await updateCart(slug);
+        const formData = new FormData();
+        formData.append("slug", cartItemData.slug);
+        formData.append("size", cartItemData.size);
+        formData.append("updatedQuantity", cartItemData.quantity);
+        formData.append("fromCart", false);
+        await updateCart(formData);
       } catch (err) {
         setLoading(false);
         return setError(
@@ -69,8 +74,16 @@ const ProductCard = (props) => {
         );
       }
     } else if (loggedIn && !existingItem) {
+      const formData = new FormData();
+      console.log(formData);
+      formData.append("slug", cartItemData.slug);
+      formData.append("size", cartItemData.size);
+      formData.append("name", cartItemData.name);
+      formData.append("price", cartItemData.price);
+      formData.append("imgLink", cartItemData.imgLink);
+      formData.append("quantity", cartItemData.quantity);
       try {
-        await addItem(payload);
+        await addToCart(formData);
       } catch (err) {
         setLoading(false);
         return setError(
@@ -78,7 +91,7 @@ const ProductCard = (props) => {
         );
       }
     }
-    dispatch(cartActions.addItem(payload));
+    dispatch(cartActions.addItem(cartItemData));
     setLoading(false);
 
     router.push("/cart");
@@ -130,7 +143,7 @@ const ProductCard = (props) => {
           )}
 
           <button
-            onClick={addToCart}
+            onClick={handleAdd}
             className={`${showButton || error ? styles.visible : ""} 
             btn w-100 position-absolute bottom-0 text-light d-none rounded-0 shadow-none ${
               error ? `btn-danger` : "btn-warning"

@@ -2,7 +2,6 @@ import CartSummary from "../../components/cart-page/cart-summary";
 import CheckoutForm from "../../components/checkout-page/checkout-form";
 import CheckoutItem from "../../components/checkout-page/checkout-item";
 import Button from "../../components/UI/button";
-import { selectTotalPrice } from "../../store/cart-slice";
 import styles from "./page.module.scss";
 import { verifyAuth } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -14,14 +13,12 @@ const Checkout = async (props) => {
   }
   const cart = props.cart;
 
-  const totalPrice = selectTotalPrice(cart);
-
   return (
     <div className={`container`}>
       <div className={styles.checkout}>
         <CheckoutForm />
         <div className={styles["cart-checkout"]}>
-          <CartSummary subtotal={totalPrice} fromCheckout />
+          <CartSummary fromCheckout />
           <div>
             {cart?.map((item) => {
               return (

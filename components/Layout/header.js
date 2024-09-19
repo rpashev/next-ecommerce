@@ -20,7 +20,8 @@ const Header = (props) => {
   const cart = useSelector((state) => state.items);
   const [showMobileNav, setShowMobileNav] = useState(false);
 
-  const totalQuantity = selectTotalQuantity(cart);
+  const totalQuantity = useSelector(selectTotalQuantity);
+  console.log(totalQuantity);
   const loggedIn = useSelector(isLoggedIn);
 
   const toggleMobileNav = () => {
@@ -77,7 +78,7 @@ const Header = (props) => {
         </ul>
         <ul className={`${styles["user-nav"]}`}>
           <li>
-            <Link href="/cart">
+            <Link href="/cart" className={styles["cart-link"]}>
               <span className={styles["cart-icon"]}>
                 <CartIcon totalQuantity={totalQuantity} />
               </span>
