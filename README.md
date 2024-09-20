@@ -32,9 +32,9 @@ I wanted to dive deeper into the React ecosystem and building a basic e-commerce
 
 
 ## Technologies Used  
-- React 17.0.2
-- Next 12
-- NextAuth
+- React 18
+- Next 14
+- Lucia
 - Redux Toolkit
 - Redux Persist
 - Bootstrap 5
