@@ -11,12 +11,13 @@ import { validateEmail } from "@/utils/validators";
 import { useInput } from "@/hooks/use-input";
 import { loginUser } from "@/actions/auth-actions";
 import { userActions } from "@/store/user-slice";
+import { cartActions } from "@/store/cart-slice";
 
 const LoginForm = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.items);
+  const cart = useSelector((state) => state.cart?.items);
   const [errors, setErrors] = useState(null);
 
   const {
@@ -51,6 +52,8 @@ const LoginForm = () => {
           return setErrors(res.errors);
         }
         dispatch(userActions.setUser(res.data));
+        console.log(res.data);
+        dispatch(cartActions.setCart({ items: res.data.cart }));
 
         router.push("/shop");
       } catch (err) {

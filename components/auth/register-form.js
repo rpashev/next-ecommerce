@@ -15,7 +15,7 @@ import { userActions } from "@/store/user-slice";
 const RegisterForm = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.items);
+  const cart = useSelector((state) => state.cart?.items);
 
   const [errors, setErrors] = useState(false);
 

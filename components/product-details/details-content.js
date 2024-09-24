@@ -1,12 +1,12 @@
 "use client";
-import { cartActions } from "@/store/cart-slice";
+import { cartActions, selectSingleItem } from "@/store/cart-slice";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./details-content.module.scss";
 import Image from "next/image";
 import SizeButtons from "@/components/product-details/size-button";
 import Button from "@/components/UI/button";
 import Slideshow from "@/components/product-details/slideshow";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductBadge from "@/components/products/product-badge";
 import ButtonOperation from "@/components/UI/btn-operation";
 import { useRouter } from "next/navigation";
@@ -27,9 +27,9 @@ const DetailsContent = ({ product }) => {
     brand,
   } = product;
 
+  const dispatch = useDispatch();
   const loggedIn = useSelector(isLoggedIn);
 
-  const dispatch = useDispatch();
   const router = useRouter();
   const cart = useSelector((state) => state.items);
 
@@ -39,6 +39,17 @@ const DetailsContent = ({ product }) => {
   const [imgLink, setImgLink] = useState(images[0]);
   const [amount, setAmount] = useState(1);
   const [size, setSize] = useState(null);
+
+  const existingItem = useSelector((state) =>
+    selectSingleItem(state, slug, null)
+  );
+
+  useEffect(() => {
+    if (existingItem) {
+      setAmount(+existingItem.quantity);
+      setSize(existingItem.size);
+    }
+  }, [existingItem]);
 
   const amountHandler = (operation) => {
     if (operation === "add") {
@@ -77,7 +88,6 @@ const DetailsContent = ({ product }) => {
     );
 
     if (loggedIn && existingItem) {
-      console.log("logged update");
       try {
         const formData = new FormData();
         formData.append("slug", cartItemData.slug);
@@ -92,10 +102,7 @@ const DetailsContent = ({ product }) => {
         );
       }
     } else if (loggedIn && !existingItem) {
-      console.log("logged add");
-
       const formData = new FormData();
-      console.log(formData);
       formData.append("slug", cartItemData.slug);
       formData.append("size", cartItemData.size);
       formData.append("name", cartItemData.name);
@@ -166,6 +173,7 @@ const DetailsContent = ({ product }) => {
             sizes={sizes}
             available={available}
             sizeHandler={sizeHandler}
+            size={size}
           />
         </div>
         <div className={styles.operations}>

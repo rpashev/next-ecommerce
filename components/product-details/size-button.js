@@ -1,6 +1,6 @@
 import styles from "./size-button.module.scss";
 
-const SizeButtons = (props) => {
+const SizeButtons = ({ sizes, sizeHandler, size }) => {
   const keyHandler = (e) => {
     if (e.keyCode === 13) {
       e.target.click();
@@ -8,15 +8,16 @@ const SizeButtons = (props) => {
   };
   return (
     <ul className={`${styles.sizes}`}>
-      {props.sizes.map((s) => {
+      {sizes.map((s) => {
         return (
           <li key={s}>
             <input
               type="radio"
               id={s}
               name="size"
-              onChange={props.sizeHandler}
+              onChange={sizeHandler}
               value={s}
+              checked={size === s}
             />
             <label tabIndex={0} htmlFor={s} onKeyDown={keyHandler}>
               {s}

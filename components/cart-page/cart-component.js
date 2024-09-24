@@ -21,12 +21,10 @@ const CartComponent = ({ cartData }) => {
       dispatch(cartActions.setCart({ items: cartData.data }));
     }
   }, [cartData.data]);
-  console.log(cartData.data);
 
   const router = useRouter();
 
   const items = useSelector((state) => state.cart.items);
-  console.log(items);
 
   const totalPrice = useSelector(selectTotalPrice);
 

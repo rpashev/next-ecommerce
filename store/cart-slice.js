@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
@@ -9,7 +9,6 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem(state, action) {
-      console.log(action);
       const newItem = action.payload;
       const existingItem = state.items.find(
         (item) => item.slug === newItem.slug && item.size === newItem.size
@@ -43,7 +42,6 @@ const cartSlice = createSlice({
     },
 
     setCart(state, action) {
-      console.dir(action.payload?.items);
       state.items = action.payload.items || [];
     },
   },
@@ -68,6 +66,21 @@ export const selectTotalPrice = (state) => {
     return prevValue;
   }, 0);
 };
+export const selectSingleItem = createSelector(
+  [(state) => state.cart?.items, (_, slug) => slug, (_, __, size) => size],
+  (cart, slug, size) => {
+    if (cart?.length === 0) {
+      return null;
+    }
+    let existingItems = cart.filter((item) => item.slug === slug);
+    if (!existingItems?.length) return null;
+
+    let existingItem = size
+      ? existingItems?.filter((item) => item.size === size)[0]
+      : existingItems[0];
+    return existingItem ? existingItem : null;
+  }
+);
 
 export const cartActions = cartSlice.actions;
 export default cartSlice;

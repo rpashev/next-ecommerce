@@ -21,7 +21,6 @@ const Header = (props) => {
   const [showMobileNav, setShowMobileNav] = useState(false);
 
   const totalQuantity = useSelector(selectTotalQuantity);
-  console.log(totalQuantity);
   const loggedIn = useSelector(isLoggedIn);
 
   const toggleMobileNav = () => {

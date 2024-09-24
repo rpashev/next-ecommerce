@@ -8,6 +8,7 @@ import {
 } from "@/lib/auth";
 import { connectToDatabase } from "@/lib/products";
 import { validateEmail } from "@/utils/validators";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const registerUser = async (formData) => {
@@ -20,7 +21,6 @@ export const registerUser = async (formData) => {
 
   let errors = [];
 
-  console.log(formData);
   if (
     !firstName ||
     !lastName ||
@@ -44,7 +44,6 @@ export const registerUser = async (formData) => {
 
   const existingUser = await usersCollection.findOne({ email: email });
   if (existingUser) {
-    console.log("from exist");
     client.close();
     errors.push({
       message: "Invalid credentials. Check your input and try again.",
@@ -53,9 +52,8 @@ export const registerUser = async (formData) => {
   }
 
   const hashedPassword = await hashPassword(password);
-  let result;
   let cart = JSON.parse(stringifiedCart);
-
+  let result;
   try {
     result = await usersCollection.insertOne({
       firstName,
@@ -74,12 +72,13 @@ export const registerUser = async (formData) => {
   await createAuthSession(user._id);
 
   client.close();
-
+  revalidatePath("/cart");
+  console.log(user.cart);
   return {
     data: {
       email: user.email,
       name: { firstName: user.firstName, lastName: user.lastName },
-      cart: user.cart,
+      cart: cart?.length > 0 ? cart : user.cart,
     },
     errors,
   };
@@ -91,7 +90,6 @@ export const loginUser = async (formData) => {
   const stringifiedCart = formData.get("cart");
 
   let errors = [];
-  console.log(formData);
   if (!validateEmail(email) || password.length < 6) {
     errors.push({
       message: "Invalid credentials. Check you input and try again.",
@@ -109,7 +107,6 @@ export const loginUser = async (formData) => {
   const user = await usersCollection.findOne({ email: email });
 
   if (!user) {
-    console.log("no user");
     client.close();
 
     errors.push({
@@ -128,6 +125,7 @@ export const loginUser = async (formData) => {
   }
 
   let cart = JSON.parse(stringifiedCart);
+  console.log(cart);
   if (cart?.length > 0) {
     try {
       await usersCollection.updateOne(
@@ -137,19 +135,20 @@ export const loginUser = async (formData) => {
     } catch (err) {
       client.close();
 
-      errors.push({ message: "Could not login!" });
+      errors.pcartush({ message: "Could not login!" });
       return { data: null, errors };
     }
   }
-  console.log(user._id.toString());
   await createAuthSession(user._id);
+
   client.close();
+  revalidatePath("/cart");
 
   return {
     data: {
       email: user.email,
       name: { firstName: user.firstName, lastName: user.lastName },
-      cart: user.cart,
+      cart: cart?.length > 0 ? cart : user.cart,
     },
     errors,
   };
