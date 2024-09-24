@@ -45,7 +45,8 @@ export const updateCart = async (formData) => {
   if (!existingItem) {
     return errorResponse(client, "Could not update cart!");
   }
-
+  console.log(fromCart, "fromCart");
+  console.log(updatedQuantity, "updatedQuantity");
   if (fromCart) {
     existingItem.quantity = updatedQuantity;
   } else {

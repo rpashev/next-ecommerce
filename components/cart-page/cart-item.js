@@ -86,12 +86,16 @@ const CartItem = (props) => {
     }
   };
 
+  const goToDetails = () => {
+    router.push(`/shop/${slug}/?size=${size}&quantity=${quantity}`);
+  };
+
   return (
     <div className={styles["cart-item"]}>
       <div
         className={`${styles.img}`}
         title="View Product"
-        onClick={() => router.push(`/shop/${slug}`)}
+        onClick={goToDetails}
         tabIndex={0}
         onKeyDown={keyHandler}
       >
@@ -103,11 +107,7 @@ const CartItem = (props) => {
         />
       </div>
 
-      <div
-        className={styles.title}
-        title="View Product"
-        onClick={() => router.push(`/shop/${slug}`)}
-      >
+      <div className={styles.title} title="View Product" onClick={goToDetails}>
         <h6 className={styles.name}>{name}</h6>
         <h6 className={styles.size}>Size: {size}</h6>
       </div>

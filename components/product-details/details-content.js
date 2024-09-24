@@ -9,7 +9,7 @@ import Slideshow from "@/components/product-details/slideshow";
 import { useEffect, useState } from "react";
 import ProductBadge from "@/components/products/product-badge";
 import ButtonOperation from "@/components/UI/btn-operation";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { isLoggedIn } from "@/store/user-slice";
 import { updateCart, addToCart } from "@/actions/cart-actions";
 
@@ -29,27 +29,33 @@ const DetailsContent = ({ product }) => {
 
   const dispatch = useDispatch();
   const loggedIn = useSelector(isLoggedIn);
-
+  const existingItemPrepopulate = useSelector((state) =>
+    selectSingleItem(state, slug, null)
+  );
   const router = useRouter();
-  const cart = useSelector((state) => state.items);
+  const searchParams = useSearchParams();
+  const sizeParam = searchParams.get("size");
+  const quantityParam = searchParams.get("quantity");
+
+  const sizeInitialValue = sizeParam
+    ? sizeParam
+    : existingItemPrepopulate
+    ? existingItemPrepopulate.size
+    : null;
+  const quantityInitialValue = quantityParam
+    ? +quantityParam
+    : existingItemPrepopulate
+    ? +existingItemPrepopulate.quantity
+    : 1;
+
+  const cart = useSelector((state) => state.cart.items);
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const [imgLink, setImgLink] = useState(images[0]);
-  const [amount, setAmount] = useState(1);
-  const [size, setSize] = useState(null);
-
-  const existingItem = useSelector((state) =>
-    selectSingleItem(state, slug, null)
-  );
-
-  useEffect(() => {
-    if (existingItem) {
-      setAmount(+existingItem.quantity);
-      setSize(existingItem.size);
-    }
-  }, [existingItem]);
+  const [size, setSize] = useState(sizeInitialValue);
+  const [amount, setAmount] = useState(quantityInitialValue);
 
   const amountHandler = (operation) => {
     if (operation === "add") {
@@ -86,14 +92,16 @@ const DetailsContent = ({ product }) => {
     const existingItem = cart?.find(
       (item) => item.slug === slug && item.size === size
     );
-
+    console.log(existingItem);
     if (loggedIn && existingItem) {
+      console.log("from existing");
+      console.log(sizeInitialValue, "sizeInitialValue");
       try {
         const formData = new FormData();
         formData.append("slug", cartItemData.slug);
         formData.append("size", cartItemData.size);
         formData.append("updatedQuantity", cartItemData.quantity);
-        formData.append("fromCart", false);
+        formData.append("fromCart", true);
         await updateCart(formData);
       } catch (err) {
         setLoading(false);
@@ -180,7 +188,7 @@ const DetailsContent = ({ product }) => {
           <ButtonOperation
             changeAmount={amountHandler.bind(null, "subtract")}
           />
-          <p className={styles.amount}>{amount}</p>
+          <p className={styles.amount}>{+amount}</p>
           <ButtonOperation add changeAmount={amountHandler.bind(null, "add")} />
         </div>
 
