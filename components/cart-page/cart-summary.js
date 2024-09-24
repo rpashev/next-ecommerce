@@ -23,7 +23,7 @@ const CartSummary = (props) => {
       <h6>Taxes: $10</h6>
       <hr></hr>
       <h5>
-        CART TOTAL:{" "}
+        CART TOTAL:
         <span className="ps-1 h4 text-warning">
           ${subtotal ? subtotal + 10 : 10}
         </span>

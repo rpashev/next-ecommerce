@@ -157,7 +157,7 @@ const DetailsContent = ({ product }) => {
         </div>
 
         <h6>
-          Availability:{" "}
+          Availability:
           <span
             className={`${
               available ? "text-success" : "text-danger"
