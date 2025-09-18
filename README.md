@@ -18,7 +18,8 @@ I wanted to dive deeper into the React ecosystem and building a basic e-commerce
 
 
 ## Challenges
-- the very concept behind Next - SG, SSR, ISR, serveless functions, what executes when - was hard for me to get, having mostly built single page applications up until now
+- most recently I did a migration from Next 12 to Next 14 which proved to be a challenge
+- the very concept behind Next - SG, SSR, ISR, serveless functions, what executes when - was hard for me to initially get, having mostly built single page applications up until now
 - authentication - using "next-auth" to implement authentication was a struggle, especially when it comes to sending back the data I want when a user logs in
 - api - having mostly used Express with its focus on middleware, it was harder for me to implement the api for this app, especially in terms of error handling
 - redux - I was familiar with Redux in theory but this was the first time I actually used it in the form of redux-toolkit. I found that redux-toolkit greatly improves the developer experience in comparison with plain Redux.
@@ -33,7 +34,7 @@ I wanted to dive deeper into the React ecosystem and building a basic e-commerce
 
 ## Technologies Used  
 - React 18
-- Next 14
+- Next 14 (migrated from Next 12)
 - Lucia
 - Redux Toolkit
 - Redux Persist
